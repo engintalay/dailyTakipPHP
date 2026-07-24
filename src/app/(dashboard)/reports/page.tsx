@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { formatDateShort, formatDateOnly, getWeekRange, getMonthRange, STATUS_TURKCE } from "@/lib/utils";
+import { formatDateShort, formatDateOnly, getWeekRange, getMonthRange } from "@/lib/utils";
 
 export default function ReportsPage() {
   const [period, setPeriod] = useState<"weekly" | "monthly">("weekly");
@@ -30,18 +30,25 @@ export default function ReportsPage() {
     const attendance = await attendanceRes.json();
     const users = await usersRes.json();
 
+    const userMap = new Map(users.map((u: any) => [u.id, u.name]));
+
     const userNoteCount: Record<string, number> = {};
     const userStatusCount: Record<string, Record<string, number>> = {};
     const userAttendance: Record<string, { present: number; total: number }> = {};
+    const userNotes: Record<string, string[]> = {};
 
     users.forEach((u: any) => {
       userNoteCount[u.id] = 0;
       userStatusCount[u.id] = { OFFICE: 0, REMOTE: 0, LEAVE: 0, SICK: 0 };
       userAttendance[u.id] = { present: 0, total: 0 };
+      userNotes[u.id] = [];
     });
 
     notes.forEach((n: any) => {
-      if (userNoteCount[n.userId] !== undefined) userNoteCount[n.userId]++;
+      if (userNoteCount[n.userId] !== undefined) {
+        userNoteCount[n.userId]++;
+        userNotes[n.userId].push(n.content);
+      }
     });
 
     statuses.forEach((s: any) => {
@@ -58,24 +65,27 @@ export default function ReportsPage() {
     });
 
     const tagCount: Record<string, number> = {};
+    const tagNotes: Record<string, string[]> = {};
     notes.forEach((n: any) => {
       (n.tags || "").split(",").filter(Boolean).forEach((tag: string) => {
         const t = tag.trim();
         tagCount[t] = (tagCount[t] || 0) + 1;
+        if (!tagNotes[t]) tagNotes[t] = [];
+        tagNotes[t].push(`${n.user.name}: ${n.content}`);
       });
     });
 
-    const dateLabels: string[] = [];
-    const dateNoteCount: number[] = [];
-    const dateCountMap: Record<string, number> = {};
+    const notesByDate: Record<string, any[]> = {};
     notes.forEach((n: any) => {
       const key = formatDateShort(n.date);
-      dateCountMap[key] = (dateCountMap[key] || 0) + 1;
+      if (!notesByDate[key]) notesByDate[key] = [];
+      notesByDate[key].push(n);
     });
-    Object.entries(dateCountMap).forEach(([date, count]) => {
-      dateLabels.push(date);
-      dateNoteCount.push(count);
-    });
+
+    const dateLabels = Object.keys(notesByDate).sort();
+
+    const dateNoteCount: number[] = [];
+    dateLabels.forEach((d) => dateNoteCount.push(notesByDate[d].length));
 
     setData({
       users,
@@ -85,10 +95,14 @@ export default function ReportsPage() {
       userNoteCount,
       userStatusCount,
       userAttendance,
+      userNotes,
       tagCount,
+      tagNotes,
+      notesByDate,
       dateLabels,
       dateNoteCount,
       range: { start: startStr, end: endStr },
+      userMap,
     });
     setLoading(false);
   }
@@ -186,6 +200,58 @@ export default function ReportsPage() {
             </tbody>
           </table>
         </div>
+
+        {data.notes.length > 0 && (
+          <>
+            <h3 className="font-semibold mb-3">Günlük Özet</h3>
+            <div className="space-y-4 mb-6">
+              {Object.entries(data.notesByDate as Record<string, any[]>)
+                .sort(([a], [b]) => b.localeCompare(a))
+                .map(([date, dayNotes]) => (
+                <div key={date} className="border border-border rounded-lg p-3">
+                  <h4 className="font-medium text-sm mb-2 text-blue-600">{date}</h4>
+                  <ul className="space-y-1.5">
+                    {dayNotes.map((note: any) => (
+                      <li key={note.id} className="text-sm">
+                        <span className="font-medium text-muted-foreground">{note.user.name}:</span>{" "}
+                        {note.content}
+                        {note.tags && (
+                          <span className="ml-1.5 text-[10px] text-muted-foreground">
+                            [{note.tags.split(",").filter(Boolean).join(", ")}]
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {data.notes.length > 0 && (
+          <>
+            <h3 className="font-semibold mb-3">Kullanıcı Bazında Yapılan İşler</h3>
+            <div className="space-y-3 mb-6">
+              {data.users.map((u: any) => {
+                const userNoteList = data.userNotes[u.id] || [];
+                if (userNoteList.length === 0) return null;
+                return (
+                  <div key={u.id} className="border border-border rounded-lg p-3">
+                    <h4 className="font-medium text-sm mb-1.5">{u.name}</h4>
+                    <ul className="list-disc list-inside space-y-0.5">
+                      {userNoteList.map((content: string, i: number) => (
+                        <li key={i} className="text-sm text-muted-foreground">
+                          {content}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
 
         {topTags.length > 0 && (
           <>

@@ -1,10 +1,10 @@
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/auth-helpers";
+import { requireAdmin, requireAuth } from "@/lib/auth-helpers";
 import { hash } from "bcryptjs";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  await requireAdmin();
+  await requireAuth();
 
   const users = await prisma.user.findMany({
     orderBy: { name: "asc" },
