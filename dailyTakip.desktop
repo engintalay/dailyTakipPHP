@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=dailyTakip
-Comment=Ekip Daily Takip Sistemi
-Exec=bash -c "cd /home/engin/projects/dailyTakip && ./start.sh"
-Icon=/home/engin/projects/dailyTakip/public/icon.png
-Terminal=true
-Type=Application
-Categories=Office;Utility;

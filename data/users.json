@@ -1,0 +1,119 @@
+[
+  {
+    "id": "cmrymq3ol0000gnf71bu5x88i",
+    "name": "Engin Talay (Admin)",
+    "email": "etalay@gelirler.gov.tr",
+    "password_hash": "$2y$12$1GWgfclovFEUKN0nfEwDpeoRRxE8WSF0k4dtC1ZrxaOkGKpWpF1lS",
+    "role": "ADMIN",
+    "is_active": 1,
+    "created_at": "2026-07-24 07:39:12"
+  },
+  {
+    "id": "cmryni4o40000gnsb0ce8ipf2",
+    "name": "Şebnem Manav",
+    "email": "smanav@gelirler.gov.tr",
+    "password_hash": "$2y$12$587tr8JbKhls6hpFekW6iOVw0zf2SKcr4h\/SWWLzESgATNf\/7jBam",
+    "role": "MEMBER",
+    "is_active": 1,
+    "created_at": "2026-07-24 08:01:00"
+  },
+  {
+    "id": "cmrynrhe0000wgnwhix3mv84d",
+    "name": "Umutcan Hazır",
+    "email": "umutcan.hazir@gelirler.gov.tr",
+    "password_hash": "$2y$12$2N\/spXxoLv91yQH0mOLZveVp0yoQG0eU6x1PAPP3JtCjKp9EvE8qK",
+    "role": "MEMBER",
+    "is_active": 1,
+    "created_at": "2026-07-24 08:08:16"
+  },
+  {
+    "id": "cmryo0m5e0002gnlvuqurwjjz",
+    "name": "Haktan Atamer",
+    "email": "haktan.atamer@gelirler.gov.tr",
+    "password_hash": "$2y$12$IYtN8OX5W6oAAYKE\/Qb9TOQrfJ3Ti2h9Yc.Mog2P1m5OEeerXYc.S",
+    "role": "MEMBER",
+    "is_active": 1,
+    "created_at": "2026-07-24 08:15:22"
+  },
+  {
+    "id": "cmryo3747000dgnlvd0i71bs1",
+    "name": "Furkan Yılmaz",
+    "email": "furkan.yilmaz@gelirler.gov.tr",
+    "password_hash": "$2y$12$TOlbTLkuwJiSd3vYsgM7B.l1LYsw9Zl3Ye9lK69ZSWyEcrnca12du",
+    "role": "MEMBER",
+    "is_active": 1,
+    "created_at": "2026-07-24 08:17:23"
+  },
+  {
+    "id": "cmryo3lb0000egnlvmwvz63bt",
+    "name": "Yaşarcan Tak",
+    "email": "ytak@gelirler.gov.tr",
+    "password_hash": "$2y$12$hSJAX659R8gJuvu5kli.WOUBfCsjCg1NqGOoEUufRIS7Wt\/81xMu2",
+    "role": "MEMBER",
+    "is_active": 1,
+    "created_at": "2026-07-24 08:17:41"
+  },
+  {
+    "id": "cmryo42ek000fgnlvb4j80hsk",
+    "name": "Murat Kazım Kanbeş",
+    "email": "kazim.murat.kanbes@gelirler.gov.tr",
+    "password_hash": "$2y$12$cgGcOaIhibXJjglYQXjwjufnWV6EFu4uuVimuIc26aU0KY6yBWK7y",
+    "role": "MEMBER",
+    "is_active": 1,
+    "created_at": "2026-07-24 08:18:03"
+  },
+  {
+    "id": "cmryo5wpz000ggnlvfn48oath",
+    "name": "Fırat Çifçi",
+    "email": "fcifci@gelirler.gov.tr",
+    "password_hash": "$2y$12$tzJvB4pt\/guHqKfyC7aoLeg71pSTCz0ZApMnARYFq1vO3d\/HarxGa",
+    "role": "MEMBER",
+    "is_active": 1,
+    "created_at": "2026-07-24 08:19:29"
+  },
+  {
+    "id": "cmryo7spk0000gnk8tkbauba1",
+    "name": "Feride Kepenek",
+    "email": "feride.kepenek@gelirler.gov.tr",
+    "password_hash": "$2y$12$QnTe8Zbo4OPfzSoRZtq1Z.QQt2p1BKTwV5o.6iSwWRF7dKcGRfUV.",
+    "role": "MEMBER",
+    "is_active": 1,
+    "created_at": "2026-07-24 08:20:57"
+  },
+  {
+    "id": "cmryo885d0001gnk8fyv9zhnk",
+    "name": "Ersen Gültepe",
+    "email": "ersen.gultepe@gelirler.gov.tr",
+    "password_hash": "$2y$12$pK\/LYTwqvZxLt4Z6jTjRCeuC9rlvtql.0\/h1bBpXkUP.X6XMlG3jm",
+    "role": "MEMBER",
+    "is_active": 1,
+    "created_at": "2026-07-24 08:21:17"
+  },
+  {
+    "id": "cmryo9e3s0002gnk8g4kecz0u",
+    "name": "Serkan Sağır",
+    "email": "ssagir@gelirler.gov.tr",
+    "password_hash": "$2y$12$fswPB.kkf53FlS2DPmmTQ.N1hEmXh7OVs0A.6TmiIAMQ6jl5LuSG6",
+    "role": "MEMBER",
+    "is_active": 1,
+    "created_at": "2026-07-24 08:22:12"
+  },
+  {
+    "id": "cmryob3i00003gnk8h7vs2q8i",
+    "name": "Ayşe Aydoğdu",
+    "email": "ayse.aydogdu@gelirler.gov.tr",
+    "password_hash": "$2y$12$TvqsNGph3LPF6Mer4cWgquV7KK6t7KIHcyxttwpTPiztjN6l7\/WVi",
+    "role": "MEMBER",
+    "is_active": 1,
+    "created_at": "2026-07-24 08:23:31"
+  },
+  {
+    "id": "cmryu1h1e0050gnbrk7wi6zn9",
+    "name": "test test",
+    "email": "test@gelirler.gov.tr",
+    "password_hash": "$2y$12$q5UXJj2p4Q8ABxs8Ub6XRe5cdNdsZVKIxAg1fbe2fn52aFEY4cgF.",
+    "role": "MEMBER",
+    "is_active": 0,
+    "created_at": "2026-07-24 11:04:00"
+  }
+]
