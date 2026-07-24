@@ -15,7 +15,10 @@ const STATUS_OPTIONS = [
 export default function StatusPage() {
   const { data: session } = useSession();
   const user = session?.user as SessionUser | undefined;
+  const isAdmin = user?.role === "ADMIN";
 
+  const [targetUserId, setTargetUserId] = useState("");
+  const [users, setUsers] = useState<{ id: string; name: string }[]>([]);
   const [todayStatus, setTodayStatus] = useState<string | null>(null);
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(true);
@@ -25,14 +28,28 @@ export default function StatusPage() {
     return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
   });
 
+  const effectiveUserId = targetUserId || user?.id || "";
+
   useEffect(() => {
-    loadTodayStatus();
-    loadMonthStatuses();
-  }, [currentMonth]);
+    if (isAdmin) loadUsers();
+  }, []);
+
+  useEffect(() => {
+    if (effectiveUserId) {
+      loadTodayStatus();
+      loadMonthStatuses();
+    }
+  }, [currentMonth, effectiveUserId]);
+
+  async function loadUsers() {
+    const res = await fetch("/api/users");
+    const data = await res.json();
+    setUsers(data);
+  }
 
   async function loadTodayStatus() {
     const today = formatDateOnly(new Date());
-    const res = await fetch(`/api/status?date=${today}&userId=${user?.id}`);
+    const res = await fetch(`/api/status?date=${today}&userId=${effectiveUserId}`);
     const data = await res.json();
     if (data.length > 0) {
       setTodayStatus(data[0].type);
@@ -53,12 +70,12 @@ export default function StatusPage() {
     setMonthStatuses(data);
   }
 
-  async function setStatus(type: string) {
+  async function setUserStatus(type: string) {
     const today = formatDateOnly(new Date());
     await fetch("/api/status", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ date: today, type, note }),
+      body: JSON.stringify({ date: today, type, note, userId: targetUserId || undefined }),
     });
     setTodayStatus(type);
     loadMonthStatuses();
@@ -83,17 +100,37 @@ export default function StatusPage() {
     monthStatusMap.set(`${s.userId}-${dateKey}`, s.type);
   });
 
+  const selectedUserLabel = users.find((u) => u.id === targetUserId)?.name || user?.name || "";
+
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">Durum Takibi</h1>
 
+      {isAdmin && (
+        <div className="bg-card border border-border rounded-xl p-4">
+          <label className="block text-sm font-medium mb-1">Kullanıcı</label>
+          <select
+            value={targetUserId}
+            onChange={(e) => setTargetUserId(e.target.value)}
+            className="w-full px-3 py-2 border border-border rounded-lg bg-background"
+          >
+            <option value="">Kendim ({user?.name})</option>
+            {users.filter((u) => u.id !== user?.id).map((u) => (
+              <option key={u.id} value={u.id}>{u.name}</option>
+            ))}
+          </select>
+        </div>
+      )}
+
       <div className="bg-card border border-border rounded-xl p-6">
-        <h2 className="font-semibold mb-4">Bugünkü Durumun</h2>
+        <h2 className="font-semibold mb-4">
+          Bugünkü Durum — {selectedUserLabel}
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {STATUS_OPTIONS.map((opt) => (
             <button
               key={opt.type}
-              onClick={() => setStatus(opt.type)}
+              onClick={() => setUserStatus(opt.type)}
               className={`p-4 rounded-xl border-2 text-center transition-all ${
                 todayStatus === opt.type
                   ? `${opt.color} border-2 scale-105 shadow-md`
@@ -109,7 +146,7 @@ export default function StatusPage() {
           <input
             value={note}
             onChange={(e) => setNote(e.target.value)}
-            onBlur={() => todayStatus && setStatus(todayStatus)}
+            onBlur={() => todayStatus && setUserStatus(todayStatus)}
             className="w-full px-3 py-2 border border-border rounded-lg bg-background text-sm"
             placeholder="Eklemek istediğin bir not var mı?"
           />
@@ -118,7 +155,7 @@ export default function StatusPage() {
 
       <div className="bg-card border border-border rounded-xl p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-semibold">Aylık Takvim</h2>
+          <h2 className="font-semibold">Aylık Takvim — {selectedUserLabel}</h2>
           <div className="flex gap-2">
             <button
               onClick={() => {
@@ -160,7 +197,7 @@ export default function StatusPage() {
             const dateStr = `${currentMonth}-${String(day).padStart(2, "0")}`;
             const isToday = dateStr === today;
 
-            const status = monthStatusMap.get(`${user?.id}-${dateStr}`);
+            const status = monthStatusMap.get(`${effectiveUserId}-${dateStr}`);
 
             return (
               <div

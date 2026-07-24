@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { getEffectiveUserId, requireAuth } from "@/lib/auth-helpers";
+import { getEffectiveUserId, requireAuth, getSessionUser, isAdmin } from "@/lib/auth-helpers";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -38,11 +38,11 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const userId = await getEffectiveUserId();
-  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const sessionUser = await getSessionUser();
+  if (!sessionUser) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const body = await req.json();
-  const { date, type, note } = body;
+  const { date, type, note, userId: targetUserId } = body;
 
   if (!date || !type) {
     return NextResponse.json({ error: "Tarih ve durum gerekli" }, { status: 400 });
@@ -53,10 +53,12 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Geçersiz durum" }, { status: 400 });
   }
 
+  const effectiveUserId = targetUserId && isAdmin(sessionUser) ? targetUserId : sessionUser.id;
+
   const status = await prisma.dailyStatus.upsert({
-    where: { userId_date: { userId, date: new Date(date) } },
+    where: { userId_date: { userId: effectiveUserId, date: new Date(date) } },
     update: { type, note: note || "" },
-    create: { userId, date: new Date(date), type, note: note || "" },
+    create: { userId: effectiveUserId, date: new Date(date), type, note: note || "" },
     include: {
       user: { select: { id: true, name: true, email: true } },
     },
