@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { formatDateOnly, STATUS_TURKCE, STATUS_COLORS } from "@/lib/utils";
+import { formatDateOnly, STATUS_COLORS } from "@/lib/utils";
 import type { SessionUser } from "@/lib/types";
 
 const STATUS_OPTIONS = [
@@ -28,6 +28,10 @@ export default function StatusPage() {
     return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
   });
 
+  const [selectedDate, setSelectedDate] = useState(formatDateOnly(new Date()));
+  const [rangeMode, setRangeMode] = useState(false);
+  const [rangeEnd, setRangeEnd] = useState(formatDateOnly(new Date()));
+
   const effectiveUserId = targetUserId || user?.id || "";
 
   useEffect(() => {
@@ -36,10 +40,10 @@ export default function StatusPage() {
 
   useEffect(() => {
     if (effectiveUserId) {
-      loadTodayStatus();
+      loadDayStatus();
       loadMonthStatuses();
     }
-  }, [currentMonth, effectiveUserId]);
+  }, [currentMonth, effectiveUserId, selectedDate]);
 
   async function loadUsers() {
     const res = await fetch("/api/users");
@@ -47,9 +51,9 @@ export default function StatusPage() {
     setUsers(data);
   }
 
-  async function loadTodayStatus() {
-    const today = formatDateOnly(new Date());
-    const res = await fetch(`/api/status?date=${today}&userId=${effectiveUserId}`);
+  async function loadDayStatus() {
+    setLoading(true);
+    const res = await fetch(`/api/status?date=${selectedDate}&userId=${effectiveUserId}`);
     const data = await res.json();
     if (data.length > 0) {
       setTodayStatus(data[0].type);
@@ -71,11 +75,19 @@ export default function StatusPage() {
   }
 
   async function setUserStatus(type: string) {
-    const today = formatDateOnly(new Date());
+    const body: any = {
+      date: selectedDate,
+      type,
+      note,
+      userId: targetUserId || undefined,
+    };
+    if (rangeMode && rangeEnd) {
+      body.endDate = rangeEnd;
+    }
     await fetch("/api/status", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ date: today, type, note, userId: targetUserId || undefined }),
+      body: JSON.stringify(body),
     });
     setTodayStatus(type);
     loadMonthStatuses();
@@ -101,6 +113,7 @@ export default function StatusPage() {
   });
 
   const selectedUserLabel = users.find((u) => u.id === targetUserId)?.name || user?.name || "";
+  const statusHere = monthStatusMap.get(`${effectiveUserId}-${selectedDate}`);
 
   return (
     <div className="space-y-6">
@@ -123,9 +136,53 @@ export default function StatusPage() {
       )}
 
       <div className="bg-card border border-border rounded-xl p-6">
-        <h2 className="font-semibold mb-4">
-          Bugünkü Durum — {selectedUserLabel}
-        </h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="font-semibold">Durum Girişi — {selectedUserLabel}</h2>
+          <label className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer">
+            <input
+              type="checkbox"
+              checked={rangeMode}
+              onChange={(e) => setRangeMode(e.target.checked)}
+              className="rounded"
+            />
+            Tarih Aralığı
+          </label>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+          <div>
+            <label className="block text-xs font-medium text-muted-foreground mb-1">Tarih</label>
+            <input
+              type="date"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+              max={rangeMode ? rangeEnd : undefined}
+              className="w-full px-3 py-2 border border-border rounded-lg bg-background text-sm"
+            />
+          </div>
+          {rangeMode && (
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-1">Bitiş Tarihi</label>
+              <input
+                type="date"
+                value={rangeEnd}
+                onChange={(e) => setRangeEnd(e.target.value)}
+                min={selectedDate}
+                className="w-full px-3 py-2 border border-border rounded-lg bg-background text-sm"
+              />
+            </div>
+          )}
+        </div>
+
+        {statusHere && selectedDate !== formatDateOnly(new Date()) && (
+          <div className="mb-3 text-xs text-muted-foreground">
+            Bu tarih için mevcut durum:{" "}
+            <span className={`font-medium px-2 py-0.5 rounded-full ${STATUS_COLORS[statusHere]}`}>
+              {statusHere === "OFFICE" ? "🏢 Ofis" : statusHere === "REMOTE" ? "🏠 Remote" : statusHere === "LEAVE" ? "🌴 İzin" : "🤒 Hasta"}
+            </span>
+          </div>
+        )}
+
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {STATUS_OPTIONS.map((opt) => (
             <button
@@ -141,6 +198,7 @@ export default function StatusPage() {
             </button>
           ))}
         </div>
+
         <div className="mt-4">
           <label className="block text-sm font-medium mb-1">Not (opsiyonel)</label>
           <input
@@ -151,6 +209,12 @@ export default function StatusPage() {
             placeholder="Eklemek istediğin bir not var mı?"
           />
         </div>
+
+        {rangeMode && selectedDate && rangeEnd && (
+          <p className="mt-2 text-xs text-muted-foreground">
+            {selectedDate} — {rangeEnd} arasındaki tüm günlere uygulanacak.
+          </p>
+        )}
       </div>
 
       <div className="bg-card border border-border rounded-xl p-6">
@@ -196,15 +260,20 @@ export default function StatusPage() {
             const day = i + 1;
             const dateStr = `${currentMonth}-${String(day).padStart(2, "0")}`;
             const isToday = dateStr === today;
-
+            const isSelected = dateStr === selectedDate;
             const status = monthStatusMap.get(`${effectiveUserId}-${dateStr}`);
 
             return (
-              <div
+              <button
                 key={day}
-                className={`aspect-square rounded-lg p-1 text-xs border ${
-                  isToday ? "border-blue-500 bg-blue-50 dark:bg-blue-950/20" : "border-border"
-                } ${status ? STATUS_COLORS[status] : "text-muted-foreground"}`}
+                onClick={() => setSelectedDate(dateStr)}
+                className={`aspect-square rounded-lg p-1 text-xs border text-left transition-all ${
+                  isSelected
+                    ? "ring-2 ring-blue-500 border-blue-500"
+                    : isToday
+                    ? "border-blue-300 bg-blue-50 dark:bg-blue-950/20"
+                    : "border-border"
+                } ${status ? STATUS_COLORS[status] : "text-muted-foreground hover:bg-secondary"}`}
               >
                 <div className="font-medium">{day}</div>
                 {status && (
@@ -212,7 +281,7 @@ export default function StatusPage() {
                     {status === "OFFICE" ? "🏢" : status === "REMOTE" ? "🏠" : status === "LEAVE" ? "🌴" : "🤒"}
                   </div>
                 )}
-              </div>
+              </button>
             );
           })}
         </div>

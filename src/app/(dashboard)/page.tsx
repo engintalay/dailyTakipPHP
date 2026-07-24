@@ -36,6 +36,13 @@ export default async function DashboardPage() {
 
   const statusMap = new Map(todayStatuses.map((s) => [s.userId, s]));
 
+  const todayNotes = await prisma.dailyNote.findMany({
+    where: { date: { gte: today, lt: tomorrow } },
+    select: { userId: true },
+  });
+  const userIdsWithNote = new Set(todayNotes.map((n) => n.userId));
+  const missingUsers = users.filter((u) => !userIdsWithNote.has(u.id));
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -57,6 +64,30 @@ export default async function DashboardPage() {
       </div>
 
       <DailyCheckBanner />
+
+      {missingUsers.length > 0 && (
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <span>⏳</span>
+            <h2 className="font-semibold text-amber-800 dark:text-amber-300">
+              Bugün Not Girmeyenler
+            </h2>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {missingUsers.map((u) => (
+              <span
+                key={u.id}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 text-sm"
+              >
+                <div className="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center text-white text-[10px] font-bold">
+                  {u.name.charAt(0)}
+                </div>
+                {u.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-card border border-border rounded-xl p-5">

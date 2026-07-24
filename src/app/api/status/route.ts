@@ -42,7 +42,7 @@ export async function POST(req: Request) {
   if (!sessionUser) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const body = await req.json();
-  const { date, type, note, userId: targetUserId } = body;
+  const { date, endDate, type, note, userId: targetUserId } = body;
 
   if (!date || !type) {
     return NextResponse.json({ error: "Tarih ve durum gerekli" }, { status: 400 });
@@ -55,14 +55,26 @@ export async function POST(req: Request) {
 
   const effectiveUserId = targetUserId && isAdmin(sessionUser) ? targetUserId : sessionUser.id;
 
-  const status = await prisma.dailyStatus.upsert({
-    where: { userId_date: { userId: effectiveUserId, date: new Date(date) } },
-    update: { type, note: note || "" },
-    create: { userId: effectiveUserId, date: new Date(date), type, note: note || "" },
-    include: {
-      user: { select: { id: true, name: true, email: true } },
-    },
-  });
+  const start = new Date(date);
+  const end = endDate ? new Date(endDate) : start;
 
-  return NextResponse.json(status);
+  const dates: Date[] = [];
+  for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+    dates.push(new Date(d));
+  }
+
+  const results = await Promise.all(
+    dates.map((dt) =>
+      prisma.dailyStatus.upsert({
+        where: { userId_date: { userId: effectiveUserId, date: dt } },
+        update: { type, note: note || "" },
+        create: { userId: effectiveUserId, date: dt, type, note: note || "" },
+        include: {
+          user: { select: { id: true, name: true, email: true } },
+        },
+      })
+    )
+  );
+
+  return NextResponse.json(results);
 }
