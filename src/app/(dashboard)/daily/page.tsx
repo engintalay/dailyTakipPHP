@@ -47,11 +47,38 @@ export default function DailyNotesPage() {
   const [filterTag, setFilterTag] = useState("");
   const [filterStart, setFilterStart] = useState("");
   const [filterEnd, setFilterEnd] = useState("");
+  const [showMissing, setShowMissing] = useState(false);
+  const [missingUsers, setMissingUsers] = useState<{ id: string; name: string }[]>([]);
+  const [loadingMissing, setLoadingMissing] = useState(false);
 
   useEffect(() => {
     loadNotes();
     if (user?.role === "ADMIN") loadUsers();
   }, [filterUser, filterTag, filterStart, filterEnd]);
+
+  useEffect(() => {
+    if (showMissing) checkMissing();
+  }, [showMissing, filterStart, filterEnd]);
+
+  async function checkMissing() {
+    setLoadingMissing(true);
+    const today = formatDateOnly(new Date());
+    const start = filterStart || today;
+    const end = filterEnd || today;
+
+    const [usersRes, notesRes] = await Promise.all([
+      fetch("/api/users"),
+      fetch(`/api/daily-notes?startDate=${start}&endDate=${end}`),
+    ]);
+
+    const allUsers: { id: string; name: string }[] = await usersRes.json();
+    const allNotes: Note[] = await notesRes.json();
+
+    const userIdsWithNotes = new Set(allNotes.map((n) => n.userId));
+    const missing = allUsers.filter((u) => !userIdsWithNotes.has(u.id));
+    setMissingUsers(missing);
+    setLoadingMissing(false);
+  }
 
   async function loadUsers() {
     const res = await fetch("/api/users");
@@ -235,7 +262,7 @@ export default function DailyNotesPage() {
       )}
 
       <div className="bg-card border border-border rounded-xl p-4 space-y-3">
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 items-center">
           <input
             type="date"
             value={filterStart}
@@ -255,13 +282,65 @@ export default function DailyNotesPage() {
             placeholder="Etiket ara..."
           />
           <button
-            onClick={() => { setFilterUser(""); setFilterTag(""); setFilterStart(""); setFilterEnd(""); }}
+            onClick={() => { setShowMissing(!showMissing); }}
+            className={`px-3 py-1.5 text-sm rounded-lg border transition-colors ${
+              showMissing
+                ? "bg-amber-500 text-white border-amber-500"
+                : "border-border text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            ⏳ Eksik Notlar
+          </button>
+          <button
+            onClick={() => { setFilterUser(""); setFilterTag(""); setFilterStart(""); setFilterEnd(""); setShowMissing(false); }}
             className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground"
           >
             Temizle
           </button>
         </div>
       </div>
+
+      {showMissing && (
+        <div className="bg-card border border-border rounded-xl p-5">
+          <h2 className="font-semibold mb-3">⏳ Not Girmeyen Kullanıcılar</h2>
+          {loadingMissing ? (
+            <p className="text-sm text-muted-foreground">Kontrol ediliyor...</p>
+          ) : missingUsers.length === 0 ? (
+            <div className="flex items-center gap-2 text-sm text-emerald-600">
+              <span>✅</span>
+              <span>Seçilen tarih aralığında herkes notunu girmiş.</span>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <p className="text-sm text-muted-foreground mb-2">
+                {missingUsers.length} kullanıcı not girmemiş:
+              </p>
+              {missingUsers.map((u) => (
+                <div key={u.id} className="flex items-center justify-between px-3 py-2 rounded-lg bg-amber-50 dark:bg-amber-950/20">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-full bg-amber-500 flex items-center justify-center text-white text-xs font-bold">
+                      {u.name.charAt(0)}
+                    </div>
+                    <span className="text-sm font-medium">{u.name}</span>
+                  </div>
+                  {isAdmin && (
+                    <button
+                      onClick={() => {
+                        setShowAdd(true);
+                        setNoteUserId(u.id);
+                        setShowMissing(false);
+                      }}
+                      className="text-xs px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    >
+                      Not Ekle
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="space-y-3">
         {loading ? (
