@@ -75,15 +75,16 @@ export default async function DashboardPage() {
           </div>
           <div className="flex flex-wrap gap-2">
             {missingUsers.map((u) => (
-              <span
+              <Link
                 key={u.id}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 text-sm"
+                href={`/daily?userId=${u.id}&openForm=true`}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 text-sm hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors"
               >
                 <div className="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center text-white text-[10px] font-bold">
                   {u.name.charAt(0)}
                 </div>
                 {u.name}
-              </span>
+              </Link>
             ))}
           </div>
         </div>

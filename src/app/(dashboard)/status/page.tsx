@@ -98,7 +98,8 @@ export default function StatusPage() {
   }
 
   function getFirstDayOfMonth(year: number, month: number) {
-    return new Date(year, month - 1, 1).getDay();
+    const day = new Date(year, month - 1, 1).getDay();
+    return day === 0 ? 6 : day - 1;
   }
 
   const today = formatDateOnly(new Date());
@@ -248,7 +249,7 @@ export default function StatusPage() {
         </div>
 
         <div className="grid grid-cols-7 gap-1">
-          {["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"].map((d) => (
+          {["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"].map((d) => (
             <div key={d} className="text-center text-xs font-medium text-muted-foreground py-2">
               {d}
             </div>

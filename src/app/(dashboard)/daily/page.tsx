@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { formatDateShort, formatDateOnly } from "@/lib/utils";
 import type { SessionUser } from "@/lib/types";
 
@@ -27,6 +27,7 @@ type Note = {
 export default function DailyNotesPage() {
   const { data: session } = useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const user = session?.user as SessionUser | undefined;
 
   const [notes, setNotes] = useState<Note[]>([]);
@@ -59,6 +60,15 @@ export default function DailyNotesPage() {
   useEffect(() => {
     if (showMissing) checkMissing();
   }, [showMissing, filterStart, filterEnd]);
+
+  useEffect(() => {
+    const uid = searchParams.get("userId");
+    const open = searchParams.get("openForm");
+    if (uid && open === "true" && user?.role === "ADMIN") {
+      setNoteUserId(uid);
+      setShowAdd(true);
+    }
+  }, [searchParams, user]);
 
   async function checkMissing() {
     setLoadingMissing(true);
