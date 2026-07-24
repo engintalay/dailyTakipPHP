@@ -33,13 +33,17 @@ export default function AttendancePage() {
     setRecords(r);
   }
 
-  async function toggleAttendance(date: string, currentPresent: boolean) {
+  async function setAttendance(date: string, present: boolean, targetUserId?: string) {
     await fetch("/api/attendance", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ date, present: !currentPresent }),
+      body: JSON.stringify({ date, present, userId: targetUserId }),
     });
     loadData();
+  }
+
+  async function toggleAttendance(date: string, currentPresent: boolean, targetUserId?: string) {
+    await setAttendance(date, !currentPresent, targetUserId);
   }
 
   const days = Array.from({ length: 7 }, (_, i) => {
@@ -107,7 +111,6 @@ export default function AttendancePage() {
                 </th>
               ))}
               <th className="text-center p-3 font-medium">Oran</th>
-              <th className="text-center p-3 font-medium">Hızlı İşlem</th>
             </tr>
           </thead>
           <tbody>
@@ -130,8 +133,14 @@ export default function AttendancePage() {
                     const isPresent = recordMap.get(key);
                     const isFuture = d > new Date();
 
+                    const canToggle = user?.id === u.id || user?.role === "ADMIN";
+
                     return (
-                      <td key={d.toISOString()} className="text-center p-3">
+                      <td
+                        key={d.toISOString()}
+                        className={`text-center p-3 ${canToggle && !isFuture ? "cursor-pointer hover:bg-muted/30" : ""}`}
+                        onClick={() => canToggle && !isFuture && toggleAttendance(formatDateOnly(d), isPresent ?? true, u.id)}
+                      >
                         {isFuture ? (
                           <span className="text-muted-foreground text-xs">—</span>
                         ) : isPresent === undefined ? (
@@ -153,22 +162,6 @@ export default function AttendancePage() {
                       {rate}%
                     </span>
                   </td>
-                  <td className="text-center p-3">
-                    {user?.id === u.id && days.map((d) => {
-                      const key = `${u.id}-${formatDateOnly(d)}`;
-                      const isPresent = recordMap.get(key);
-                      if (d > new Date()) return null;
-                      return (
-                        <button
-                          key={d.toISOString()}
-                          onClick={() => toggleAttendance(formatDateOnly(d), isPresent ?? true)}
-                          className="text-xs px-2 py-1 border border-border rounded hover:bg-secondary mr-1"
-                        >
-                          {formatDateOnly(d) === formatDateOnly(new Date()) ? "Bugün" : d.getDate() + ""}
-                        </button>
-                      );
-                    }).filter(Boolean).slice(0, 1)}
-                  </td>
                 </tr>
               );
             })}
@@ -183,13 +176,13 @@ export default function AttendancePage() {
         </p>
         <div className="flex gap-2">
           <button
-            onClick={() => toggleAttendance(formatDateOnly(new Date()), true)}
+            onClick={() => setAttendance(formatDateOnly(new Date()), true)}
             className="px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm hover:bg-emerald-700"
           >
             ✅ Katıldı
           </button>
           <button
-            onClick={() => toggleAttendance(formatDateOnly(new Date()), false)}
+            onClick={() => setAttendance(formatDateOnly(new Date()), false)}
             className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm hover:bg-red-700"
           >
             ❌ Katılmadı
