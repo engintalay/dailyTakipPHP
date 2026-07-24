@@ -1,10 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { formatDateShort, formatDateOnly } from "@/lib/utils";
 import type { SessionUser } from "@/lib/types";
+
+type UploadedFile = {
+  name: string;
+  url: string;
+  size: number;
+  type: string;
+};
 
 type Note = {
   id: string;
@@ -12,6 +19,8 @@ type Note = {
   date: string;
   content: string;
   tags: string;
+  jiraLink: string;
+  files: string;
   user: { id: string; name: string; email: string };
 };
 
@@ -23,10 +32,16 @@ export default function DailyNotesPage() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAdd, setShowAdd] = useState(false);
+  const [users, setUsers] = useState<{ id: string; name: string }[]>([]);
 
   const [content, setContent] = useState("");
   const [tags, setTags] = useState("");
+  const [jiraLink, setJiraLink] = useState("");
   const [noteDate, setNoteDate] = useState(formatDateOnly(new Date()));
+  const [noteUserId, setNoteUserId] = useState("");
+  const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [filterUser, setFilterUser] = useState("");
   const [filterTag, setFilterTag] = useState("");
@@ -35,7 +50,14 @@ export default function DailyNotesPage() {
 
   useEffect(() => {
     loadNotes();
+    if (user?.role === "ADMIN") loadUsers();
   }, [filterUser, filterTag, filterStart, filterEnd]);
+
+  async function loadUsers() {
+    const res = await fetch("/api/users");
+    const data = await res.json();
+    setUsers(data);
+  }
 
   async function loadNotes() {
     setLoading(true);
@@ -54,14 +76,42 @@ export default function DailyNotesPage() {
   async function addNote(e: React.FormEvent) {
     e.preventDefault();
     if (!content.trim()) return;
+
+    let uploadedFiles: UploadedFile[] = [];
+
+    if (attachedFiles.length > 0) {
+      setUploading(true);
+      for (const file of attachedFiles) {
+        const fd = new FormData();
+        fd.set("file", file);
+        const res = await fetch("/api/upload", { method: "POST", body: fd });
+        const data = await res.json();
+        uploadedFiles.push(data);
+      }
+      setUploading(false);
+    }
+
+    const body: any = {
+      date: noteDate,
+      content: content.trim(),
+      tags: tags.trim(),
+      jiraLink: jiraLink.trim(),
+      files: JSON.stringify(uploadedFiles),
+    };
+    if (noteUserId) body.userId = noteUserId;
+
     await fetch("/api/daily-notes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ date: noteDate, content: content.trim(), tags: tags.trim() }),
+      body: JSON.stringify(body),
     });
+
     setContent("");
     setTags("");
+    setJiraLink("");
     setNoteDate(formatDateOnly(new Date()));
+    setNoteUserId("");
+    setAttachedFiles([]);
     setShowAdd(false);
     loadNotes();
   }
@@ -70,6 +120,12 @@ export default function DailyNotesPage() {
     if (!confirm("Bu notu silmek istediğinize emin misiniz?")) return;
     await fetch(`/api/daily-notes/${id}`, { method: "DELETE" });
     loadNotes();
+  }
+
+  function formatFileSize(bytes: number) {
+    if (bytes < 1024) return bytes + " B";
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+    return (bytes / (1024 * 1024)).toFixed(1) + " MB";
   }
 
   const isAdmin = user?.role === "ADMIN";
@@ -88,6 +144,21 @@ export default function DailyNotesPage() {
 
       {showAdd && (
         <form onSubmit={addNote} className="bg-card border border-border rounded-xl p-5 space-y-4">
+          {isAdmin && (
+            <div>
+              <label className="block text-sm font-medium mb-1">Kullanıcı</label>
+              <select
+                value={noteUserId}
+                onChange={(e) => setNoteUserId(e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded-lg bg-background"
+              >
+                <option value="">Kendim</option>
+                {users.map((u) => (
+                  <option key={u.id} value={u.id}>{u.name}</option>
+                ))}
+              </select>
+            </div>
+          )}
           <div>
             <label className="block text-sm font-medium mb-1">Tarih</label>
             <input
@@ -117,11 +188,48 @@ export default function DailyNotesPage() {
               placeholder="frontend, bugfix, toplantı"
             />
           </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Jira Linki</label>
+            <input
+              value={jiraLink}
+              onChange={(e) => setJiraLink(e.target.value)}
+              className="w-full px-3 py-2 border border-border rounded-lg bg-background"
+              placeholder="https://jira.company.com/browse/PROJ-123"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Dosya Ekle</label>
+            <input
+              ref={fileInputRef}
+              type="file"
+              multiple
+              onChange={(e) => setAttachedFiles(Array.from(e.target.files || []))}
+              className="w-full text-sm file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900/20 dark:file:text-blue-400"
+            />
+            {attachedFiles.length > 0 && (
+              <div className="mt-2 space-y-1">
+                {attachedFiles.map((f, i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <span>📎 {f.name}</span>
+                    <span>({formatFileSize(f.size)})</span>
+                    <button
+                      type="button"
+                      onClick={() => setAttachedFiles(attachedFiles.filter((_, j) => j !== i))}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
+            disabled={uploading}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 disabled:bg-blue-400"
           >
-            Kaydet
+            {uploading ? "Dosyalar yükleniyor..." : "Kaydet"}
           </button>
         </form>
       )}
@@ -133,14 +241,12 @@ export default function DailyNotesPage() {
             value={filterStart}
             onChange={(e) => setFilterStart(e.target.value)}
             className="px-3 py-1.5 border border-border rounded-lg bg-background text-sm"
-            placeholder="Başlangıç"
           />
           <input
             type="date"
             value={filterEnd}
             onChange={(e) => setFilterEnd(e.target.value)}
             className="px-3 py-1.5 border border-border rounded-lg bg-background text-sm"
-            placeholder="Bitiş"
           />
           <input
             value={filterTag}
@@ -163,42 +269,81 @@ export default function DailyNotesPage() {
         ) : notes.length === 0 ? (
           <p className="text-muted-foreground">Henüz not eklenmemiş.</p>
         ) : (
-          notes.map((note) => (
-            <div key={note.id} className="bg-card border border-border rounded-xl p-4">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">
-                    {note.user.name.charAt(0)}
+          notes.map((note) => {
+            const files: UploadedFile[] = (() => {
+              try { return JSON.parse(note.files); } catch { return []; }
+            })();
+            return (
+              <div key={note.id} className="bg-card border border-border rounded-xl p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">
+                      {note.user.name.charAt(0)}
+                    </div>
+                    <span className="text-sm font-medium">{note.user.name}</span>
+                    <span className="text-xs text-muted-foreground">·</span>
+                    <span className="text-xs text-muted-foreground">{formatDateShort(note.date)}</span>
                   </div>
-                  <span className="text-sm font-medium">{note.user.name}</span>
-                  <span className="text-xs text-muted-foreground">·</span>
-                  <span className="text-xs text-muted-foreground">{formatDateShort(note.date)}</span>
+                  {(isAdmin || note.userId === user?.id) && (
+                    <button
+                      onClick={() => deleteNote(note.id)}
+                      className="text-xs text-muted-foreground hover:text-red-500"
+                    >
+                      Sil
+                    </button>
+                  )}
                 </div>
-                {(isAdmin || note.userId === user?.id) && (
-                  <button
-                    onClick={() => deleteNote(note.id)}
-                    className="text-xs text-muted-foreground hover:text-red-500"
-                  >
-                    Sil
-                  </button>
+
+                <p className="text-sm whitespace-pre-wrap">{note.content}</p>
+
+                {note.jiraLink && (
+                  <div className="mt-2">
+                    <a
+                      href={note.jiraLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs text-blue-600 hover:underline"
+                    >
+                      <span>🔗</span>
+                      {note.jiraLink.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+                    </a>
+                  </div>
+                )}
+
+                {files.length > 0 && (
+                  <div className="mt-2 space-y-1">
+                    {files.map((f, i) => (
+                      <a
+                        key={i}
+                        href={f.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs text-blue-600 hover:underline mr-3"
+                      >
+                        <span>📎</span>
+                        {f.name}
+                        <span className="text-muted-foreground">({formatFileSize(f.size)})</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+
+                {note.tags && (
+                  <div className="flex gap-1 mt-2">
+                    {note.tags.split(",").filter(Boolean).map((tag) => (
+                      <button
+                        key={tag}
+                        onClick={() => setFilterTag(tag.trim())}
+                        className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-400"
+                      >
+                        {tag.trim()}
+                      </button>
+                    ))}
+                  </div>
                 )}
               </div>
-              <p className="text-sm whitespace-pre-wrap">{note.content}</p>
-              {note.tags && (
-                <div className="flex gap-1 mt-2">
-                  {note.tags.split(",").filter(Boolean).map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={() => setFilterTag(tag.trim())}
-                      className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-400"
-                    >
-                      {tag.trim()}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>

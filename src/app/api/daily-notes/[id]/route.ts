@@ -20,6 +20,8 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
       ...(body.content && { content: body.content }),
       ...(body.tags !== undefined && { tags: body.tags }),
       ...(body.date && { date: new Date(body.date) }),
+      ...(body.jiraLink !== undefined && { jiraLink: body.jiraLink }),
+      ...(body.files !== undefined && { files: body.files }),
     },
     include: {
       user: { select: { id: true, name: true, email: true } },

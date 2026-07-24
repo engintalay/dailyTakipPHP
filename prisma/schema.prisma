@@ -29,6 +29,8 @@ model DailyNote {
   date      DateTime
   content   String
   tags      String   @default("")
+  jiraLink  String   @default("") @map("jira_link")
+  files     String   @default("[]")
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("daily_notes")
