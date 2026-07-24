@@ -166,6 +166,7 @@ export default function AdminUsersPage() {
         <table className="w-full text-sm">
           <thead className="bg-muted/50">
             <tr>
+              <th className="text-center p-3 font-medium w-12">#</th>
               <th className="text-left p-3 font-medium">İsim</th>
               <th className="text-left p-3 font-medium">E-posta</th>
               <th className="text-left p-3 font-medium">Rol</th>
@@ -174,8 +175,9 @@ export default function AdminUsersPage() {
             </tr>
           </thead>
           <tbody>
-            {users.map((u) => (
+            {users.map((u, i) => (
               <tr key={u.id} className="border-t border-border hover:bg-muted/20">
+                <td className="p-3 text-center text-muted-foreground text-xs">{i + 1}</td>
                 <td className="p-3 font-medium">{u.name}</td>
                 <td className="p-3 text-muted-foreground">{u.email}</td>
                 <td className="p-3">
