@@ -1,122 +1,212 @@
 [
-    {
-        "id": "cmrynypfi0001gnlv32vd4xd3",
-        "user_id": "cmryni4o40000gnsb0ce8ipf2",
-        "date": "2026-07-24",
-        "content": "Gibintra işinden devam ediyorum. Feride dün test yaptı serviste bir sıkıntı var gibi ona bakıcam",
-        "tags": "GIBINTRANET, İLANLİSTESİ",
-        "jira_link": "",
-        "files": "[]",
-        "created_at": "2026-07-24 08:13:53"
-    },
-    {
-        "id": "cmryo1jww0004gnlvel56cd8e",
-        "user_id": "cmryo0m5e0002gnlvuqurwjjz",
-        "date": "2026-07-24",
-        "content": "Günaydın\nMerve hanım dönüş yaptı istediğim indexi oluşturdu tebligOzet servisi yeğenbey ve nakil vasıta için 2sn lere indi. Prod deployu yapıldı.\n\nBelge görüntüleme servisi querydsl geçiş tamamlanmak üzere gün içinde test deploy edip feride hanımı bilgilendireceğim",
-        "tags": "EBELGE,",
-        "jira_link": "",
-        "files": "[]",
-        "created_at": "2026-07-24 08:16:06"
-    },
-    {
-        "id": "cmryoi8gu0001gnyh2yns4mf9",
-        "user_id": "cmrymq3ol0000gnf71bu5x88i",
-        "date": "2026-07-24",
-        "content": "Genel iş takibi, destek",
-        "tags": "",
-        "jira_link": "",
-        "files": "[]",
-        "created_at": "2026-07-24 08:29:04"
-    },
-    {
-        "id": "cmryom1lq000hgnooyudn3rnr",
-        "user_id": "cmryob3i00003gnk8h7vs2q8i",
-        "date": "2026-07-24",
-        "content": "Merhaba Engin abi ben banka kati haciz düzenleme ekranında devam ediyorum Feride hanımla konuşacaklarım var onları netleştirip bu gün yarın biter diye düşünüyorum",
-        "tags": "EHACIZBANKA",
-        "jira_link": "",
-        "files": "[]",
-        "created_at": "2026-07-24 08:32:02"
-    },
-    {
-        "id": "cmryoovlb0001gn1f1mwoj1lr",
-        "user_id": "cmryo5wpz000ggnlvfn48oath",
-        "date": "2026-07-24",
-        "content": "EVDB haciz 100 bin kayıt aktarıldı. VT ekibi ile görüşelecek. Foreign keyler için görüş alınacak.",
-        "tags": "EHACIZ_YENİ",
-        "jira_link": "",
-        "files": "[]",
-        "created_at": "2026-07-24 08:34:14"
-    },
-    {
-        "id": "cmryp6bfq0003gn1f2bms83co",
-        "user_id": "cmryo42ek000fgnlvb4j80hsk",
-        "date": "2026-07-24",
-        "content": "VT ekibi ile görüşülecek. Göç scriptlerine devam edilecek.",
-        "tags": "",
-        "jira_link": "",
-        "files": "[]",
-        "created_at": "2026-07-24 08:47:48"
-    },
-    {
-        "id": "cmryp8bjl000pgn1fazqx95nt",
-        "user_id": "cmryo885d0001gnk8fyv9zhnk",
-        "date": "2026-07-24",
-        "content": "Belge görüntüleme ekranı için geliştirme yapıldı. Devamı için Haktan bekleniyor. Tebliğ ekranı için geliştirmeye başlayacak.",
-        "tags": "",
-        "jira_link": "",
-        "files": "[]",
-        "created_at": "2026-07-24 08:49:21"
-    },
-    {
-        "id": "cmryp92rw000rgn1fpbnfe37w",
-        "user_id": "cmrynrhe0000wgnwhix3mv84d",
-        "date": "2026-07-24",
-        "content": "Veri sözlüğü devam ediyor. Referans tablolar eklenecek. Düzeltmeler yapılıyor.",
-        "tags": "",
-        "jira_link": "",
-        "files": "[]",
-        "created_at": "2026-07-24 08:49:57"
-    },
-    {
-        "id": "cmrypadkb000tgn1fbzl97y3c",
-        "user_id": "cmryo3747000dgnlvd0i71bs1",
-        "date": "2026-07-24",
-        "content": "Tebliğ zarfının eski halini geri yükleyecek. Ülke kontrolüne göre yurt dışı adresi yazdırılacak şekilde düzenleme yapılacak.",
-        "tags": "",
-        "jira_link": "",
-        "files": "[]",
-        "created_at": "2026-07-24 08:50:57"
-    },
-    {
-        "id": "cmrypbb9w000vgn1fy1avtks8",
-        "user_id": "cmryo9e3s0002gnk8g4kecz0u",
-        "date": "2026-07-24",
-        "content": "531 için istatistik devam ediyor. Brüt kazanç bilgisi olmayanlar için çalışma devam ediyor.",
-        "tags": "",
-        "jira_link": "",
-        "files": "[]",
-        "created_at": "2026-07-24 08:51:41"
-    },
-    {
-        "id": "cmrypbq57000xgn1f951wra1u",
-        "user_id": "cmryo7spk0000gnk8tkbauba1",
-        "date": "2026-07-24",
-        "content": "Ebelge ekranındaki tebliğ/adres değişiklik ekranı analizi devam ediyor.",
-        "tags": "",
-        "jira_link": "",
-        "files": "[]",
-        "created_at": "2026-07-24 08:52:00"
-    },
-    {
-        "id": "cmrypyjdp0001gnd76bvz3dsy",
-        "user_id": "cmryo3lb0000egnlvmwvz63bt",
-        "date": "2026-07-24",
-        "content": "Önceki gün ile aynı",
-        "tags": "",
-        "jira_link": "",
-        "files": "[]",
-        "created_at": "2026-07-24 09:09:44"
-    }
+  {
+    "id": "cmrynypfi0001gnlv32vd4xd3",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-07-24",
+    "content": "Gibintra işinden devam ediyorum. Feride dün test yaptı serviste bir sıkıntı var gibi ona bakıcam",
+    "tags": "GIBINTRANET, İLANLİSTESİ",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-24 08:13:53"
+  },
+  {
+    "id": "cmryo1jww0004gnlvel56cd8e",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-07-24",
+    "content": "Günaydın\nMerve hanım dönüş yaptı istediğim indexi oluşturdu tebligOzet servisi yeğenbey ve nakil vasıta için 2sn lere indi. Prod deployu yapıldı.\n\nBelge görüntüleme servisi querydsl geçiş tamamlanmak üzere gün içinde test deploy edip feride hanımı bilgilendireceğim",
+    "tags": "EBELGE,",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-24 08:16:06"
+  },
+  {
+    "id": "cmryoi8gu0001gnyh2yns4mf9",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-07-24",
+    "content": "Genel iş takibi, destek",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-24 08:29:04"
+  },
+  {
+    "id": "cmryom1lq000hgnooyudn3rnr",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-07-24",
+    "content": "Merhaba Engin abi ben banka kati haciz düzenleme ekranında devam ediyorum Feride hanımla konuşacaklarım var onları netleştirip bu gün yarın biter diye düşünüyorum",
+    "tags": "EHACIZBANKA",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-24 08:32:02"
+  },
+  {
+    "id": "cmryoovlb0001gn1f1mwoj1lr",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-07-24",
+    "content": "EVDB haciz 100 bin kayıt aktarıldı. VT ekibi ile görüşelecek. Foreign keyler için görüş alınacak.",
+    "tags": "EHACIZ_YENİ",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-24 08:34:14"
+  },
+  {
+    "id": "cmryp6bfq0003gn1f2bms83co",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-07-24",
+    "content": "VT ekibi ile görüşülecek. Göç scriptlerine devam edilecek.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-24 08:47:48"
+  },
+  {
+    "id": "cmryp8bjl000pgn1fazqx95nt",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-07-24",
+    "content": "Belge görüntüleme ekranı için geliştirme yapıldı. Devamı için Haktan bekleniyor. Tebliğ ekranı için geliştirmeye başlayacak.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-24 08:49:21"
+  },
+  {
+    "id": "cmryp92rw000rgn1fpbnfe37w",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-07-24",
+    "content": "Veri sözlüğü devam ediyor. Referans tablolar eklenecek. Düzeltmeler yapılıyor.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-24 08:49:57"
+  },
+  {
+    "id": "cmrypadkb000tgn1fbzl97y3c",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-07-24",
+    "content": "Tebliğ zarfının eski halini geri yükleyecek. Ülke kontrolüne göre yurt dışı adresi yazdırılacak şekilde düzenleme yapılacak.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-24 08:50:57"
+  },
+  {
+    "id": "cmrypbb9w000vgn1fy1avtks8",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-07-24",
+    "content": "531 için istatistik devam ediyor. Brüt kazanç bilgisi olmayanlar için çalışma devam ediyor.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-24 08:51:41"
+  },
+  {
+    "id": "cmrypbq57000xgn1f951wra1u",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-07-24",
+    "content": "Ebelge ekranındaki tebliğ\/adres değişiklik ekranı analizi devam ediyor.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-24 08:52:00"
+  },
+  {
+    "id": "cmrypyjdp0001gnd76bvz3dsy",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-07-24",
+    "content": "Önceki gün ile aynı",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-24 09:09:44"
+  },
+  {
+    "id": "229ec1be-babf-410f-8bf5-2ec8c066f696",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-07-27",
+    "content": "önceki gün ile aynı",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-27 09:12:05"
+  },
+  {
+    "id": "ff4148ba-eb99-43f5-8fd6-af7f9e016303",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-07-27",
+    "content": "vt ekibi istegine gore oid alanlari view scriptlerine eklenecek. postgre tarafında stage tabloları oluşturulacak. Fırat Olgaça mail atmıştı değişiklik olursa guncellemeler yapılacak değilse cevap script leri ile devam edeceğiz. istek sciptleri vt ekibine gonderdik donuş yaparlarsa tekrar değerlendirilcek",
+    "tags": "toplantı,tasarım",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-27 09:17:31"
+  },
+  {
+    "id": "9fbeff76-db18-4319-a669-a65d4a3d1e4e",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-07-27",
+    "content": "Bu gün EVDB-9927 deki üst limit hatası çözülecek. EVDB-9991de iptal tarihi ve iptal neden ile ilgili Feride Hanımla konuştuk. Popupdaki diğer alanlar tamam. Ekrandaki son eksikler tamamlanacak. ",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-27 09:40:24"
+  },
+  {
+    "id": "c29bbffe-7350-415c-b301-b399166a9758",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-07-27",
+    "content": "iş bekliyorum.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-27 09:52:26"
+  },
+  {
+    "id": "0c55e7ec-7dce-4a0d-9d9d-4ce6708f7a22",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-07-27",
+    "content": "merhaba. epdk yer alan mükelleflerden teminat veren ve vermeyen ayrılması ayrıca verilen teminatların yeterli olup olmadığı ile ilgili veriler üzerinde çalışılıyor.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-27 09:53:05"
+  },
+  {
+    "id": "bfbe4091-82eb-4125-8f3c-af079af34fc1",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-07-27",
+    "content": "Veri sözlüğü devam ediyor. Referans tablolar eklenecek. Düzeltmeler yapılıyor.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-27 10:03:49"
+  },
+  {
+    "id": "6c1ee780-56a9-4f3a-8687-3abc17faaf38",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-07-27",
+    "content": "Belge Görüntüleme de Haktan servisi yazdı, şimdi onun üzerinde çalışıyorum.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-07-27 10:04:22"
+  },
+  {
+    "id": "c060eee4-fcbc-4f4e-8413-8825e385fec0",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-07-27",
+    "content": "- ANALIZEVDB-1340  :e-Belge\/Adres Değişikliği ve Tebliğ Şekli Günleme Ekranları analizi\r\n- EBLGTST-7 : eBelge görüntüleme querysql ile yazılan yeni servise limit eklenmesi servis testi\r\n-TESTEVDB-3538 :E-Haciz Kat'i Düzenleme Ekranında Üst Limit Eklenmesi testi\r\n-TESTEVDB-3598 :genelGibintranetServices_anaTakipSorgulama \/ DYNAMIC_SP_OLUSTUR : TUZEL_ORTAK_TAKIP_SORGULA testi ",
+    "tags": "",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EBLGTST-7  https:\/\/jira.gelirler.gov.tr\/browse\/TESTEVDB-3538?filter=15394 https:\/\/jira.gelirler.gov.tr\/browse\/TESTEVDB-3598?filter=15394 https:\/\/jira.gelirler.gov.tr\/browse\/ANALIZEVDB-1340?filter=15394",
+    "files": "[]",
+    "created_at": "2026-07-27 10:06:44"
+  },
+  {
+    "id": "e0092126-c072-4391-b6fa-2f1a1c31a99c",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-07-27",
+    "content": "GÜVENLİĞİ FARKINDALIK EĞİTİMİ'ni yapıyorum. Gibintra işinden devam ediyorum. Bittikten sonra takipIlanWorker programındaki hataya bakmayı planlıyorum. ",
+    "tags": "Bugfix",
+    "jira_link": "EVDB-10030",
+    "files": "[]",
+    "created_at": "2026-07-27 10:06:56"
+  }
 ]

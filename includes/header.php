@@ -108,7 +108,11 @@ $currentPath = $_SERVER['REQUEST_URI'];
 
                 <a href="<?php echo APP_URL; ?>pages/reports.php"
                    class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'reports.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
-                    <span class="text-base">📈</span> Raporlar
+                     <span class="text-base">📈</span> Raporlar
+                </a>
+                <a href="<?php echo APP_URL; ?>pages/admin/status-report.php"
+                   class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'status-report.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
+                    <span class="text-base">📌</span> Durum Raporu
                 </a>
                 <?php endif; ?>
             </nav>
@@ -185,6 +189,7 @@ $currentPath = $_SERVER['REQUEST_URI'];
                     <div class="pt-3 pb-1"><p class="px-3 text-xs font-semibold uppercase text-gray-400">Yönetim</p></div>
                     <a href="<?php echo APP_URL; ?>pages/admin/users.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'admin/users.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>👥</span> Kullanıcılar</a>
                     <a href="<?php echo APP_URL; ?>pages/reports.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'reports.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📈</span> Raporlar</a>
+                    <a href="<?php echo APP_URL; ?>pages/admin/status-report.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'status-report.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📌</span> Durum Raporu</a>
                     <?php endif; ?>
                 </nav>
                 <div class="p-3 border-t border-gray-200 dark:border-gray-700 space-y-1">

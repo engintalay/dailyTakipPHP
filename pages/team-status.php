@@ -13,6 +13,7 @@ $users = getAllUsers(true);
 
 // Current month
 $currentMonth = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
+$today = date('Y-m-d');
 list($year, $month) = explode('-', $currentMonth);
 $monthNames = array('', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık');
 $monthLabel = $monthNames[(int)$month] . ' ' . $year;
@@ -94,12 +95,15 @@ $currentPath = 'pages/team-status.php';
                     <?php for ($day = 1; $day <= $daysInMonth; $day++):
                         $dow = (int)date('w', mktime(0, 0, 0, $month, $day, $year));
                         $isWeekend = $dow === 0 || $dow === 6;
+                        $dateStr = sprintf('%s-%02d-%02d', $year, $month, $day);
+                        $isToday = $dateStr === $today;
                         $dayNames = array('Pzt','Sal','Çar','Per','Cum','Cmt','Paz');
                         $dayName = $dayNames[$dow === 0 ? 6 : $dow - 1];
                     ?>
-                    <th class="text-center p-1 font-medium min-w-[28px] <?php echo $isWeekend ? 'bg-slate-200 text-slate-800 dark:bg-slate-600 dark:text-white' : ''; ?>">
+                    <th title="<?php echo $isToday ? 'Bugün' : ''; ?>" class="text-center p-1 font-medium min-w-[28px] <?php echo $isWeekend ? 'bg-slate-200 text-slate-800 dark:bg-slate-600 dark:text-white' : ''; ?> <?php echo $isToday ? 'bg-blue-200 text-blue-950 ring-2 ring-blue-600 ring-inset dark:bg-blue-900 dark:text-blue-100 dark:ring-blue-400' : ''; ?>">
                         <div><?php echo $day; ?></div>
                         <div class="text-gray-500 dark:text-gray-400"><?php echo $dayName; ?></div>
+                        <?php if ($isToday): ?><div class="text-[9px] font-bold text-blue-700 dark:text-blue-200">Bugün</div><?php endif; ?>
                     </th>
                     <?php endfor; ?>
                 </tr>
@@ -113,10 +117,12 @@ $currentPath = 'pages/team-status.php';
                         $status = isset($statusMap[$u['id'] . '-' . $dateStr]) ? $statusMap[$u['id'] . '-' . $dateStr] : null;
                         $dow = (int)date('w', mktime(0, 0, 0, $month, $day, $year));
                         $isWeekend = $dow === 0 || $dow === 6;
+                        $isToday = $dateStr === $today;
                     ?>
                     <td onclick="cycleStatus('<?php echo $u['id']; ?>', '<?php echo $dateStr; ?>', '<?php echo $status ?: ''; ?>')"
                         class="text-center p-1 border-l border-gray-200 dark:border-gray-700 cursor-pointer transition-colors hover:ring-2 hover:ring-blue-500 hover:ring-inset <?php
                             echo $isWeekend ? 'bg-slate-100 dark:bg-slate-800' : '';
+                            echo $isToday ? ' bg-blue-50 ring-2 ring-blue-500 ring-inset dark:bg-blue-950/40 dark:ring-blue-400' : '';
                             echo $status ? ' ' . getStatusColorClass($status) : ' hover:bg-gray-100 dark:hover:bg-gray-700';
                         ?>">
                         <?php if ($status): ?>

@@ -198,5 +198,77 @@
     "present": 1,
     "note": "",
     "created_at": "2026-07-24 16:36:59"
+  },
+  {
+    "id": "917faf76-2d60-4b4c-ae5b-66eb17908c8e",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-07-24",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-07-24 16:57:02"
+  },
+  {
+    "id": "8ee062b3-7b8a-43dd-b050-7ad2fc8dd039",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-07-27",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-07-27 08:35:59"
+  },
+  {
+    "id": "5b672228-be1e-41bb-89f1-23495cb1c679",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-07-27",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-07-27 08:37:28"
+  },
+  {
+    "id": "b484345f-ca7a-4543-a7d3-b1755d2f5658",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-07-27",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-07-27 09:13:49"
+  },
+  {
+    "id": "5aac2915-555a-4632-aec6-9af9d362b889",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-07-27",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-07-27 09:42:32"
+  },
+  {
+    "id": "4d3608fb-0c4a-498a-8f36-6463790eefe2",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-07-27",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-07-27 09:49:58"
+  },
+  {
+    "id": "839e1c7d-d05f-4293-9e4c-7401a00f74d7",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-07-27",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-07-27 09:49:59"
+  },
+  {
+    "id": "fd352221-6ec7-4538-aa6a-61f1a1b02ce6",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-07-27",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-07-27 10:02:55"
+  },
+  {
+    "id": "9f94a61f-575b-4ae2-a0d9-ee31871a7abe",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-07-27",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-07-27 10:03:12"
   }
 ]

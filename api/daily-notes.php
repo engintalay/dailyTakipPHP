@@ -37,9 +37,15 @@ if ($method === 'GET') {
     }
 } elseif ($method === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
+    if (!is_array($input)) $input = $_POST;
 
     if (!$input || empty($input['action'])) {
         jsonResponse(array('error' => 'Invalid request'), 400);
+    }
+
+    $csrf = isset($input['csrf_token']) ? $input['csrf_token'] : '';
+    if (!verifyCsrfToken($csrf)) {
+        jsonResponse(array('error' => 'Invalid CSRF token'), 403);
     }
 
     if ($input['action'] === 'create') {
@@ -71,7 +77,11 @@ if ($method === 'GET') {
         jsonResponse($note);
     }
 } elseif ($method === 'DELETE' && $noteId) {
+    $deleteInput = json_decode(file_get_contents('php://input'), true);
     $csrf = isset($_GET['csrf_token']) ? $_GET['csrf_token'] : '';
+    if (!$csrf && is_array($deleteInput) && isset($deleteInput['csrf_token'])) {
+        $csrf = $deleteInput['csrf_token'];
+    }
     if (!verifyCsrfToken($csrf)) {
         jsonResponse(array('error' => 'Invalid CSRF token'), 403);
     }

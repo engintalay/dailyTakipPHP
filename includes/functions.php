@@ -231,12 +231,17 @@ function getTagsHtml($tags) {
 function getJiraLinkHtml($jiraLink) {
     if (empty($jiraLink)) return '';
 
-    $display = preg_replace('/^https?:\/\//', '', $jiraLink);
-    $display = rtrim($display, '/');
-    $url = escapeHtml($jiraLink);
-    $display = escapeHtml($display);
-
-    return '<div class="mt-2"><a href="' . $url . '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs text-blue-600 hover:underline">🔗 ' . $display . '</a></div>';
+    $links = preg_split('/[\r\n,]+/', $jiraLink, -1, PREG_SPLIT_NO_EMPTY);
+    $html = '<div class="mt-2 space-y-1">';
+    foreach ($links as $link) {
+        $link = trim($link);
+        if (empty($link)) continue;
+        $display = preg_replace('/^https?:\/\//', '', $link);
+        $display = rtrim($display, '/');
+        $html .= '<a href="' . escapeHtml($link) . '" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-xs text-blue-600 hover:underline">🔗 ' . escapeHtml($display) . '</a>';
+    }
+    $html .= '</div>';
+    return $html;
 }
 
 function renderFlash() {

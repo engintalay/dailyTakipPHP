@@ -128,9 +128,9 @@ include __DIR__ . '/../includes/header.php';
 
         <div>
             <label class="block text-sm font-medium mb-1">Jira Linki</label>
-            <input type="url" name="jira_link" id="noteJiraLink"
-                   class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700"
-                   placeholder="https://jira.company.com/browse/PROJ-123">
+            <textarea name="jira_link" id="noteJiraLink" rows="2"
+                   class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 resize-none"
+                   placeholder="Her satıra bir Jira linki yazın"></textarea>
         </div>
 
         <div>
@@ -181,7 +181,7 @@ include __DIR__ . '/../includes/header.php';
                 </div>
                 <?php if ($isAdmin || $note['user_id'] === $effectiveUserId): ?>
                 <div class="flex gap-2">
-                    <button type="button" onclick="editNote(<?php echo json_encode($note); ?>)" class="text-xs text-gray-500 hover:text-blue-500">Düzenle</button>
+                    <button type="button" onclick="editNote(<?php echo htmlspecialchars(json_encode($note), ENT_QUOTES, 'UTF-8'); ?>)" class="text-xs text-gray-500 hover:text-blue-500">Düzenle</button>
                     <button type="button" onclick="deleteNote('<?php echo $note['id']; ?>')" class="text-xs text-gray-500 hover:text-red-500">Sil</button>
                 </div>
                 <?php endif; ?>
@@ -189,14 +189,7 @@ include __DIR__ . '/../includes/header.php';
 
             <p class="text-sm whitespace-pre-wrap"><?php echo escapeHtml($note['content']); ?></p>
 
-            <?php if (!empty($note['jira_link'])): ?>
-            <div class="mt-2">
-                <a href="<?php echo escapeHtml($note['jira_link']); ?>" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs text-blue-600 hover:underline">
-                    <span>🔗</span>
-                    <?php echo escapeHtml(preg_replace('/^https?:\/\//', '', rtrim($note['jira_link'], '/'))); ?>
-                </a>
-            </div>
-            <?php endif; ?>
+            <?php echo getJiraLinkHtml($note['jira_link']); ?>
 
             <?php if (!empty($files)): ?>
             <div class="mt-2 space-y-1">
@@ -278,6 +271,35 @@ document.getElementById('toggleAddForm').addEventListener('click', function() {
 
 document.getElementById('cancelEdit').addEventListener('click', resetForm);
 
+document.getElementById('addNoteForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = this;
+    var noteId = document.getElementById('noteId').value;
+    var url = form.getAttribute('action') + (noteId ? '?id=' + encodeURIComponent(noteId) : '');
+    var submitButton = document.getElementById('submitBtn');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Kaydediliyor...';
+
+    fetch(url, {
+        method: 'POST',
+        body: new FormData(form)
+    }).then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        if (data.error) {
+            alert('Hata: ' + data.error);
+            submitButton.disabled = false;
+            submitButton.textContent = noteId ? 'Güncelle' : 'Kaydet';
+            return;
+        }
+        window.location.reload();
+    }).catch(function() {
+        alert('Not kaydedilemedi. Lütfen tekrar deneyin.');
+        submitButton.disabled = false;
+        submitButton.textContent = noteId ? 'Güncelle' : 'Kaydet';
+    });
+});
+
 function resetForm() {
     document.getElementById('addNoteForm').reset();
     document.getElementById('formAction').value = 'create';
@@ -311,7 +333,12 @@ function editNote(note) {
     }
 
     // Load existing files
-    attachedFiles = <?php echo isset($note) && isset($note['files']) ? json_encode($note['files']) : '[]'; ?>;
+    try {
+        attachedFiles = note.files ? (typeof note.files === 'string' ? JSON.parse(note.files) : note.files) : [];
+        if (!Array.isArray(attachedFiles)) attachedFiles = [];
+    } catch (e) {
+        attachedFiles = [];
+    }
     updateAttachedFilesDisplay();
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
