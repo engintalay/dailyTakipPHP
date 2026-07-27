@@ -6,14 +6,18 @@ require_once __DIR__ . '/../../includes/config.php';
 require_once __DIR__ . '/../../includes/auth.php';
 require_once __DIR__ . '/../../includes/models.php';
 
-$currentUser = requireAdminAccess();
-$isAdmin = true;
+$currentUser = requireManagementAccess();
+$isAdmin = isAdmin($currentUser);
 
 $pageTitle = 'Kullanıcı Yönetimi';
 $currentPath = 'pages/admin/users.php';
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!$isAdmin) {
+        http_response_code(403);
+        exit('Salt okunur kullanıcılar değişiklik yapamaz.');
+    }
     $csrf = isset($_POST['csrf_token']) ? $_POST['csrf_token'] : '';
     if (verifyCsrfToken($csrf)) {
         $action = isset($_POST['action']) ? $_POST['action'] : '';
@@ -88,11 +92,14 @@ include __DIR__ . '/../../includes/header.php';
             <a href="<?php echo APP_URL; ?>index.php" class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">← Geri</a>
             <h1 class="text-2xl font-bold">Kullanıcı Yönetimi</h1>
         </div>
+        <?php if ($isAdmin): ?>
         <button onclick="document.getElementById('addUserForm').classList.toggle('hidden'); this.textContent = document.getElementById('addUserForm').classList.contains('hidden') ? '+ Yeni Kullanıcı' : 'İptal';"
                 class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">+ Yeni Kullanıcı</button>
+        <?php endif; ?>
     </div>
 
     <!-- Add/Edit Form -->
+    <?php if ($isAdmin): ?>
     <form id="addUserForm" method="POST" class="hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 space-y-4">
         <input type="hidden" name="action" id="formAction" value="create">
         <input type="hidden" name="user_id" id="editUserId">
@@ -119,12 +126,14 @@ include __DIR__ . '/../../includes/header.php';
                 <select name="role" id="formRole" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700">
                     <option value="<?php echo ROLE_MEMBER; ?>">Üye</option>
                     <option value="<?php echo ROLE_ADMIN; ?>">Admin</option>
+                    <option value="<?php echo ROLE_VIEWER; ?>">Salt Okunur</option>
                 </select>
             </div>
         </div>
 
         <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700" id="submitBtn">Oluştur</button>
     </form>
+    <?php endif; ?>
 
     <!-- Users Table -->
     <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
@@ -136,7 +145,7 @@ include __DIR__ . '/../../includes/header.php';
                     <th class="text-left p-3 font-medium">E-posta</th>
                     <th class="text-left p-3 font-medium">Rol</th>
                     <th class="text-left p-3 font-medium">Durum</th>
-                    <th class="text-right p-3 font-medium">İşlem</th>
+                    <th class="text-right p-3 font-medium"><?php echo $isAdmin ? 'İşlem' : 'Erişim'; ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -149,9 +158,11 @@ include __DIR__ . '/../../includes/header.php';
                         <span class="text-xs px-2 py-0.5 rounded-full font-medium <?php
                             echo $u['role'] === ROLE_ADMIN
                                 ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'
-                                : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400';
+                                : ($u['role'] === ROLE_VIEWER
+                                    ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                                    : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400');
                         ?>">
-                            <?php echo $u['role'] === ROLE_ADMIN ? 'Admin' : 'Üye'; ?>
+                            <?php echo escapeHtml(getRoleLabel($u['role'])); ?>
                         </span>
                     </td>
                     <td class="p-3">
@@ -164,6 +175,7 @@ include __DIR__ . '/../../includes/header.php';
                         </span>
                     </td>
                     <td class="p-3 text-right">
+                        <?php if ($isAdmin): ?>
                         <div class="flex items-center justify-end gap-2">
                             <!-- Impersonate -->
                             <?php if ($u['id'] !== $currentUser['id'] && $u['is_active']): ?>
@@ -176,7 +188,7 @@ include __DIR__ . '/../../includes/header.php';
                             <?php endif; ?>
 
                             <!-- Edit -->
-                            <button onclick="editUser(<?php echo json_encode($u); ?>)" class="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-400">Düzenle</button>
+                            <button onclick="editUser(<?php echo htmlspecialchars(json_encode($u), ENT_QUOTES, 'UTF-8'); ?>)" class="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-400">Düzenle</button>
 
                             <!-- Toggle Active -->
                             <form method="POST" style="display:inline">
@@ -199,6 +211,9 @@ include __DIR__ . '/../../includes/header.php';
                             </form>
                             <?php endif; ?>
                         </div>
+                        <?php else: ?>
+                        <span class="text-xs text-gray-500 dark:text-gray-400">Salt okunur</span>
+                        <?php endif; ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -207,6 +222,7 @@ include __DIR__ . '/../../includes/header.php';
     </div>
 </div>
 
+<?php if ($isAdmin): ?>
 <script>
 function editUser(user) {
     document.getElementById('addUserForm').classList.remove('hidden');
@@ -221,15 +237,19 @@ function editUser(user) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Reset form when cancelled
-document.querySelector('#addUserForm button[type="button"]').addEventListener('click', function() {
-    document.getElementById('addUserForm').classList.add('hidden');
-    document.getElementById('formAction').value = 'create';
-    document.getElementById('editUserId').value = '';
-    document.getElementById('addUserForm').reset();
-    document.getElementById('passwordLabel').textContent = 'Şifre';
-    document.getElementById('submitBtn').textContent = 'Oluştur';
-});
+// Reset form when a cancel button is present
+var cancelButton = document.querySelector('#addUserForm button[type="button"]');
+if (cancelButton) {
+    cancelButton.addEventListener('click', function() {
+        document.getElementById('addUserForm').classList.add('hidden');
+        document.getElementById('formAction').value = 'create';
+        document.getElementById('editUserId').value = '';
+        document.getElementById('addUserForm').reset();
+        document.getElementById('passwordLabel').textContent = 'Şifre';
+        document.getElementById('submitBtn').textContent = 'Oluştur';
+    });
+}
 </script>
+<?php endif; ?>
 
 <?php include __DIR__ . '/../../includes/footer.php'; ?>

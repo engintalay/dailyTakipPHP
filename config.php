@@ -29,6 +29,7 @@ define('PASSWORD_COST', 12);
 // Roles
 define('ROLE_ADMIN', 'ADMIN');
 define('ROLE_MEMBER', 'MEMBER');
+define('ROLE_VIEWER', 'VIEWER');
 
 // Status types
 define('STATUS_OFFICE', 'OFFICE');

@@ -167,10 +167,22 @@ include __DIR__ . '/../includes/header.php';
         <?php if (empty($notes)): ?>
         <p class="text-gray-500 dark:text-gray-400">Henüz not eklenmemiş.</p>
         <?php else: ?>
+        <?php $previousNoteDate = ''; ?>
         <?php foreach ($notes as $note):
             $files = json_decode($note['files'], true);
             if (!is_array($files)) $files = array();
+            $noteDateKey = substr($note['date'], 0, 10);
+            if ($noteDateKey !== $previousNoteDate):
+                $previousNoteDate = $noteDateKey;
         ?>
+        <div class="flex items-center gap-3 pt-2">
+            <div class="h-px flex-1 bg-slate-300 dark:bg-slate-600"></div>
+            <span class="px-3 py-1 rounded-full bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-200 text-xs font-semibold whitespace-nowrap">
+                <?php echo escapeHtml(formatDateShort($noteDateKey)); ?>
+            </span>
+            <div class="h-px flex-1 bg-slate-300 dark:bg-slate-600"></div>
+        </div>
+        <?php endif; ?>
         <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4" data-note-id="<?php echo $note['id']; ?>">
             <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center gap-2">

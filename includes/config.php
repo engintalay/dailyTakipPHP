@@ -18,6 +18,7 @@ ini_set('session.cookie_secure', isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] =
 // Role constants
 define('ROLE_ADMIN', 'ADMIN');
 define('ROLE_MEMBER', 'MEMBER');
+define('ROLE_VIEWER', 'VIEWER');
 
 // Status types
 define('STATUS_OFFICE', 'OFFICE');

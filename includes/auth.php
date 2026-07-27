@@ -74,6 +74,23 @@ function isAdmin($user = null) {
     return $user && $user['role'] === ROLE_ADMIN;
 }
 
+function canViewManagement($user = null) {
+    if (!$user) $user = getCurrentUser();
+    return $user && ($user['role'] === ROLE_ADMIN || $user['role'] === ROLE_VIEWER);
+}
+
+function requireManagementAccess() {
+    $user = requireLogin();
+    if (!canViewManagement($user)) {
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+            jsonResponse(array('error' => 'Management access required'), 403);
+        }
+        header('Location: ' . APP_URL . 'index.php');
+        exit;
+    }
+    return $user;
+}
+
 function requireLogin() {
     if (!isLoggedIn()) {
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {

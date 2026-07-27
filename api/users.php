@@ -10,11 +10,12 @@ header('Content-Type: application/json; charset=utf-8');
 
 $currentUser = requireLogin();
 $isAdmin = isAdmin($currentUser);
+$canViewManagement = canViewManagement($currentUser);
 
 $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method === 'GET') {
-    if (!$isAdmin) {
+    if (!$canViewManagement) {
         jsonResponse(array('error' => 'Admin required'), 403);
     }
 

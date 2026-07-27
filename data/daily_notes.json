@@ -195,7 +195,7 @@
     "date": "2026-07-27",
     "content": "- ANALIZEVDB-1340  :e-Belge\/Adres Değişikliği ve Tebliğ Şekli Günleme Ekranları analizi\r\n- EBLGTST-7 : eBelge görüntüleme querysql ile yazılan yeni servise limit eklenmesi servis testi\r\n-TESTEVDB-3538 :E-Haciz Kat'i Düzenleme Ekranında Üst Limit Eklenmesi testi\r\n-TESTEVDB-3598 :genelGibintranetServices_anaTakipSorgulama \/ DYNAMIC_SP_OLUSTUR : TUZEL_ORTAK_TAKIP_SORGULA testi ",
     "tags": "",
-    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EBLGTST-7  https:\/\/jira.gelirler.gov.tr\/browse\/TESTEVDB-3538?filter=15394 https:\/\/jira.gelirler.gov.tr\/browse\/TESTEVDB-3598?filter=15394 https:\/\/jira.gelirler.gov.tr\/browse\/ANALIZEVDB-1340?filter=15394",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EBLGTST-7 ,https:\/\/jira.gelirler.gov.tr\/browse\/TESTEVDB-3538?filter=15394 , https:\/\/jira.gelirler.gov.tr\/browse\/TESTEVDB-3598?filter=15394 , https:\/\/jira.gelirler.gov.tr\/browse\/ANALIZEVDB-1340?filter=15394",
     "files": "[]",
     "created_at": "2026-07-27 10:06:44"
   },
@@ -203,10 +203,20 @@
     "id": "e0092126-c072-4391-b6fa-2f1a1c31a99c",
     "user_id": "cmryni4o40000gnsb0ce8ipf2",
     "date": "2026-07-27",
-    "content": "GÜVENLİĞİ FARKINDALIK EĞİTİMİ'ni yapıyorum. Gibintra işinden devam ediyorum. Bittikten sonra takipIlanWorker programındaki hataya bakmayı planlıyorum. ",
+    "content": "BİLGİ GÜVENLİĞİ FARKINDALIK EĞİTİMİ'ni yapıyorum. Gibintra işinden devam ediyorum. Bittikten sonra takipIlanWorker programındaki hataya bakmayı planlıyorum. ",
     "tags": "Bugfix",
     "jira_link": "EVDB-10030",
     "files": "[]",
     "created_at": "2026-07-27 10:06:56"
+  },
+  {
+    "id": "2637abea-36e5-4da8-84c8-e12e6b926cb0",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-07-27",
+    "content": "PYO-3247 Altındaki işlerin son durumu güncellenecek\r\nPYO-4348 örnek yazı hazırlanacak",
+    "tags": "",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/PYO-3247\r\nhttps:\/\/jira.gelirler.gov.tr\/browse\/PYO-4348\r\n",
+    "files": "[]",
+    "created_at": "2026-07-27 11:44:18"
   }
 ]

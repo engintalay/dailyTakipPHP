@@ -6,8 +6,8 @@ require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/models.php';
 
-$currentUser = requireAdminAccess();
-$isAdmin = true;
+$currentUser = requireManagementAccess();
+$isAdmin = isAdmin($currentUser);
 
 $pageTitle = 'Raporlar';
 $currentPath = 'pages/reports.php';

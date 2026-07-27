@@ -10,6 +10,7 @@ $impersonated = isImpersonating();
 $impersonatedUser = $impersonated ? getImpersonatedUser() : null;
 $effectiveUser = getEffectiveUser();
 $isAdmin = isAdmin($user);
+$canViewManagement = canViewManagement($user);
 $csrfToken = generateCsrfToken();
 
 $pageTitle = isset($pageTitle) ? $pageTitle . ' - ' . APP_NAME : APP_NAME;
@@ -73,8 +74,8 @@ $currentPath = $_SERVER['REQUEST_URI'];
                 </a>
 
                 <a href="<?php echo APP_URL; ?>pages/daily.php"
-                   class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'daily.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
-                    <span class="text-base">📝</span> Daily Notlar
+                   class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo basename(parse_url($currentPath, PHP_URL_PATH)) === 'daily.php' ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
+                     <span class="text-base">📝</span> Daily Notlar
                 </a>
 
                 <a href="<?php echo APP_URL; ?>pages/status.php"
@@ -97,7 +98,7 @@ $currentPath = $_SERVER['REQUEST_URI'];
                     <span class="text-base">🔍</span> Arama
                 </a>
 
-                <?php if ($isAdmin): ?>
+                <?php if ($canViewManagement): ?>
                 <div class="pt-3 pb-1">
                     <p class="px-3 text-xs font-semibold uppercase text-gray-400 dark:text-gray-500">Yönetim</p>
                 </div>
@@ -106,9 +107,13 @@ $currentPath = $_SERVER['REQUEST_URI'];
                     <span class="text-base">👥</span> Kullanıcılar
                 </a>
 
-                <a href="<?php echo APP_URL; ?>pages/reports.php"
-                   class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'reports.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
+                    <a href="<?php echo APP_URL; ?>pages/reports.php"
+                       class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'reports.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
                      <span class="text-base">📈</span> Raporlar
+                </a>
+                <a href="<?php echo APP_URL; ?>pages/daily-summary.php"
+                   class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'daily-summary.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
+                    <span class="text-base">📚</span> Günlük Özet
                 </a>
                 <a href="<?php echo APP_URL; ?>pages/admin/status-report.php"
                    class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'status-report.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
@@ -129,7 +134,7 @@ $currentPath = $_SERVER['REQUEST_URI'];
                     <?php echo getUserAvatar($effectiveUser['name'], 'w-7 h-7'); ?>
                     <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium truncate"><?php echo escapeHtml($effectiveUser['name']); ?></p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 truncate"><?php echo $effectiveUser['role'] === ROLE_ADMIN ? 'Admin' : 'Üye'; ?></p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 truncate"><?php echo escapeHtml(getRoleLabel($effectiveUser['role'])); ?></p>
                     </div>
                 </a>
 
@@ -180,15 +185,16 @@ $currentPath = $_SERVER['REQUEST_URI'];
                 </div>
                 <nav class="flex-1 p-3 space-y-1 overflow-y-auto">
                     <a href="<?php echo APP_URL; ?>index.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'index.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📊</span> Dashboard</a>
-                    <a href="<?php echo APP_URL; ?>pages/daily.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'daily.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📝</span> Daily Notlar</a>
+                    <a href="<?php echo APP_URL; ?>pages/daily.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo basename(parse_url($currentPath, PHP_URL_PATH)) === 'daily.php' ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📝</span> Daily Notlar</a>
                     <a href="<?php echo APP_URL; ?>pages/status.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo basename(parse_url($currentPath, PHP_URL_PATH)) === 'status.php' ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📍</span> Durum Takibi</a>
                     <a href="<?php echo APP_URL; ?>pages/team-status.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'team-status.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📅</span> Ekip Takvimi</a>
                     <a href="<?php echo APP_URL; ?>pages/attendance.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'attendance.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>✅</span> Katılım</a>
                     <a href="<?php echo APP_URL; ?>pages/search.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'search.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>🔍</span> Arama</a>
-                    <?php if ($isAdmin): ?>
+                    <?php if ($canViewManagement): ?>
                     <div class="pt-3 pb-1"><p class="px-3 text-xs font-semibold uppercase text-gray-400">Yönetim</p></div>
                     <a href="<?php echo APP_URL; ?>pages/admin/users.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'admin/users.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>👥</span> Kullanıcılar</a>
                     <a href="<?php echo APP_URL; ?>pages/reports.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'reports.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📈</span> Raporlar</a>
+                    <a href="<?php echo APP_URL; ?>pages/daily-summary.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'daily-summary.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📚</span> Günlük Özet</a>
                     <a href="<?php echo APP_URL; ?>pages/admin/status-report.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'status-report.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📌</span> Durum Raporu</a>
                     <?php endif; ?>
                 </nav>
@@ -199,7 +205,7 @@ $currentPath = $_SERVER['REQUEST_URI'];
                     </button>
                     <a href="<?php echo APP_URL; ?>pages/profile.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
                         <?php echo getUserAvatar($effectiveUser['name'], 'w-7 h-7'); ?>
-                        <div class="flex-1 min-w-0"><p class="text-sm font-medium truncate"><?php echo escapeHtml($effectiveUser['name']); ?></p><p class="text-xs text-gray-500 dark:text-gray-400 truncate"><?php echo $effectiveUser['role'] === ROLE_ADMIN ? 'Admin' : 'Üye'; ?></p></div>
+                        <div class="flex-1 min-w-0"><p class="text-sm font-medium truncate"><?php echo escapeHtml($effectiveUser['name']); ?></p><p class="text-xs text-gray-500 dark:text-gray-400 truncate"><?php echo escapeHtml(getRoleLabel($effectiveUser['role'])); ?></p></div>
                     </a>
                     <?php if ($impersonated): ?>
                     <div class="px-3 py-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg">

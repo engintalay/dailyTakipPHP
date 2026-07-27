@@ -238,7 +238,13 @@ function getDailyNotes($filters = array()) {
         $result[] = $n;
     }
 
-    usort($result, function($a, $b) { return strcmp($b['date'], $a['date']); });
+    usort($result, function($a, $b) {
+        $dateCompare = strcmp($b['date'], $a['date']);
+        if ($dateCompare !== 0) return $dateCompare;
+        $aCreated = isset($a['created_at']) ? $a['created_at'] : '';
+        $bCreated = isset($b['created_at']) ? $b['created_at'] : '';
+        return strcmp($bCreated, $aCreated);
+    });
 
     if (!empty($filters['limit'])) $result = array_slice($result, 0, (int)$filters['limit']);
     if (!empty($filters['offset'])) $result = array_slice($result, (int)$filters['offset']);

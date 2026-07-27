@@ -157,6 +157,12 @@ function getStatusColorClass($type) {
     return isset($classes[$type]) ? $classes[$type] : 'border-slate-200 bg-slate-50 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400';
 }
 
+function getRoleLabel($role) {
+    if ($role === ROLE_ADMIN) return 'Admin';
+    if ($role === ROLE_VIEWER) return 'Salt Okunur';
+    return 'Üye';
+}
+
 function getUserAvatar($name, $size = 'w-8 h-8') {
     $initial = '';
     if (function_exists('mb_substr')) {

@@ -931,17 +931,9 @@
     "id": "120f3a9f-739f-4562-bfc3-de3bb2805a8b",
     "user_id": "cmryni4o40000gnsb0ce8ipf2",
     "date": "2026-07-30",
-    "type": "OFFICE",
-    "note": "",
-    "created_at": "2026-07-24 17:02:31"
-  },
-  {
-    "id": "213b514a-0f46-4eb9-8eba-b053fcf96b5e",
-    "user_id": "cmryni4o40000gnsb0ce8ipf2",
-    "date": "2026-07-31",
     "type": "REMOTE",
     "note": "",
-    "created_at": "2026-07-24 17:02:34"
+    "created_at": "2026-07-24 17:02:31"
   },
   {
     "id": "16399fd2-2cb8-41ec-a7a8-60ef9e3103b9",
@@ -1110,5 +1102,373 @@
     "type": "OFFICE",
     "note": "",
     "created_at": "2026-07-27 09:28:53"
+  },
+  {
+    "id": "a22c26ab-87eb-4582-87ea-05d0a165bdd5",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-07-27",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 11:45:48"
+  },
+  {
+    "id": "9575111c-f499-4d9f-b13f-11673c82c318",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-07-27",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 11:45:50"
+  },
+  {
+    "id": "8fd5bc11-d27e-4512-a23f-54f9f7ef38e4",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-07-28",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "c88d1131-f71c-4ea8-8957-437df6fd0212",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-07-29",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "90f15564-7d61-4728-bb79-279b093f5c95",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-07-30",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "c26978eb-53d8-4245-ade2-60b5040e7964",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-07-31",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "402083f5-0d3d-4d25-9497-369cecc50b73",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-01",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "bfb7da3f-030c-4c2e-af29-f5a10dba1126",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-02",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "e609a97b-ee59-48a2-b322-94e478941c0d",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-08",
+    "type": "LEAVE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "09f721ed-28f6-4e5c-ba50-d43f54dbd797",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-09",
+    "type": "LEAVE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "2896e9d0-3411-4bee-b388-ddd2e7495b2c",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-15",
+    "type": "LEAVE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "d1080233-b9b4-4726-8696-c9262e91dc0e",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-16",
+    "type": "LEAVE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "e655d860-fe79-41d3-b38a-22f4094af349",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-17",
+    "type": "LEAVE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "92b0d555-b13d-45ab-be0e-555128827b16",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-18",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "578b438a-45ad-44ee-ab46-03112a67729c",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-19",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "e883372c-7683-400a-9fe4-e9c7deb0b5b8",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-20",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "5c1abd02-d477-40d7-b51a-dd45cf4529db",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-21",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "a8c3a9a8-61bb-4eb1-b659-c595a5152c4a",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-22",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "cf63da44-c3fe-4b5a-8e1c-c42a914a071e",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-23",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "4553cdcb-872a-4915-98ce-9278693122c2",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-24",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "855031e2-40a1-4e2f-beb3-d8008736ce41",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-25",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "ac197ccf-17dc-43cf-b6ae-970189d0e3b5",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-26",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "266c66fd-b607-4b87-9d9f-3d669ab0aaf5",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-27",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "17a23715-c22f-45a0-b928-d5610a1a9e4b",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-28",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "4669e07d-1dbd-4a6c-9cc9-47fa6622eded",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-29",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "a5db8280-610f-4729-a138-880469146fd1",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-30",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "2825b8a2-85b4-4f66-99d7-a33f0f90c39e",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-08-31",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "41e28bf3-fcfe-4100-ad9f-1037953bc410",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-01",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "cdadc7cc-7b67-4c11-ae9a-2d60af7b32d2",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-02",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "112ddc64-991a-4d16-903d-c4d39c39453d",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-03",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "4c2546d8-3998-4bf7-84d5-6b9d846273d5",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-04",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "8f01780b-c974-4324-9ad6-ef5d811943b6",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-05",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "0477285b-7262-4d41-ac15-e5b7403cbd10",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-06",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "33f4193a-fd43-4bb8-b638-b4d6c8042c12",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-07",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "3b404067-9764-40fd-bd71-0afcf11eb327",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-08",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "c9bb6a03-8474-44b3-a626-178804bd0bc9",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-09",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "a8724d6c-bc83-4aca-8e75-9e6fc254f014",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-10",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "73ee8cfd-0e46-4f17-a5bf-b4a99f4bb717",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-11",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "a5a3c77a-e46e-41cb-968d-5adfb8cdeb19",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-12",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "0f89d881-03d3-4a50-8229-d0619ecf85d8",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-13",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "824ab8a9-6226-43ab-8d27-de32903a1d8f",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-14",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:17:03"
+  },
+  {
+    "id": "1469a391-94e8-45e6-8aea-f80e16d4bd49",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-07-30",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:56:37"
+  },
+  {
+    "id": "6cf5e52a-a986-4a56-97fb-1abceb2f00c8",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-07-28",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 15:56:45"
+  },
+  {
+    "id": "a07c5a14-8f73-405b-897d-e657631b9aff",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-07-29",
+    "type": "REMOTE",
+    "note": "",
+    "created_at": "2026-07-27 15:56:50"
+  },
+  {
+    "id": "6f27b273-30c6-4a9e-96b8-581f1701bed9",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-07-31",
+    "type": "REMOTE",
+    "note": "",
+    "created_at": "2026-07-27 15:57:01"
+  },
+  {
+    "id": "71a0830f-53bd-41f3-866a-779560472be8",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-07-31",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-07-27 17:29:08"
   }
 ]
