@@ -1,8 +1,4 @@
 <?php
-/**
- * Todo module
- * PHP 5.3 compatible
- */
 require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/models.php';
@@ -100,8 +96,10 @@ include __DIR__ . '/../includes/header.php';
     <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center text-sm text-gray-500 dark:text-gray-400">Henüz görev bulunmuyor.</div>
     <?php else: ?>
     <div class="space-y-3">
-        <?php foreach ($roots as $todo): ?>
-        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 <?php echo $todo['status'] === 'DONE' ? 'opacity-70' : ''; ?>">
+        <?php foreach ($roots as $todo):
+            $canEdit = $isAdmin || $todo['creator_id'] === $currentUser['id'] || $todo['assigned_to'] === $currentUser['id'];
+        ?>
+        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 <?php echo $todo['status'] === 'DONE' ? 'opacity-70' : ''; ?>" id="todo_<?php echo $todo['id']; ?>">
             <div class="flex items-start justify-between gap-3">
                 <div class="min-w-0">
                     <div class="flex flex-wrap items-center gap-2">
@@ -120,12 +118,17 @@ include __DIR__ . '/../includes/header.php';
                     <?php if ($todo['status'] === 'TODO'): ?><form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="update"><input type="hidden" name="todo_id" value="<?php echo $todo['id']; ?>"><input type="hidden" name="status" value="IN_PROGRESS"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300">Başlat</button></form><?php endif; ?>
                     <form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="update"><input type="hidden" name="todo_id" value="<?php echo $todo['id']; ?>"><input type="hidden" name="status" value="DONE"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="px-2 py-1 text-xs bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300">Tamamla</button></form>
                     <?php endif; ?>
+                    <?php if ($canEdit): ?>
+                    <button onclick="editTodo('<?php echo $todo['id']; ?>')" class="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400">Düzenle</button>
+                    <?php endif; ?>
                 </div>
             </div>
 
             <?php if (!empty($children[$todo['id']])): ?>
             <div class="mt-4 ml-4 pl-4 border-l-2 border-blue-200 dark:border-blue-800 space-y-2">
-                <?php foreach ($children[$todo['id']] as $child): ?>
+                <?php foreach ($children[$todo['id']] as $child):
+                    $canEditChild = $isAdmin || $child['creator_id'] === $currentUser['id'] || $child['assigned_to'] === $currentUser['id'];
+                ?>
                 <div class="rounded-lg bg-gray-50 dark:bg-gray-700/50 p-3 <?php echo $child['status'] === 'DONE' ? 'opacity-70' : ''; ?>">
                     <div class="flex items-center justify-between gap-2">
                         <div class="flex items-center gap-2 min-w-0">
@@ -135,6 +138,9 @@ include __DIR__ . '/../includes/header.php';
                         <div class="flex gap-1 shrink-0">
                             <?php if ($child['status'] !== 'DONE' && $child['assigned_to'] !== $currentUser['id']): ?><form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="claim"><input type="hidden" name="todo_id" value="<?php echo $child['id']; ?>"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="text-xs text-amber-700 dark:text-amber-300">Üzerime Al</button></form><?php endif; ?>
                             <?php if ($child['status'] !== 'DONE' && ($child['assigned_to'] === $currentUser['id'] || $isAdmin)): ?><?php if ($child['status'] === 'TODO'): ?><form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="update"><input type="hidden" name="todo_id" value="<?php echo $child['id']; ?>"><input type="hidden" name="status" value="IN_PROGRESS"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="text-xs text-blue-700 dark:text-blue-300">Başlat</button></form><?php endif; ?><form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="update"><input type="hidden" name="todo_id" value="<?php echo $child['id']; ?>"><input type="hidden" name="status" value="DONE"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="text-xs text-emerald-700 dark:text-emerald-300">Tamamla</button></form><?php endif; ?>
+                            <?php if ($canEditChild): ?>
+                            <button onclick="editTodo('<?php echo $child['id']; ?>')" class="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Düzenle</button>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">Atanan: <?php echo escapeHtml($child['assignee_name']); ?></div>
@@ -148,7 +154,64 @@ include __DIR__ . '/../includes/header.php';
     <?php endif; ?>
 </div>
 
+<!-- Edit Modal -->
+<div id="editModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center" onclick="closeEditModal()">
+    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 max-w-lg w-full mx-4 shadow-xl" onclick="event.stopPropagation()">
+        <h3 class="font-semibold text-lg mb-4">Görevi Düzenle</h3>
+        <form id="editForm" class="space-y-4">
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="todo_id" id="edit_todo_id">
+            <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
+            <div>
+                <label class="block text-sm font-medium mb-1">Başlık</label>
+                <input type="text" name="title" id="edit_title" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Açıklama</label>
+                <textarea name="description" id="edit_description" rows="2" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 resize-none"></textarea>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Atanan</label>
+                    <select name="assigned_to" id="edit_assigned_to" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700">
+                        <option value="">Seçin</option>
+                        <?php foreach ($users as $user): ?>
+                        <option value="<?php echo $user['id']; ?>"><?php echo escapeHtml($user['name']); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Durum</label>
+                    <select name="status" id="edit_status" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700">
+                        <option value="TODO">Bekliyor</option>
+                        <option value="IN_PROGRESS">Devam Ediyor</option>
+                        <option value="DONE">Tamamlandı</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Öncelik</label>
+                    <select name="priority" id="edit_priority" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700">
+                        <option value="LOW">Düşük</option>
+                        <option value="NORMAL">Normal</option>
+                        <option value="HIGH">Yüksek</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Son tarih</label>
+                    <input type="date" name="due_date" id="edit_due_date" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700">
+                </div>
+            </div>
+            <div class="flex gap-2 pt-2">
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">Kaydet</button>
+                <button type="button" onclick="closeEditModal()" class="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm hover:bg-gray-200 dark:hover:bg-gray-600">İptal</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
+var todosData = <?php echo json_encode($todos); ?>;
+
 document.getElementById('toggleTodoForm').addEventListener('click', function() {
     var form = document.getElementById('todoForm');
     form.classList.toggle('hidden');
@@ -167,6 +230,39 @@ document.querySelectorAll('.todo-action-form, #todoForm').forEach(function(form)
             .catch(function() { alert('İşlem gerçekleştirilemedi.'); });
     });
 });
+
+document.getElementById('editForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    fetch('<?php echo APP_URL; ?>api/todos.php', { method: 'POST', body: new FormData(this) })
+        .then(function(response) { return response.json(); })
+        .then(function(data) {
+            if (data.error) { alert(data.error); return; }
+            closeEditModal();
+            window.location.reload();
+        })
+        .catch(function() { alert('Güncelleme başarısız'); });
+});
+
+function editTodo(todoId) {
+    var todo = null;
+    for (var i = 0; i < todosData.length; i++) {
+        if (todosData[i].id === todoId) { todo = todosData[i]; break; }
+    }
+    if (!todo) { alert('Görev bulunamadı'); return; }
+
+    document.getElementById('edit_todo_id').value = todo.id;
+    document.getElementById('edit_title').value = todo.title;
+    document.getElementById('edit_description').value = todo.description || '';
+    document.getElementById('edit_assigned_to').value = todo.assigned_to || '';
+    document.getElementById('edit_status').value = todo.status;
+    document.getElementById('edit_priority').value = todo.priority;
+    document.getElementById('edit_due_date').value = todo.due_date || '';
+    document.getElementById('editModal').classList.remove('hidden');
+}
+
+function closeEditModal() {
+    document.getElementById('editModal').classList.add('hidden');
+}
 </script>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>
