@@ -4,9 +4,12 @@
 - **Target**: PHP 5.3 — no `??`, no `[]` short arrays, no `array_column`,
   no `func()[0]` dereference, no `JSON_UNESCAPED_UNICODE`/`JSON_PRETTY_PRINT`,
   no `cal_days_in_month`
-- **Server runs PHP 8.0+** — `create_function()` kaldırıldığı için
-  `unicodeJsonEncode`'da named callback (`_unicodeJsonReplace`) kullanıldı
+- **Server runs PHP 5.3** — `create_function()` mevcut, ancak her ihtimale
+  karşı named callback (`_unicodeJsonReplace`) kullanılıyor
 - Tüm `create_function` kullanımları temizlendi
+- **File permission sorunu**: SSH mount ile oluşturulan JSON dosyaları
+  web sunucusu (www-data) tarafından yazılamayabiliyor. `saveJson()`
+  otomatik `chmod(0666)` yapar, `initDatabase()` tüm dosyaları düzeltir
 
 ### Storage
 - JSON files in `data/` (no MySQL/SQLite)
