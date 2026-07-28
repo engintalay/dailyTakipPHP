@@ -52,7 +52,8 @@ $pageTitle = 'Giriş Yap';
         })();
     </script>
     <link rel="stylesheet" href="<?php echo APP_URL; ?>assets/css/app.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="<?php echo APP_URL; ?>assets/favicon.svg?v=<?php echo APP_VERSION; ?>">
+    <link rel="shortcut icon" type="image/svg+xml" href="<?php echo APP_URL; ?>assets/favicon.svg?v=<?php echo APP_VERSION; ?>">
 </head>
 <body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-950 dark:to-slate-900">
     <button type="button" onclick="toggleDarkMode()" class="fixed top-4 right-4 px-3 py-2 rounded-lg border border-slate-300 bg-white text-slate-700 shadow-sm hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700" aria-label="Tema değiştir">

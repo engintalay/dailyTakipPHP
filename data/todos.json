@@ -1,0 +1,44 @@
+[
+  {
+    "id": "e82b0ac8-d944-4cb1-b566-509c97bb066f",
+    "parent_id": "",
+    "title": "EHaciz para isteme yazısı örnek oluşturma",
+    "description": "",
+    "creator_id": "cmrymq3ol0000gnf71bu5x88i",
+    "assigned_to": "cmrymq3ol0000gnf71bu5x88i",
+    "status": "TODO",
+    "priority": "NORMAL",
+    "due_date": "",
+    "created_at": "2026-07-28 10:16:25",
+    "updated_at": "2026-07-28 10:16:25",
+    "completed_at": ""
+  },
+  {
+    "id": "da68ba13-aff6-4a27-86a7-2cf1ac739765",
+    "parent_id": "",
+    "title": "EHaciz banka hesap bulunamayan kayıtların otomatik iptali için bilgilendirme maili gönderilecek.",
+    "description": "",
+    "creator_id": "cmrymq3ol0000gnf71bu5x88i",
+    "assigned_to": "cmrymq3ol0000gnf71bu5x88i",
+    "status": "TODO",
+    "priority": "NORMAL",
+    "due_date": "",
+    "created_at": "2026-07-28 10:17:09",
+    "updated_at": "2026-07-28 10:17:09",
+    "completed_at": ""
+  },
+  {
+    "id": "121505e0-9ada-4f96-a7eb-bb14f3a168c4",
+    "parent_id": "",
+    "title": "GIBIntrane servisi düzeltilecek.",
+    "description": "",
+    "creator_id": "cmrymq3ol0000gnf71bu5x88i",
+    "assigned_to": "cmrymq3ol0000gnf71bu5x88i",
+    "status": "TODO",
+    "priority": "NORMAL",
+    "due_date": "",
+    "created_at": "2026-07-28 10:17:27",
+    "updated_at": "2026-07-28 10:17:27",
+    "completed_at": ""
+  }
+]

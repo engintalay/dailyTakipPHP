@@ -9,6 +9,9 @@ define('DB_USERS', DB_DIR . 'users.json');
 define('DB_NOTES', DB_DIR . 'daily_notes.json');
 define('DB_STATUSES', DB_DIR . 'daily_statuses.json');
 define('DB_ATTENDANCES', DB_DIR . 'attendances.json');
+define('DB_TODOS', DB_DIR . 'todos.json');
+define('DB_ONCALL', DB_DIR . 'on_call.json');
+define('DB_HOLIDAYS', DB_DIR . 'holidays.json');
 
 if (!is_dir(DB_DIR)) {
     mkdir(DB_DIR, 0755, true);
@@ -77,6 +80,9 @@ function initDatabase() {
     if (!file_exists(DB_NOTES)) saveJson(DB_NOTES, array());
     if (!file_exists(DB_STATUSES)) saveJson(DB_STATUSES, array());
     if (!file_exists(DB_ATTENDANCES)) saveJson(DB_ATTENDANCES, array());
+    if (!file_exists(DB_TODOS)) saveJson(DB_TODOS, array());
+    if (!file_exists(DB_ONCALL)) saveJson(DB_ONCALL, array('team' => array(), 'assignments' => array()));
+    if (!file_exists(DB_HOLIDAYS)) saveJson(DB_HOLIDAYS, array());
 }
 
 function seedDefaultUsers() {
@@ -456,6 +462,259 @@ function setAttendance($userId, $date, $present = true, $note = '') {
     }
     saveJson(DB_ATTENDANCES, $attendances);
     return getAttendanceByUserAndDate($userId, $date);
+}
+
+// Todo functions
+function getTodos($filters = array()) {
+    $todos = loadJson(DB_TODOS);
+    $users = loadJson(DB_USERS);
+    $userMap = array();
+    foreach ($users as $u) $userMap[$u['id']] = $u['name'];
+
+    $children = array();
+    foreach ($todos as $todo) {
+        if (!empty($todo['parent_id'])) {
+            if (!isset($children[$todo['parent_id']])) $children[$todo['parent_id']] = 0;
+            $children[$todo['parent_id']]++;
+        }
+    }
+
+    $result = array();
+    foreach ($todos as $todo) {
+        if (!empty($filters['assigned_to']) && $todo['assigned_to'] !== $filters['assigned_to']) continue;
+        if (!empty($filters['creator_id']) && $todo['creator_id'] !== $filters['creator_id']) continue;
+        if (!empty($filters['parent_id']) && $todo['parent_id'] !== $filters['parent_id']) continue;
+        if (!empty($filters['status']) && $todo['status'] !== $filters['status']) continue;
+        if (empty($filters['include_done']) && $todo['status'] === 'DONE') continue;
+
+        $todo['creator_name'] = isset($userMap[$todo['creator_id']]) ? $userMap[$todo['creator_id']] : 'Bilinmeyen';
+        $todo['assignee_name'] = isset($userMap[$todo['assigned_to']]) ? $userMap[$todo['assigned_to']] : 'Atanmamış';
+        $todo['subtask_count'] = isset($children[$todo['id']]) ? $children[$todo['id']] : 0;
+        $result[] = $todo;
+    }
+
+    usort($result, function($a, $b) {
+        if ($a['status'] === 'DONE' && $b['status'] !== 'DONE') return 1;
+        if ($a['status'] !== 'DONE' && $b['status'] === 'DONE') return -1;
+        return strcmp($b['created_at'], $a['created_at']);
+    });
+    return $result;
+}
+
+function getTodoById($id) {
+    $todos = loadJson(DB_TODOS);
+    foreach ($todos as $todo) {
+        if ($todo['id'] === $id) return $todo;
+    }
+    return null;
+}
+
+function createTodo($creatorId, $title, $description = '', $assignedTo = '', $dueDate = '', $priority = 'NORMAL', $parentId = '') {
+    $todos = loadJson(DB_TODOS);
+    $todo = array(
+        'id' => generateId(),
+        'parent_id' => $parentId,
+        'title' => $title,
+        'description' => $description,
+        'creator_id' => $creatorId,
+        'assigned_to' => $assignedTo ? $assignedTo : $creatorId,
+        'status' => 'TODO',
+        'priority' => in_array($priority, array('LOW', 'NORMAL', 'HIGH')) ? $priority : 'NORMAL',
+        'due_date' => $dueDate,
+        'created_at' => date('Y-m-d H:i:s'),
+        'updated_at' => date('Y-m-d H:i:s'),
+        'completed_at' => ''
+    );
+    $todos[] = $todo;
+    saveJson(DB_TODOS, $todos);
+    return $todo;
+}
+
+function updateTodo($id, $data) {
+    $todos = loadJson(DB_TODOS);
+    $updated = null;
+    foreach ($todos as &$todo) {
+        if ($todo['id'] !== $id) continue;
+        foreach (array('title', 'description', 'assigned_to', 'due_date', 'priority', 'parent_id') as $field) {
+            if (isset($data[$field])) $todo[$field] = $data[$field];
+        }
+        if (isset($data['status']) && in_array($data['status'], array('TODO', 'IN_PROGRESS', 'DONE'))) {
+            $todo['status'] = $data['status'];
+            $todo['completed_at'] = $data['status'] === 'DONE' ? date('Y-m-d H:i:s') : '';
+        }
+        $todo['updated_at'] = date('Y-m-d H:i:s');
+        $updated = $todo;
+        break;
+    }
+    saveJson(DB_TODOS, $todos);
+    return $updated;
+}
+
+function deleteTodo($id) {
+    $todos = loadJson(DB_TODOS);
+    $kept = array();
+    foreach ($todos as $todo) {
+        if ($todo['id'] !== $id && $todo['parent_id'] !== $id) $kept[] = $todo;
+    }
+    saveJson(DB_TODOS, $kept);
+    return true;
+}
+
+// On-Call functions
+function getOnCallData() {
+    $data = loadJson(DB_ONCALL);
+    if (!isset($data['team'])) $data['team'] = array();
+    if (!isset($data['assignments'])) $data['assignments'] = array();
+    return $data;
+}
+
+function saveOnCallData($data) {
+    return saveJson(DB_ONCALL, $data);
+}
+
+function getOnCallTeam() {
+    $data = getOnCallData();
+    return $data['team'];
+}
+
+function setOnCallTeam($teamUserIds) {
+    $data = getOnCallData();
+    $data['team'] = $teamUserIds;
+    return saveOnCallData($data);
+}
+
+function getOnCallAssignmentsForMonth($year, $month) {
+    $data = getOnCallData();
+    $result = array();
+    $prefix = sprintf('%s-%02d-', $year, $month);
+    foreach ($data['assignments'] as $a) {
+        if (strpos($a['date'], $prefix) === 0) {
+            $result[$a['date']] = $a['user_id'];
+        }
+    }
+    return $result;
+}
+
+function getOnCallAssignment($date) {
+    $data = getOnCallData();
+    foreach ($data['assignments'] as $a) {
+        if ($a['date'] === $date) return $a['user_id'];
+    }
+    return null;
+}
+
+function setOnCallAssignment($date, $userId) {
+    $data = getOnCallData();
+    $assignments = array();
+    foreach ($data['assignments'] as $a) {
+        if ($a['date'] !== $date) $assignments[] = $a;
+    }
+    $assignments[] = array('date' => $date, 'user_id' => $userId);
+    $data['assignments'] = $assignments;
+    return saveOnCallData($data);
+}
+
+function removeOnCallAssignment($date) {
+    $data = getOnCallData();
+    $assignments = array();
+    foreach ($data['assignments'] as $a) {
+        if ($a['date'] !== $date) $assignments[] = $a;
+    }
+    $data['assignments'] = $assignments;
+    return saveOnCallData($data);
+}
+
+function getOnCallSuggestions($year, $month) {
+    $data = getOnCallData();
+    $team = $data['team'];
+    if (empty($team)) return array();
+
+    $holidays = getHolidays();
+    $holidayDates = array();
+    foreach ($holidays as $h) {
+        $holidayDates[$h['date']] = true;
+    }
+
+    $existingAssignments = array();
+    foreach ($data['assignments'] as $a) {
+        $existingAssignments[$a['date']] = $a['user_id'];
+    }
+
+    $daysInMonth = (int)date('t', mktime(0, 0, 0, $month, 1, $year));
+    $suggestions = array();
+    $teamIdx = 0;
+
+    // Find last assigned team member index from previous assignments
+    $lastAssignedDate = '';
+    foreach ($data['assignments'] as $a) {
+        if ($a['date'] <= sprintf('%s-%02d-%02d', $year, $month, $daysInMonth)) {
+            if ($a['date'] > $lastAssignedDate) $lastAssignedDate = $a['date'];
+        }
+    }
+    if ($lastAssignedDate && isset($existingAssignments[$lastAssignedDate])) {
+        $lastUserId = $existingAssignments[$lastAssignedDate];
+        foreach ($team as $idx => $uid) {
+            if ($uid === $lastUserId) {
+                $teamIdx = ($idx + 1) % count($team);
+                break;
+            }
+        }
+    }
+
+    for ($day = 1; $day <= $daysInMonth; $day++) {
+        $dateStr = sprintf('%s-%02d-%02d', $year, $month, $day);
+        $dow = (int)date('w', mktime(0, 0, 0, $month, $day, $year));
+
+        // Skip weekends
+        if ($dow === 0 || $dow === 6) continue;
+        // Skip holidays
+        if (isset($holidayDates[$dateStr])) continue;
+        // Skip already assigned
+        if (isset($existingAssignments[$dateStr])) continue;
+
+        $suggestions[$dateStr] = $team[$teamIdx];
+        $teamIdx = ($teamIdx + 1) % count($team);
+    }
+
+    return $suggestions;
+}
+
+// Holidays functions
+function getHolidays() {
+    return loadJson(DB_HOLIDAYS);
+}
+
+function getHoliday($date) {
+    $holidays = loadJson(DB_HOLIDAYS);
+    foreach ($holidays as $h) {
+        if ($h['date'] === $date) return $h;
+    }
+    return null;
+}
+
+function saveHoliday($date, $name) {
+    $holidays = loadJson(DB_HOLIDAYS);
+    $found = false;
+    foreach ($holidays as &$h) {
+        if ($h['date'] === $date) {
+            $h['name'] = $name;
+            $found = true;
+            break;
+        }
+    }
+    if (!$found) {
+        $holidays[] = array('date' => $date, 'name' => $name);
+    }
+    return saveJson(DB_HOLIDAYS, $holidays);
+}
+
+function deleteHoliday($date) {
+    $holidays = loadJson(DB_HOLIDAYS);
+    $kept = array();
+    foreach ($holidays as $h) {
+        if ($h['date'] !== $date) $kept[] = $h;
+    }
+    return saveJson(DB_HOLIDAYS, $kept);
 }
 
 // Initialize on include

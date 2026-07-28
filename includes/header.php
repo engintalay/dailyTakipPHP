@@ -23,6 +23,8 @@ $currentPath = $_SERVER['REQUEST_URI'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo escapeHtml($pageTitle); ?></title>
     <meta name="description" content="<?php echo escapeHtml(APP_DESCRIPTION); ?>">
+    <link rel="icon" type="image/svg+xml" href="<?php echo APP_URL; ?>assets/favicon.svg?v=<?php echo APP_VERSION; ?>">
+    <link rel="shortcut icon" type="image/svg+xml" href="<?php echo APP_URL; ?>assets/favicon.svg?v=<?php echo APP_VERSION; ?>">
 
     <!-- Tailwind CSS via CDN (class-based dark mode) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -77,6 +79,10 @@ $currentPath = $_SERVER['REQUEST_URI'];
                    class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo basename(parse_url($currentPath, PHP_URL_PATH)) === 'daily.php' ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
                      <span class="text-base">📝</span> Daily Notlar
                 </a>
+                <a href="<?php echo APP_URL; ?>pages/todos.php"
+                   class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'todos.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
+                    <span class="text-base">✅</span> Todo İşler
+                </a>
 
                 <a href="<?php echo APP_URL; ?>pages/status.php"
                    class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo basename(parse_url($currentPath, PHP_URL_PATH)) === 'status.php' ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
@@ -86,6 +92,11 @@ $currentPath = $_SERVER['REQUEST_URI'];
                 <a href="<?php echo APP_URL; ?>pages/team-status.php"
                    class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'team-status.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
                     <span class="text-base">📅</span> Ekip Takvimi
+                </a>
+
+                <a href="<?php echo APP_URL; ?>pages/oncall.php"
+                   class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'oncall.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
+                    <span class="text-base">🔔</span> Nöbet Takvimi
                 </a>
 
                 <a href="<?php echo APP_URL; ?>pages/attendance.php"
@@ -105,6 +116,10 @@ $currentPath = $_SERVER['REQUEST_URI'];
                 <a href="<?php echo APP_URL; ?>pages/admin/users.php"
                    class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'admin/users.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
                     <span class="text-base">👥</span> Kullanıcılar
+                </a>
+                <a href="<?php echo APP_URL; ?>pages/admin/holidays.php"
+                   class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'admin/holidays.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
+                    <span class="text-base">🎉</span> Tatiller
                 </a>
 
                     <a href="<?php echo APP_URL; ?>pages/reports.php"
@@ -186,13 +201,16 @@ $currentPath = $_SERVER['REQUEST_URI'];
                 <nav class="flex-1 p-3 space-y-1 overflow-y-auto">
                     <a href="<?php echo APP_URL; ?>index.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'index.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📊</span> Dashboard</a>
                     <a href="<?php echo APP_URL; ?>pages/daily.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo basename(parse_url($currentPath, PHP_URL_PATH)) === 'daily.php' ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📝</span> Daily Notlar</a>
+                    <a href="<?php echo APP_URL; ?>pages/todos.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'todos.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>✅</span> Todo İşler</a>
                     <a href="<?php echo APP_URL; ?>pages/status.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo basename(parse_url($currentPath, PHP_URL_PATH)) === 'status.php' ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📍</span> Durum Takibi</a>
                     <a href="<?php echo APP_URL; ?>pages/team-status.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'team-status.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📅</span> Ekip Takvimi</a>
+                    <a href="<?php echo APP_URL; ?>pages/oncall.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'oncall.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>🔔</span> Nöbet Takvimi</a>
                     <a href="<?php echo APP_URL; ?>pages/attendance.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'attendance.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>✅</span> Katılım</a>
                     <a href="<?php echo APP_URL; ?>pages/search.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'search.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>🔍</span> Arama</a>
                     <?php if ($canViewManagement): ?>
                     <div class="pt-3 pb-1"><p class="px-3 text-xs font-semibold uppercase text-gray-400">Yönetim</p></div>
                     <a href="<?php echo APP_URL; ?>pages/admin/users.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'admin/users.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>👥</span> Kullanıcılar</a>
+                    <a href="<?php echo APP_URL; ?>pages/admin/holidays.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'admin/holidays.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>🎉</span> Tatiller</a>
                     <a href="<?php echo APP_URL; ?>pages/reports.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'reports.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📈</span> Raporlar</a>
                     <a href="<?php echo APP_URL; ?>pages/daily-summary.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'daily-summary.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📚</span> Günlük Özet</a>
                     <a href="<?php echo APP_URL; ?>pages/admin/status-report.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'status-report.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📌</span> Durum Raporu</a>
