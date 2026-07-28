@@ -110,18 +110,22 @@ if ($action === 'remove_assignment') {
 }
 
 if ($action === 'suggest') {
-    $year = isset($input['year']) ? (int)$input['year'] : (int)date('Y');
-    $month = isset($input['month']) ? (int)$input['month'] : (int)date('m');
-
-    if (!$isAdmin) {
-        $today = date('Y-m-d');
-        $firstOfMonth = sprintf('%s-%02d-01', $year, $month);
-        if ($firstOfMonth < $today) {
-            jsonResponse(array('error' => 'Geçmiş aylar için öneri yalnızca admin tarafından yapılabilir'), 403);
+    if (isset($input['start_date']) && isset($input['end_date'])) {
+        $startDate = $input['start_date'];
+        $endDate = $input['end_date'];
+        $suggestions = getOnCallSuggestionsForRange($startDate, $endDate);
+    } else {
+        $year = isset($input['year']) ? (int)$input['year'] : (int)date('Y');
+        $month = isset($input['month']) ? (int)$input['month'] : (int)date('m');
+        if (!$isAdmin) {
+            $today = date('Y-m-d');
+            $firstOfMonth = sprintf('%s-%02d-01', $year, $month);
+            if ($firstOfMonth < $today) {
+                jsonResponse(array('error' => 'Geçmiş aylar için öneri yalnızca admin tarafından yapılabilir'), 403);
+            }
         }
+        $suggestions = getOnCallSuggestions($year, $month);
     }
-
-    $suggestions = getOnCallSuggestions($year, $month);
     $users = getAllUsers(true);
     $userMap = array();
     foreach ($users as $u) $userMap[$u['id']] = $u;
@@ -136,18 +140,22 @@ if ($action === 'suggest') {
 }
 
 if ($action === 'apply_suggestions') {
-    $year = isset($input['year']) ? (int)$input['year'] : (int)date('Y');
-    $month = isset($input['month']) ? (int)$input['month'] : (int)date('m');
-
-    if (!$isAdmin) {
-        $today = date('Y-m-d');
-        $firstOfMonth = sprintf('%s-%02d-01', $year, $month);
-        if ($firstOfMonth < $today) {
-            jsonResponse(array('error' => 'Geçmiş aylar için bu işlem yalnızca admin tarafından yapılabilir'), 403);
+    if (isset($input['start_date']) && isset($input['end_date'])) {
+        $startDate = $input['start_date'];
+        $endDate = $input['end_date'];
+        $suggestions = getOnCallSuggestionsForRange($startDate, $endDate);
+    } else {
+        $year = isset($input['year']) ? (int)$input['year'] : (int)date('Y');
+        $month = isset($input['month']) ? (int)$input['month'] : (int)date('m');
+        if (!$isAdmin) {
+            $today = date('Y-m-d');
+            $firstOfMonth = sprintf('%s-%02d-01', $year, $month);
+            if ($firstOfMonth < $today) {
+                jsonResponse(array('error' => 'Geçmiş aylar için bu işlem yalnızca admin tarafından yapılabilir'), 403);
+            }
         }
+        $suggestions = getOnCallSuggestions($year, $month);
     }
-
-    $suggestions = getOnCallSuggestions($year, $month);
     foreach ($suggestions as $date => $uid) {
         setOnCallAssignment($date, $uid);
     }

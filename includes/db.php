@@ -595,6 +595,17 @@ function getOnCallAssignmentsForMonth($year, $month) {
     return $result;
 }
 
+function getOnCallAssignmentsForRange($startDate, $endDate) {
+    $data = getOnCallData();
+    $result = array();
+    foreach ($data['assignments'] as $a) {
+        if ($a['date'] >= $startDate && $a['date'] <= $endDate) {
+            $result[$a['date']] = $a['user_id'];
+        }
+    }
+    return $result;
+}
+
 function getOnCallAssignment($date) {
     $data = getOnCallData();
     foreach ($data['assignments'] as $a) {
@@ -625,6 +636,13 @@ function removeOnCallAssignment($date) {
 }
 
 function getOnCallSuggestions($year, $month) {
+    $daysInMonth = (int)date('t', mktime(0, 0, 0, $month, 1, $year));
+    $startDate = sprintf('%s-%02d-01', $year, $month);
+    $endDate = sprintf('%s-%02d-%02d', $year, $month, $daysInMonth);
+    return getOnCallSuggestionsForRange($startDate, $endDate);
+}
+
+function getOnCallSuggestionsForRange($startDate, $endDate) {
     $data = getOnCallData();
     $team = $data['team'];
     if (empty($team)) return array();
@@ -640,30 +658,35 @@ function getOnCallSuggestions($year, $month) {
         $existingAssignments[$a['date']] = $a['user_id'];
     }
 
-    $daysInMonth = (int)date('t', mktime(0, 0, 0, $month, 1, $year));
     $suggestions = array();
     $teamIdx = 0;
+    $teamCount = count($team);
 
-    // Find last assigned team member index from previous assignments
-    $lastAssignedDate = '';
+    list($sy, $sm, $sd) = explode('-', $startDate);
+    list($ey, $em, $ed) = explode('-', $endDate);
+    $startTs = mktime(0, 0, 0, (int)$sm, (int)$sd, (int)$sy);
+    $endTs = mktime(0, 0, 0, (int)$em, (int)$ed, (int)$ey);
+
+    // Find last assigned team member index from assignments before the range
+    $lastDateBefore = '';
     foreach ($data['assignments'] as $a) {
-        if ($a['date'] <= sprintf('%s-%02d-%02d', $year, $month, $daysInMonth)) {
-            if ($a['date'] > $lastAssignedDate) $lastAssignedDate = $a['date'];
+        if ($a['date'] < $startDate && $a['date'] > $lastDateBefore) {
+            $lastDateBefore = $a['date'];
         }
     }
-    if ($lastAssignedDate && isset($existingAssignments[$lastAssignedDate])) {
-        $lastUserId = $existingAssignments[$lastAssignedDate];
+    if ($lastDateBefore && isset($existingAssignments[$lastDateBefore])) {
+        $lastUserId = $existingAssignments[$lastDateBefore];
         foreach ($team as $idx => $uid) {
             if ($uid === $lastUserId) {
-                $teamIdx = ($idx + 1) % count($team);
+                $teamIdx = ($idx + 1) % $teamCount;
                 break;
             }
         }
     }
 
-    for ($day = 1; $day <= $daysInMonth; $day++) {
-        $dateStr = sprintf('%s-%02d-%02d', $year, $month, $day);
-        $dow = (int)date('w', mktime(0, 0, 0, $month, $day, $year));
+    for ($ts = $startTs; $ts <= $endTs; $ts = $ts + 86400) {
+        $dateStr = date('Y-m-d', $ts);
+        $dow = (int)date('w', $ts);
 
         // Skip weekends
         if ($dow === 0 || $dow === 6) continue;
@@ -673,7 +696,7 @@ function getOnCallSuggestions($year, $month) {
         if (isset($existingAssignments[$dateStr])) continue;
 
         $suggestions[$dateStr] = $team[$teamIdx];
-        $teamIdx = ($teamIdx + 1) % count($team);
+        $teamIdx = ($teamIdx + 1) % $teamCount;
     }
 
     return $suggestions;

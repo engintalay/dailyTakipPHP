@@ -7,23 +7,34 @@ $isAdmin = isAdmin($currentUser);
 $isViewer = $currentUser['role'] === 'VIEWER';
 $effectiveUserId = getEffectiveUserId();
 
-$currentMonth = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
 $today = date('Y-m-d');
-list($year, $month) = explode('-', $currentMonth);
-$year = (int)$year;
-$month = (int)$month;
+
+// Default: start from this Monday
+$startDate = isset($_GET['start_date']) ? $_GET['start_date'] : date('Y-m-d', strtotime('monday this week'));
+$startTs = strtotime($startDate);
+// Always ensure start is a Monday
+$dow = (int)date('w', $startTs);
+$mondayOffset = $dow === 0 ? -6 : 1 - $dow;
+$startTs = mktime(0, 0, 0, (int)date('m', $startTs), (int)date('d', $startTs) + $mondayOffset, (int)date('Y', $startTs));
+$startDate = date('Y-m-d', $startTs);
+
+// End date: 13 days later (14 days total: this Mon-Sun + next Mon-Sun)
+$endTs = $startTs + (13 * 86400);
+$endDate = date('Y-m-d', $endTs);
+
+$prevStart = date('Y-m-d', $startTs - (14 * 86400));
+$nextStart = date('Y-m-d', $endTs + 86400);
+
 $monthNames = array('', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık');
-$monthLabel = $monthNames[$month] . ' ' . $year;
-$daysInMonth = (int)date('t', mktime(0, 0, 0, $month, 1, $year));
-$firstDay = (int)date('w', mktime(0, 0, 0, $month, 1, $year));
-$firstDay = $firstDay === 0 ? 6 : $firstDay - 1; // Mon=0
+$rangeLabel = date('d', $startTs) . ' ' . $monthNames[(int)date('n', $startTs)] . ' ' . date('Y', $startTs)
+    . ' — ' . date('d', $endTs) . ' ' . $monthNames[(int)date('n', $endTs)] . ' ' . date('Y', $endTs);
 
 $holidays = getHolidays();
 $holidayMap = array();
 foreach ($holidays as $h) $holidayMap[$h['date']] = $h['name'];
 
 $data = getOnCallData();
-$assignments = getOnCallAssignmentsForMonth($year, $month);
+$assignments = getOnCallAssignmentsForRange($startDate, $endDate);
 $team = $data['team'];
 $allUsers = getAllUsers(true);
 $userMap = array();
@@ -36,7 +47,6 @@ foreach ($team as $tid) {
 $pageTitle = 'Nöbet Takvimi';
 $currentPath = 'pages/oncall.php';
 
-// Handle POST for simple form actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $csrf = isset($_POST['csrf_token']) ? $_POST['csrf_token'] : '';
     if (verifyCsrfToken($csrf)) {
@@ -45,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             if (!is_array($teamIds)) $teamIds = array();
             setOnCallTeam($teamIds);
             flash('success', 'Nöbet ekibi güncellendi');
-            header('Location: ' . APP_URL . 'pages/oncall.php?month=' . $currentMonth);
+            header('Location: ' . APP_URL . 'pages/oncall.php?start_date=' . $startDate);
             exit;
         }
     }
@@ -55,20 +65,25 @@ include __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="space-y-6">
-    <div class="flex items-center justify-between">
+    <!-- Header with navigation -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <h1 class="text-2xl font-bold">Nöbet Takvimi</h1>
-        <div class="flex gap-2">
-            <a href="<?php echo APP_URL; ?>pages/oncall.php?month=<?php echo date('Y-m', mktime(0, 0, 0, $month - 1, 1, $year)); ?>"
-               class="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">←</a>
-            <span class="px-3 py-1 text-sm font-medium"><?php echo escapeHtml($monthLabel); ?></span>
-            <a href="<?php echo APP_URL; ?>pages/oncall.php?month=<?php echo date('Y-m', mktime(0, 0, 0, $month + 1, 1, $year)); ?>"
-               class="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">→</a>
+        <div class="flex flex-wrap items-center gap-2">
+            <a href="<?php echo APP_URL; ?>pages/oncall.php?start_date=<?php echo $prevStart; ?>"
+               class="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">← Önceki 2 Hafta</a>
+            <span class="px-3 py-1 text-sm font-medium text-center whitespace-nowrap"><?php echo escapeHtml($rangeLabel); ?></span>
+            <a href="<?php echo APP_URL; ?>pages/oncall.php?start_date=<?php echo $nextStart; ?>"
+               class="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Sonraki 2 Hafta →</a>
+            <form method="GET" class="flex items-center gap-1 ml-2" onsubmit="var v=this.querySelector('input').value; if(v) window.location='<?php echo APP_URL; ?>pages/oncall.php?start_date='+v; return false;">
+                <input type="date" class="px-2 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700" value="<?php echo $startDate; ?>">
+                <button type="submit" class="px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700">Git</button>
+            </form>
         </div>
     </div>
 
     <?php if (!$isViewer): ?>
-    <!-- Team Management (Admin) -->
     <?php if ($isAdmin): ?>
+    <!-- Team Management -->
     <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
         <div class="flex items-center justify-between mb-3">
             <h2 class="font-semibold">Nöbet Ekibi</h2>
@@ -86,7 +101,6 @@ include __DIR__ . '/../includes/header.php';
             <?php endforeach; ?>
             <?php endif; ?>
         </div>
-
         <form id="teamEditForm" method="POST" class="hidden mt-3 space-y-3">
             <input type="hidden" name="action" value="set_team">
             <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
@@ -109,7 +123,7 @@ include __DIR__ . '/../includes/header.php';
     </div>
     <?php endif; ?>
 
-    <!-- Suggest/Apply buttons -->
+    <!-- Action buttons -->
     <div class="flex flex-wrap items-center gap-2">
         <button onclick="previewSuggestions()" class="px-4 py-2 bg-amber-500 text-white rounded-lg text-sm hover:bg-amber-600">Öneriyi Önizle</button>
         <button onclick="applySuggestions()" class="px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm hover:bg-emerald-700">Öneri ile Doldur</button>
@@ -119,24 +133,32 @@ include __DIR__ . '/../includes/header.php';
     </div>
     <?php endif; ?>
 
-    <!-- Calendar -->
+    <!-- 14-Day Calendar -->
     <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-x-auto">
         <table class="w-full text-sm">
             <thead>
                 <tr class="bg-gray-50 dark:bg-gray-700/50">
                     <th class="text-left p-3 font-medium sticky left-0 bg-gray-50 dark:bg-gray-700/50 z-10 min-w-[100px]">Gün</th>
-                    <?php for ($day = 1; $day <= $daysInMonth; $day++):
-                        $dow = (int)date('w', mktime(0, 0, 0, $month, $day, $year));
+                    <?php for ($i = 0; $i < 14; $i++):
+                        $ts = $startTs + ($i * 86400);
+                        $day = (int)date('d', $ts);
+                        $dow = (int)date('w', $ts);
                         $isWeekend = $dow === 0 || $dow === 6;
-                        $dateStr = sprintf('%s-%02d-%02d', $year, $month, $day);
+                        $dateStr = date('Y-m-d', $ts);
                         $isToday = $dateStr === $today;
                         $dayNames = array('Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz');
                         $dayName = $dayNames[$dow === 0 ? 6 : $dow - 1];
+                        $weekNum = $i < 7 ? 1 : 2;
                     ?>
                     <th class="text-center p-2 font-medium min-w-[80px] <?php
                         echo $isWeekend ? 'bg-slate-200 text-slate-600 dark:bg-slate-600 dark:text-slate-300' : '';
                         echo $isToday ? 'bg-blue-200 text-blue-950 ring-2 ring-blue-600 ring-inset dark:bg-blue-900 dark:text-blue-100 dark:ring-blue-400' : '';
                     ?>">
+                        <?php if ($i === 0 || $i === 7): ?>
+                        <div class="text-[10px] text-gray-400 dark:text-gray-500 font-semibold mb-1">
+                            <?php echo $i === 0 ? 'Bu Hafta' : 'Gelecek Hafta'; ?>
+                        </div>
+                        <?php endif; ?>
                         <div><?php echo $day; ?></div>
                         <div class="text-xs <?php echo $isWeekend ? 'text-slate-500 dark:text-slate-400' : 'text-gray-500 dark:text-gray-400'; ?>"><?php echo $dayName; ?></div>
                         <?php if (isset($holidayMap[$dateStr])): ?>
@@ -155,10 +177,11 @@ include __DIR__ . '/../includes/header.php';
                         <div class="text-xs font-normal text-gray-500 dark:text-gray-400 mt-1">(Ekip yok)</div>
                         <?php endif; ?>
                     </td>
-                    <?php for ($day = 1; $day <= $daysInMonth; $day++):
-                        $dow = (int)date('w', mktime(0, 0, 0, $month, $day, $year));
+                    <?php for ($i = 0; $i < 14; $i++):
+                        $ts = $startTs + ($i * 86400);
+                        $dow = (int)date('w', $ts);
                         $isWeekend = $dow === 0 || $dow === 6;
-                        $dateStr = sprintf('%s-%02d-%02d', $year, $month, $day);
+                        $dateStr = date('Y-m-d', $ts);
                         $isToday = $dateStr === $today;
                         $isHoliday = isset($holidayMap[$dateStr]);
                         $isExcluded = $isWeekend || $isHoliday;
@@ -264,7 +287,6 @@ function openAssignModal(dateStr, userId) {
     document.getElementById('modalTitle').textContent = userId ? 'Nöbet Değiştir' : 'Nöbet Ata';
     document.getElementById('assignModal').classList.remove('hidden');
 
-    // Highlight current assignment
     document.querySelectorAll('[id^="teamOpt_"]').forEach(function(el) {
         var uid = el.id.replace('teamOpt_', '');
         if (uid === userId) {
@@ -327,8 +349,8 @@ function previewSuggestions() {
     var formData = new FormData();
     formData.append('action', 'suggest');
     formData.append('csrf_token', '<?php echo $csrfToken; ?>');
-    formData.append('year', '<?php echo $year; ?>');
-    formData.append('month', '<?php echo $month; ?>');
+    formData.append('start_date', '<?php echo $startDate; ?>');
+    formData.append('end_date', '<?php echo $endDate; ?>');
 
     fetch('<?php echo APP_URL; ?>api/oncall.php', {
         method: 'POST',
@@ -369,8 +391,8 @@ function applyPreviewSuggestions() {
     var formData = new FormData();
     formData.append('action', 'apply_suggestions');
     formData.append('csrf_token', '<?php echo $csrfToken; ?>');
-    formData.append('year', '<?php echo $year; ?>');
-    formData.append('month', '<?php echo $month; ?>');
+    formData.append('start_date', '<?php echo $startDate; ?>');
+    formData.append('end_date', '<?php echo $endDate; ?>');
 
     fetch('<?php echo APP_URL; ?>api/oncall.php', {
         method: 'POST',
@@ -390,8 +412,8 @@ function applySuggestions() {
     var formData = new FormData();
     formData.append('action', 'apply_suggestions');
     formData.append('csrf_token', '<?php echo $csrfToken; ?>');
-    formData.append('year', '<?php echo $year; ?>');
-    formData.append('month', '<?php echo $month; ?>');
+    formData.append('start_date', '<?php echo $startDate; ?>');
+    formData.append('end_date', '<?php echo $endDate; ?>');
 
     fetch('<?php echo APP_URL; ?>api/oncall.php', {
         method: 'POST',
