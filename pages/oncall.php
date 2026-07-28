@@ -6,6 +6,9 @@ $currentUser = requireLogin();
 $isAdmin = isAdmin($currentUser);
 $isViewer = $currentUser['role'] === 'VIEWER';
 $effectiveUserId = getEffectiveUserId();
+$data = getOnCallData();
+$team = $data['team'];
+$isInTeam = in_array($effectiveUserId, $team);
 
 $today = date('Y-m-d');
 
@@ -33,9 +36,7 @@ $holidays = getHolidays();
 $holidayMap = array();
 foreach ($holidays as $h) $holidayMap[$h['date']] = $h['name'];
 
-$data = getOnCallData();
 $assignments = getOnCallAssignmentsForRange($startDate, $endDate);
-$team = $data['team'];
 $allUsers = getAllUsers(true);
 $userMap = array();
 foreach ($allUsers as $u) $userMap[$u['id']] = $u;
@@ -88,7 +89,7 @@ include __DIR__ . '/../includes/header.php';
         </div>
     </div>
 
-    <?php if (!$isViewer): ?>
+    <?php if (!$isViewer && ($isAdmin || $isInTeam)): ?>
     <?php if ($isAdmin): ?>
     <!-- Team Management -->
     <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
@@ -194,7 +195,7 @@ include __DIR__ . '/../includes/header.php';
                         $isExcluded = $isWeekend || $isHoliday;
                         $assignedUserId = isset($assignments[$dateStr]) ? $assignments[$dateStr] : null;
                         $assignedUser = $assignedUserId && isset($userMap[$assignedUserId]) ? $userMap[$assignedUserId] : null;
-                        $canEdit = !$isViewer && !$isExcluded && ($isAdmin || $dateStr >= $today);
+                        $canEdit = !$isViewer && $isInTeam && !$isExcluded && ($isAdmin || $dateStr >= $today);
                     ?>
                     <td class="text-center p-2 border-l border-gray-200 dark:border-gray-700 <?php
                         echo $isWeekend ? 'bg-slate-100 dark:bg-slate-800' : '';

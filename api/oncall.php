@@ -7,6 +7,9 @@ $currentUser = requireLogin();
 $userId = $currentUser['id'];
 $isAdmin = isAdmin($currentUser);
 $isViewer = $currentUser['role'] === 'VIEWER';
+$oncallData = getOnCallData();
+$team = $oncallData['team'];
+$isInTeam = in_array($userId, $team);
 $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method === 'GET') {
@@ -71,24 +74,23 @@ if ($action === 'set_assignment') {
         jsonResponse(array('error' => 'Tarih ve kullanıcı gerekli'), 400);
     }
 
-    $data = getOnCallData();
-    $team = $data['team'];
     $today = date('Y-m-d');
 
     // Permission check
     if ($isAdmin) {
         // Admin can edit any date
     } else {
-        // Non-admin can only edit today and future dates
+        // Non-admin must be on the team
+        if (!$isInTeam) {
+            jsonResponse(array('error' => 'Bu işlem için nöbet ekibinde olmalısınız'), 403);
+        }
+        // Can only edit today and future dates
         if ($date < $today) {
             jsonResponse(array('error' => 'Geçmiş tarihleri yalnızca admin düzenleyebilir'), 403);
         }
-        // Non-admin can only assign themselves or must be on team
+        // Can only assign team members
         if (!in_array($targetUserId, $team)) {
-            jsonResponse(array('error' => 'Bu kullanıcı nöbet ekibinde değil'), 403);
-        }
-        if ($targetUserId !== $userId && !$isAdmin) {
-            jsonResponse(array('error' => 'Kendiniz dışında atama yapamazsınız'), 403);
+            jsonResponse(array('error' => 'Yalnızca nöbet ekibi üyeleri atanabilir'), 403);
         }
     }
 
@@ -101,8 +103,13 @@ if ($action === 'remove_assignment') {
     if (!$date) jsonResponse(array('error' => 'Tarih gerekli'), 400);
 
     $today = date('Y-m-d');
-    if (!$isAdmin && $date < $today) {
-        jsonResponse(array('error' => 'Geçmiş tarihleri yalnızca admin düzenleyebilir'), 403);
+    if (!$isAdmin) {
+        if (!$isInTeam) {
+            jsonResponse(array('error' => 'Bu işlem için nöbet ekibinde olmalısınız'), 403);
+        }
+        if ($date < $today) {
+            jsonResponse(array('error' => 'Geçmiş tarihleri yalnızca admin düzenleyebilir'), 403);
+        }
     }
 
     removeOnCallAssignment($date);
@@ -110,6 +117,9 @@ if ($action === 'remove_assignment') {
 }
 
 if ($action === 'suggest') {
+    if (!$isAdmin && !$isInTeam) {
+        jsonResponse(array('error' => 'Bu işlem için nöbet ekibinde olmalısınız'), 403);
+    }
     if (isset($input['start_date']) && isset($input['end_date'])) {
         $startDate = $input['start_date'];
         $endDate = $input['end_date'];
@@ -117,13 +127,6 @@ if ($action === 'suggest') {
     } else {
         $year = isset($input['year']) ? (int)$input['year'] : (int)date('Y');
         $month = isset($input['month']) ? (int)$input['month'] : (int)date('m');
-        if (!$isAdmin) {
-            $today = date('Y-m-d');
-            $firstOfMonth = sprintf('%s-%02d-01', $year, $month);
-            if ($firstOfMonth < $today) {
-                jsonResponse(array('error' => 'Geçmiş aylar için öneri yalnızca admin tarafından yapılabilir'), 403);
-            }
-        }
         $suggestions = getOnCallSuggestions($year, $month);
     }
     $users = getAllUsers(true);
@@ -140,6 +143,9 @@ if ($action === 'suggest') {
 }
 
 if ($action === 'apply_suggestions') {
+    if (!$isAdmin && !$isInTeam) {
+        jsonResponse(array('error' => 'Bu işlem için nöbet ekibinde olmalısınız'), 403);
+    }
     if (isset($input['start_date']) && isset($input['end_date'])) {
         $startDate = $input['start_date'];
         $endDate = $input['end_date'];
@@ -147,13 +153,6 @@ if ($action === 'apply_suggestions') {
     } else {
         $year = isset($input['year']) ? (int)$input['year'] : (int)date('Y');
         $month = isset($input['month']) ? (int)$input['month'] : (int)date('m');
-        if (!$isAdmin) {
-            $today = date('Y-m-d');
-            $firstOfMonth = sprintf('%s-%02d-01', $year, $month);
-            if ($firstOfMonth < $today) {
-                jsonResponse(array('error' => 'Geçmiş aylar için bu işlem yalnızca admin tarafından yapılabilir'), 403);
-            }
-        }
         $suggestions = getOnCallSuggestions($year, $month);
     }
     foreach ($suggestions as $date => $uid) {
