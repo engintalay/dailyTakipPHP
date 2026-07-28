@@ -49,16 +49,23 @@ $currentPath = 'pages/oncall.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $csrf = isset($_POST['csrf_token']) ? $_POST['csrf_token'] : '';
-    if (verifyCsrfToken($csrf)) {
-        if ($_POST['action'] === 'set_team' && $isAdmin && !$isViewer) {
-            $teamIds = isset($_POST['team_ids']) ? $_POST['team_ids'] : array();
-            if (!is_array($teamIds)) $teamIds = array();
-            setOnCallTeam($teamIds);
-            flash('success', 'Nöbet ekibi güncellendi');
-            header('Location: ' . APP_URL . 'pages/oncall.php?start_date=' . $startDate);
-            exit;
-        }
+    if (!verifyCsrfToken($csrf)) {
+        flash('error', 'CSRF token geçersiz, lütfen sayfayı yenileyin.');
+        header('Location: ' . APP_URL . 'pages/oncall.php?start_date=' . $startDate);
+        exit;
     }
+    if ($_POST['action'] === 'set_team' && $isAdmin && !$isViewer) {
+        $teamIds = isset($_POST['team_ids']) ? $_POST['team_ids'] : array();
+        if (!is_array($teamIds)) $teamIds = array();
+        $teamIds = array_values($teamIds);
+        setOnCallTeam($teamIds);
+        flash('success', 'Nöbet ekibi güncellendi (' . count($teamIds) . ' üye)');
+        header('Location: ' . APP_URL . 'pages/oncall.php?start_date=' . $startDate);
+        exit;
+    }
+    flash('error', 'Geçersiz işlem veya yetkiniz yok.');
+    header('Location: ' . APP_URL . 'pages/oncall.php?start_date=' . $startDate);
+    exit;
 }
 
 include __DIR__ . '/../includes/header.php';
