@@ -17,10 +17,14 @@ if (!is_dir(DB_DIR)) {
     mkdir(DB_DIR, 0755, true);
 }
 
+function _unicodeJsonReplace($m) {
+    return html_entity_decode("&#" . hexdec($m[1]) . ";", ENT_COMPAT, "UTF-8");
+}
+
 function unicodeJsonEncode($data, $pretty = false) {
     $json = json_encode($data);
     if (!$json) return '[]';
-    $json = preg_replace_callback('/\\\\u([0-9a-f]{4})/i', create_function('$m', 'return html_entity_decode("&#" . hexdec($m[1]) . ";", ENT_COMPAT, "UTF-8");'), $json);
+    $json = preg_replace_callback('/\\\\u([0-9a-f]{4})/i', '_unicodeJsonReplace', $json);
     if ($pretty) {
         $result = '';
         $indent = 0;
