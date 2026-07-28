@@ -71,7 +71,11 @@ function loadJson($file) {
 }
 
 function saveJson($file, $data) {
-    return file_put_contents($file, unicodeJsonEncode($data, true));
+    $ret = file_put_contents($file, unicodeJsonEncode($data, true));
+    if ($ret !== false) {
+        @chmod($file, 0666);
+    }
+    return $ret;
 }
 
 function db() {
@@ -87,6 +91,13 @@ function initDatabase() {
     if (!file_exists(DB_TODOS)) saveJson(DB_TODOS, array());
     if (!file_exists(DB_ONCALL)) saveJson(DB_ONCALL, array('team' => array(), 'assignments' => array()));
     if (!file_exists(DB_HOLIDAYS)) saveJson(DB_HOLIDAYS, array());
+    // Ensure all data files are writable (fix permission issues with ssh mount)
+    $files = glob(DB_DIR . '*.json');
+    if (is_array($files)) {
+        foreach ($files as $f) {
+            @chmod($f, 0666);
+        }
+    }
 }
 
 function seedDefaultUsers() {
