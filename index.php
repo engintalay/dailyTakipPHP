@@ -52,6 +52,31 @@ $currentPath = 'index.php';
         </div>
     </div>
 
+    <?php
+    // Bugünün nöbetçisi
+    $oncallUserId = getOnCallAssignment($today);
+    $oncallUser = null;
+    if ($oncallUserId) {
+        $oncallUser = getUserById($oncallUserId);
+    }
+    ?>
+    <?php if ($oncallUser): ?>
+    <div class="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
+        <div class="flex items-center gap-3">
+            <span class="text-lg">🔔</span>
+            <div>
+                <p class="text-sm text-blue-800 dark:text-blue-300">
+                    <span class="font-semibold">Bugünün nöbetçisi:</span>
+                    <a href="<?php echo APP_URL; ?>pages/oncall.php" class="inline-flex items-center gap-1.5 font-medium hover:underline">
+                        <?php echo getUserAvatar($oncallUser['name'], 'w-5 h-5'); ?>
+                        <?php echo escapeHtml($oncallUser['name']); ?>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+
     <?php if (!empty($missingUsers)): ?>
     <div class="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4">
         <div class="flex items-center gap-2 mb-2">
