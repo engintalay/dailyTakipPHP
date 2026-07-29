@@ -12,6 +12,7 @@ define('DB_ATTENDANCES', DB_DIR . 'attendances.json');
 define('DB_TODOS', DB_DIR . 'todos.json');
 define('DB_ONCALL', DB_DIR . 'on_call.json');
 define('DB_HOLIDAYS', DB_DIR . 'holidays.json');
+define('DB_JIRA_TASKS', DB_DIR . 'jira_tasks.json');
 
 if (!is_dir(DB_DIR)) {
     mkdir(DB_DIR, 0755, true);
@@ -91,6 +92,7 @@ function initDatabase() {
     if (!file_exists(DB_TODOS)) saveJson(DB_TODOS, array());
     if (!file_exists(DB_ONCALL)) saveJson(DB_ONCALL, array('team' => array(), 'assignments' => array()));
     if (!file_exists(DB_HOLIDAYS)) saveJson(DB_HOLIDAYS, array());
+    if (!file_exists(DB_JIRA_TASKS)) saveJson(DB_JIRA_TASKS, array());
     // Ensure all data files are writable (fix permission issues with ssh mount)
     $files = glob(DB_DIR . '*.json');
     if (is_array($files)) {
@@ -753,6 +755,77 @@ function deleteHoliday($date) {
         if ($h['date'] !== $date) $kept[] = $h;
     }
     return saveJson(DB_HOLIDAYS, $kept);
+}
+
+// Jira Tasks functions
+function getJiraTasks($filters = array()) {
+    $tasks = loadJson(DB_JIRA_TASKS);
+    $users = loadJson(DB_USERS);
+    $userMap = array();
+    foreach ($users as $u) $userMap[$u['id']] = $u['name'];
+
+    $result = array();
+    foreach ($tasks as $t) {
+        if (!empty($filters['search']) && stripos($t['title'], $filters['search']) === false && stripos($t['jira_link'], $filters['search']) === false) continue;
+        if (!empty($filters['priority']) && $t['priority'] !== $filters['priority']) continue;
+        if (!empty($filters['status']) && $t['status'] !== $filters['status']) continue;
+        if (isset($filters['assigned_empty']) && $filters['assigned_empty']) {
+            if (!empty($t['assigned_to'])) continue;
+        }
+        if (isset($filters['assigned_not_empty']) && $filters['assigned_not_empty']) {
+            if (empty($t['assigned_to'])) continue;
+        }
+
+        $t['assigned_name'] = isset($userMap[$t['assigned_to']]) ? $userMap[$t['assigned_to']] : '';
+        $result[] = $t;
+    }
+
+    usort($result, function($a, $b) {
+        $order = array('HIGH' => 0, 'NORMAL' => 1, 'LOW' => 2);
+        $pa = isset($order[$a['priority']]) ? $order[$a['priority']] : 1;
+        $pb = isset($order[$b['priority']]) ? $order[$b['priority']] : 1;
+        if ($pa !== $pb) return $pa - $pb;
+        return strcmp($b['created_at'], $a['created_at']);
+    });
+
+    return $result;
+}
+
+function getJiraTaskById($id) {
+    $tasks = loadJson(DB_JIRA_TASKS);
+    foreach ($tasks as $t) {
+        if ($t['id'] === $id) return $t;
+    }
+    return null;
+}
+
+function saveJiraTask($data) {
+    $tasks = loadJson(DB_JIRA_TASKS);
+    $found = false;
+    foreach ($tasks as &$t) {
+        if ($t['id'] === $data['id']) {
+            foreach (array('jira_link', 'title', 'priority', 'assigned_to', 'assigned_at', 'status') as $f) {
+                if (isset($data[$f])) $t[$f] = $data[$f];
+            }
+            $found = true;
+            break;
+        }
+    }
+    if (!$found) {
+        $tasks[] = $data;
+    }
+    saveJson(DB_JIRA_TASKS, $tasks);
+    return getJiraTaskById($data['id']);
+}
+
+function deleteJiraTask($id) {
+    $tasks = loadJson(DB_JIRA_TASKS);
+    $kept = array();
+    foreach ($tasks as $t) {
+        if ($t['id'] !== $id) $kept[] = $t;
+    }
+    saveJson(DB_JIRA_TASKS, $kept);
+    return true;
 }
 
 // Initialize on include
