@@ -13,11 +13,25 @@ $pageTitle = 'Raporlar';
 $currentPath = 'pages/reports.php';
 
 $period = isset($_GET['period']) ? $_GET['period'] : 'weekly';
-$range = $period === 'weekly' ? getWeekRange() : getMonthRange();
+$monthStr = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
+if (!preg_match('/^\d{4}-\d{2}$/', $monthStr)) $monthStr = date('Y-m');
+
+// Önceki / sonraki ay hesaplama
+$monthDt = new DateTime($monthStr . '-01');
+$prevMonthDt = clone $monthDt;
+$prevMonthDt->modify('-1 month');
+$nextMonthDt = clone $monthDt;
+$nextMonthDt->modify('+1 month');
+$prevMonth = $prevMonthDt->format('Y-m');
+$nextMonth = $nextMonthDt->format('Y-m');
+
+$range = $period === 'weekly' ? getWeekRange($monthStr . '-01') : getMonthRange($monthStr . '-01');
 $startStr = formatDateOnly($range['start']);
 $endStr = formatDateOnly($range['end']);
 $startLabel = formatDateShort($startStr);
 $endLabel = formatDateShort($endStr);
+$monthLabel = formatDateShort($monthStr . '-01');
+$monthLabel = preg_replace('/^01 /', '', $monthLabel);
 
 // Fetch all data
 $notes = getDailyNotes(array('start_date' => $startStr, 'end_date' => $endStr));
@@ -43,7 +57,11 @@ foreach ($users as $u) {
 foreach ($notes as $n) {
     if (isset($userNoteCount[$n['user_id']])) {
         $userNoteCount[$n['user_id']]++;
-        $userNotes[$n['user_id']][] = $n['content'];
+        $userNotes[$n['user_id']][] = array(
+            'date' => $n['date'],
+            'content' => $n['content'],
+            'tags' => !empty($n['tags']) ? $n['tags'] : ''
+        );
     }
 }
 
@@ -111,6 +129,18 @@ include __DIR__ . '/../includes/header.php';
         </div>
     </div>
 
+    <div class="flex flex-wrap items-center gap-2">
+        <a href="<?php echo APP_URL; ?>pages/reports.php?period=<?php echo $period; ?>&month=<?php echo $prevMonth; ?>"
+           class="px-3 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">‹ Önceki Ay</a>
+        <span class="px-4 py-1.5 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg"><?php echo escapeHtml($monthLabel); ?></span>
+        <a href="<?php echo APP_URL; ?>pages/reports.php?period=<?php echo $period; ?>&month=<?php echo $nextMonth; ?>"
+           class="px-3 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Sonraki Ay ›</a>
+        <?php if ($monthStr !== date('Y-m')): ?>
+        <a href="<?php echo APP_URL; ?>pages/reports.php?period=<?php echo $period; ?>"
+           class="px-3 py-1.5 text-sm rounded-lg bg-blue-600 text-white hover:bg-blue-700">Bu Ay</a>
+        <?php endif; ?>
+    </div>
+
     <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5" id="report-content">
         <h2 class="text-lg font-semibold mb-1"><?php echo $periodLabel; ?> Özet Rapor</h2>
         <p class="text-sm text-gray-500 dark:text-gray-400 mb-4"><?php echo escapeHtml($startLabel); ?> — <?php echo escapeHtml($endLabel); ?></p>
@@ -152,7 +182,13 @@ include __DIR__ . '/../includes/header.php';
                         $attRate = $att['total'] > 0 ? round(($att['present'] / $att['total']) * 100) : 0;
                     ?>
                     <tr class="border-t border-gray-200 dark:border-gray-700">
-                        <td class="p-2 font-medium"><?php echo escapeHtml($u['name']); ?></td>
+                        <td class="p-2 font-medium">
+                            <a href="#user-detail-<?php echo $u['id']; ?>"
+                               onclick="event.preventDefault(); document.getElementById('user-detail-<?php echo $u['id']; ?>').scrollIntoView({behavior: 'smooth', block: 'start'});"
+                               class="text-blue-600 dark:text-blue-400 hover:underline cursor-pointer">
+                                <?php echo escapeHtml($u['name']); ?>
+                            </a>
+                        </td>
                         <td class="text-center p-2"><?php echo $notes; ?></td>
                         <td class="text-center p-2"><?php echo isset($statuses[STATUS_OFFICE]) ? $statuses[STATUS_OFFICE] : 0; ?></td>
                         <td class="text-center p-2"><?php echo isset($statuses[STATUS_REMOTE]) ? $statuses[STATUS_REMOTE] : 0; ?></td>
@@ -194,15 +230,26 @@ include __DIR__ . '/../includes/header.php';
         <div class="space-y-3 mb-6">
             <?php foreach ($users as $u):
                 $userNoteList = isset($userNotes[$u['id']]) ? $userNotes[$u['id']] : array();
-                if (empty($userNoteList)) continue;
             ?>
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-3">
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-3" id="user-detail-<?php echo $u['id']; ?>">
                 <h4 class="font-medium text-sm mb-1.5"><?php echo escapeHtml($u['name']); ?></h4>
-                <ul class="list-disc list-inside space-y-0.5">
-                    <?php foreach ($userNoteList as $content): ?>
-                    <li class="text-sm text-gray-500 dark:text-gray-400"><?php echo escapeHtml($content); ?></li>
+                <?php if (empty($userNoteList)): ?>
+                <p class="text-sm text-gray-400 dark:text-gray-500 italic">Bu dönemde henüz daily notu girilmemiş</p>
+                <?php else: ?>
+                <ul class="space-y-1">
+                    <?php foreach ($userNoteList as $note): ?>
+                    <li class="text-sm text-gray-500 dark:text-gray-400">
+                        <span class="font-medium text-gray-700 dark:text-gray-300">📅 <?php echo escapeHtml(formatDateShort($note['date'])); ?>:</span>
+                        <?php echo escapeHtml($note['content']); ?>
+                        <?php if (!empty($note['tags'])): ?>
+                        <span class="ml-1.5 text-xs text-gray-400 dark:text-gray-500">
+                            [<?php echo escapeHtml(implode(', ', array_filter(array_map('trim', explode(',', $note['tags']))))); ?>]
+                        </span>
+                        <?php endif; ?>
+                    </li>
                     <?php endforeach; ?>
                 </ul>
+                <?php endif; ?>
             </div>
             <?php endforeach; ?>
         </div>

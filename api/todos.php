@@ -60,14 +60,16 @@ if ($action === 'create') {
 
 if (!$todo) jsonResponse(array('error' => 'Görev bulunamadı'), 404);
 
+$isAdmin = isAdmin($currentUser);
+$canEdit = $isAdmin || $todo['creator_id'] === $userId || $todo['assigned_to'] === $userId;
+
+// Only creator, assignee or admin can act on a task (including claim)
+if (!$canEdit) jsonResponse(array('error' => 'Bu görev için yetkiniz yok'), 403);
+
 if ($action === 'claim') {
     if ($todo['status'] === 'DONE') jsonResponse(array('error' => 'Tamamlanmış görev devralınamaz'), 400);
     jsonResponse(updateTodo($todoId, array('assigned_to' => $userId)));
 }
-
-$isAdmin = isAdmin($currentUser);
-$canEdit = $isAdmin || $todo['creator_id'] === $userId || $todo['assigned_to'] === $userId;
-if (!$canEdit) jsonResponse(array('error' => 'Bu görev için yetkiniz yok'), 403);
 
 if ($action === 'update') {
     $data = array();

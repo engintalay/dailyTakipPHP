@@ -4,16 +4,21 @@
  * PHP 5.3 compatible
  */
 
+// Start output buffering to prevent whitespace issues
+ob_start();
+
 define('APP_NAME', 'dailyTakip');
 define('APP_DESCRIPTION', 'Ekip Daily Takip Sistemi');
-define('APP_VERSION', '1.0.0');
+define('APP_VERSION', '1.0.1');
 define('APP_URL', 'http://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost') . '/dailyTakip/');
 define('SESSION_NAME', 'dailytakip_session');
 
-// Session configuration
+// Session configuration - 1 day lifetime
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_only_cookies', 1);
 ini_set('session.cookie_secure', isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 1 : 0);
+ini_set('session.cookie_lifetime', 86400);
+ini_set('session.gc_maxlifetime', 86400);
 
 // Role constants
 define('ROLE_ADMIN', 'ADMIN');

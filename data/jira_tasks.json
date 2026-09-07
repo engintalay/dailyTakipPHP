@@ -1,3 +1,68 @@
 [
-  
+  {
+    "id": "b29f896b-1c31-4db4-81af-3df588b395f0",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EVDB-4793",
+    "title": "GİBIntranet Borç Listelerine Ortak Takiplerinin Sorgulanması için Liste Yapılması Ekranı için Servis Talebi",
+    "priority": "NORMAL",
+    "assigned_to": "",
+    "assigned_at": "",
+    "status": "PENDING",
+    "created_at": "2026-07-29 12:32:37",
+    "created_by": "cmrymq3ol0000gnf71bu5x88i"
+  },
+  {
+    "id": "12ab13b1-e3db-4039-8858-a17338d808cf",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EVDB-9806",
+    "title": "YBS Borcu Biten Haciz Bildirileri Sorgulama Ekranı Haciz Bildirisi Türü Alanında Güncelleme",
+    "priority": "NORMAL",
+    "assigned_to": "",
+    "assigned_at": "",
+    "status": "PENDING",
+    "created_at": "2026-07-29 12:33:06",
+    "created_by": "cmrymq3ol0000gnf71bu5x88i"
+  },
+  {
+    "id": "73d4274e-a6fe-43f7-82cc-1980873a9aa9",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EVDB-9823",
+    "title": "Haciz tatbik ve kaldırma işlemlerinde \"Haciz Yazısı İmzalanmış TKGM'ye Henüz Gönderilmemiş\"lerin raporlanması",
+    "priority": "LOW",
+    "assigned_to": "",
+    "assigned_at": "",
+    "status": "PENDING",
+    "created_at": "2026-07-29 12:33:33",
+    "created_by": "cmrymq3ol0000gnf71bu5x88i"
+  },
+  {
+    "id": "979fcbf9-9b75-4154-a9b8-15a21a3c5052",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EVDB-9666",
+    "title": "Noter Mükerrer kayıtların kaldırılması",
+    "priority": "HIGH",
+    "assigned_to": "",
+    "assigned_at": "",
+    "status": "PENDING",
+    "created_at": "2026-07-29 12:33:53",
+    "created_by": "cmrymq3ol0000gnf71bu5x88i"
+  },
+  {
+    "id": "74b48ca9-751d-452d-89e1-ca22e87c69fd",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EVDB-1853",
+    "title": "ARAÇ ÜZERİNDE BULUNAN MÜKERRER TAKYİDAT ŞERHLERİNİN KALDIRILMASI",
+    "priority": "HIGH",
+    "assigned_to": "",
+    "assigned_at": "",
+    "status": "PENDING",
+    "created_at": "2026-07-29 12:34:59",
+    "created_by": "cmrymq3ol0000gnf71bu5x88i"
+  },
+  {
+    "id": "6260ccc1-8738-43dd-9584-e7e8f2b4b50c",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EBELGE-66",
+    "title": "EBELGE-66 Beytepe Vergi Dairesi Geçişi Sonrası İmzalanmamış Durumdaki Belgelerin Metadalarının Güncellenmesi",
+    "priority": "NORMAL",
+    "assigned_to": "",
+    "assigned_at": "",
+    "status": "PENDING",
+    "created_at": "2026-07-30 10:14:38",
+    "created_by": "cmrymq3ol0000gnf71bu5x88i"
+  }
 ]

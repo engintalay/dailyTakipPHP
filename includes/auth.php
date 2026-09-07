@@ -9,6 +9,19 @@ require_once __DIR__ . '/functions.php';
 
 session_start();
 
+// Session timeout check - 1 day (86400 seconds)
+if (isset($_SESSION['login_time']) && (time() - $_SESSION['login_time']) > 86400) {
+    // Session expired, destroy and redirect
+    session_destroy();
+    session_start();
+    session_regenerate_id(true);
+    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+        jsonResponse(array('error' => 'Session expired'), 401);
+    }
+    header('Location: ' . APP_URL . 'login.php?expired=1');
+    exit;
+}
+
 function login($email, $password) {
     $user = getUserByEmail($email);
 

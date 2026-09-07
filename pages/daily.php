@@ -133,6 +133,17 @@ include __DIR__ . '/../includes/header.php';
                    placeholder="Her satıra bir Jira linki yazın"></textarea>
         </div>
 
+        <!-- Last Month Tasks Section -->
+        <div id="lastMonthTasks" class="hidden bg-gray-50 dark:bg-gray-900/30 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300">Son 1 Aydaki Görevler</h3>
+                <button type="button" id="toggleTasks" class="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">Göster</button>
+            </div>
+            <div id="tasksContent" class="space-y-2">
+                <p class="text-xs text-gray-500 dark:text-gray-400 italic">Yükleniyor...</p>
+            </div>
+        </div>
+
         <div>
             <label class="block text-sm font-medium mb-1">Dosya Ekle</label>
             <input type="file" name="files[]" id="noteFiles" multiple
@@ -269,6 +280,17 @@ function formatFileSize(bytes) {
     return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
 }
 
+function formatDateShort(dateStr) {
+    if (!dateStr) return '';
+    const months = ['', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+    const day = date.getDate();
+    const month = months[date.getMonth() + 1];
+    const year = date.getFullYear();
+    return day + ' ' + month + ' ' + year;
+}
+
 document.getElementById('toggleAddForm').addEventListener('click', function() {
     const form = document.getElementById('addNoteForm');
     if (form.classList.contains('hidden')) {
@@ -320,6 +342,8 @@ function resetForm() {
     document.getElementById('submitBtn').textContent = 'Kaydet';
     document.getElementById('cancelEdit').classList.add('hidden');
     document.getElementById('noteDate').value = '<?php echo date('Y-m-d'); ?>';
+    document.getElementById('noteContent').value = '';
+    document.getElementById('noteJiraLink').value = '';
     attachedFiles = [];
     updateAttachedFilesDisplay();
 }
@@ -436,6 +460,158 @@ function addNoteForUser(userId) {
     document.getElementById('noteDate').value = '<?php echo date('Y-m-d'); ?>';
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Load last month's tasks
+function loadLastMonthTasks() {
+    const section = document.getElementById('lastMonthTasks');
+    const content = document.getElementById('tasksContent');
+    
+    if (!section || !content) return;
+    
+    fetch('<?php echo APP_URL; ?>api/daily-notes-history.php')
+        .then(r => r.json())
+        .then(data => {
+            if (!Array.isArray(data) || data.length === 0) {
+                content.innerHTML = '<p class="text-xs text-gray-500 dark:text-gray-400 italic">Son 1 ayda not bulunmuyor.</p>';
+                section.classList.add('hidden');
+                return;
+            }
+            
+            section.classList.remove('hidden');
+            content.innerHTML = data.map(task => {
+                const jiraBase = 'https://jira.gelirler.gov.tr/browse/';
+                // Extract issue key from URL if needed
+                let issueKey = '';
+                if (task.jira_link) {
+                    const match = task.jira_link.match(/\/([A-Z]+-[0-9]+)$/);
+                    if (match) {
+                        issueKey = match[1];
+                    }
+                }
+                
+                let jiraHtml = '';
+                if (task.jira_link) {
+                    jiraHtml = '<div class="mt-1">' +
+                        '<a href="' + escapeHtml(task.jira_link) + '" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-blue-600 hover:underline dark:text-blue-400">' + escapeHtml(issueKey || task.jira_link) + '</a>' +
+                        '</div>';
+                }
+                
+                return '<div class="flex items-start gap-2 p-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">' +
+                    '<div class="flex-1 min-w-0">' +
+                    '<div class="flex items-center gap-2 mb-1">' +
+                    '<span class="text-[10px] text-gray-500 dark:text-gray-400">' + escapeHtml(formatDateShort(task.date)) + '</span>' +
+                    '</div>' +
+                    '<p class="text-xs text-gray-600 dark:text-gray-300 whitespace-pre-wrap line-clamp-3 mb-2">' + escapeHtml(task.content || '') + '</p>' +
+                    jiraHtml +
+                    '</div>' +
+                    '<button type="button" class="shrink-0 px-2 py-1 text-xs bg-emerald-600 text-white rounded hover:bg-emerald-700" data-task-content="' + escapeHtml(task.content || '') + '" data-task-jira="' + escapeHtml(task.jira_link || '') + '" onclick="copyTaskToNote(this)">Ekle</button>' +
+                    '</div>';
+            }).join('');
+        })
+        .catch(() => {
+            content.innerHTML = '<p class="text-xs text-red-500 italic">Notlar yüklenemedi.</p>';
+        });
+}
+
+// Copy task to note
+function copyTaskToNote(btn) {
+    const noteContentInput = document.getElementById('noteContent');
+    if (!noteContentInput) return;
+    
+    // Get task data from data attributes
+    const jiraLink = btn.getAttribute('data-task-jira');
+    const noteContent = btn.getAttribute('data-task-content');
+    
+    // Add Jira link to jira_link field
+    const jiraLinkInput = document.getElementById('noteJiraLink');
+    if (jiraLink && jiraLinkInput) {
+        const currentJiraLink = jiraLinkInput.value.trim();
+        if (!currentJiraLink.toLowerCase().includes(jiraLink.toLowerCase())) {
+            if (currentJiraLink) {
+                jiraLinkInput.value = currentJiraLink + '\n' + jiraLink;
+            } else {
+                jiraLinkInput.value = jiraLink;
+            }
+        }
+    }
+    
+    // Add note content to content field
+    if (noteContent && noteContentInput) {
+        const currentContent = noteContentInput.value.trim();
+        if (!currentContent.toLowerCase().includes(noteContent.toLowerCase())) {
+            if (currentContent) {
+                noteContentInput.value = currentContent + '\n\n' + noteContent;
+            } else {
+                noteContentInput.value = noteContent;
+            }
+        }
+    }
+    
+    // Show success feedback
+    const originalText = btn.textContent;
+    btn.textContent = 'Eklendi!';
+    btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
+    btn.classList.add('bg-emerald-400', 'cursor-default');
+    setTimeout(function() {
+        btn.textContent = originalText;
+        btn.classList.remove('bg-emerald-400', 'cursor-default');
+        btn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+    }, 1500);
+}
+
+// Toggle tasks section
+document.getElementById('toggleTasks').addEventListener('click', function() {
+    const section = document.getElementById('lastMonthTasks');
+    if (section.classList.contains('hidden')) {
+        section.classList.remove('hidden');
+        this.textContent = 'Gizle';
+        if (section.querySelector('#tasksContent p')?.textContent.includes('Yükleniyor...')) {
+            loadLastMonthTasks();
+        }
+    } else {
+        section.classList.add('hidden');
+        this.textContent = 'Göster';
+    }
+});
+
+// Auto-load tasks when form is opened
+document.getElementById('toggleAddForm').addEventListener('click', function() {
+    const form = document.getElementById('addNoteForm');
+    if (!form.classList.contains('hidden')) {
+        // Form is now visible, load tasks if not already loaded
+        const tasksContent = document.getElementById('tasksContent');
+        if (tasksContent && tasksContent.innerHTML.includes('Yükleniyor...')) {
+            loadLastMonthTasks();
+        }
+        
+        // Load today's note content
+        loadTodayNote();
+    }
+});
+
+// Load today's note content for quick copy
+function loadTodayNote() {
+    const today = document.getElementById('noteDate').value;
+    if (!today) return;
+    
+    fetch('<?php echo APP_URL; ?>api/daily-notes.php?userId=<?php echo $effectiveUserId; ?>&startDate=' + today + '&endDate=' + today + '&limit=1')
+        .then(r => r.json())
+        .then(data => {
+            if (Array.isArray(data) && data.length > 0) {
+                const note = data[0];
+                const jiraInput = document.getElementById('noteJiraLink');
+                const currentJira = jiraInput.value.trim();
+                
+                // If no jira link yet, add from today's note
+                if (!currentJira && note.jira_link) {
+                    jiraInput.value = note.jira_link;
+                }
+            }
+        })
+        .catch(function() {
+            // Silent fail - this is just convenience
+        });
 }
 </script>
 

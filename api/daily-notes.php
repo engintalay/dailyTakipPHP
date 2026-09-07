@@ -64,6 +64,10 @@ if ($method === 'GET') {
             isset($input['files']) ? $input['files'] : '[]'
         );
 
+        // Note girildiğinde o kullanıcının o günkü katılım durumunu "katıldı" yap
+        $attendanceDate = substr($input['date'], 0, 10);
+        setAttendance($userId, $attendanceDate, true);
+
         jsonResponse($note);
     } elseif ($input['action'] === 'update' && $noteId) {
         $data = array();

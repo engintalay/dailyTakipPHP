@@ -237,14 +237,20 @@ function getTagsHtml($tags) {
 function getJiraLinkHtml($jiraLink) {
     if (empty($jiraLink)) return '';
 
+    $jiraBase = 'https://jira.gelirler.gov.tr/browse/';
     $links = preg_split('/[\r\n,]+/', $jiraLink, -1, PREG_SPLIT_NO_EMPTY);
     $html = '<div class="mt-2 space-y-1">';
     foreach ($links as $link) {
         $link = trim($link);
         if (empty($link)) continue;
-        $display = preg_replace('/^https?:\/\//', '', $link);
+        $url = $link;
+        // Jira issue key formatı (örn. EBLGANALIZ-3) girilmişse tam URL'ye tamamla
+        if (preg_match('/^[A-Za-z0-9]+-[0-9]+$/', $link)) {
+            $url = $jiraBase . $link;
+        }
+        $display = preg_replace('/^https?:\/\//', '', $url);
         $display = rtrim($display, '/');
-        $html .= '<a href="' . escapeHtml($link) . '" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-xs text-blue-600 hover:underline">🔗 ' . escapeHtml($display) . '</a>';
+        $html .= '<a href="' . escapeHtml($url) . '" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-xs text-blue-600 hover:underline">🔗 ' . escapeHtml($display) . '</a>';
     }
     $html .= '</div>';
     return $html;

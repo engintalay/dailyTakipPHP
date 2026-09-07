@@ -12,7 +12,7 @@
     "id": "cmryni4o40000gnsb0ce8ipf2",
     "name": "Şebnem Manav",
     "email": "smanav@gelirler.gov.tr",
-    "password_hash": "$2y$12$z\/Z1tddpbIXNKtZqJZBbQePv.KJYgNV.M1XCucRAdIEcJ1iqTvnka",
+    "password_hash": "$2y$12$Nkz311R7\/cbhMoWzhSlnsO74WXA6U4kBbMvCjNsyZ.a9T5KbI6oRq",
     "role": "MEMBER",
     "is_active": 1,
     "created_at": "2026-07-24 08:01:00"
@@ -67,7 +67,7 @@
     "name": "Fırat Çifçi",
     "email": "fcifci@gelirler.gov.tr",
     "password_hash": "$2y$12$tzJvB4pt\/guHqKfyC7aoLeg71pSTCz0ZApMnARYFq1vO3d\/HarxGa",
-    "role": "MEMBER",
+    "role": "VIEWER",
     "is_active": 1,
     "created_at": "2026-07-24 08:19:29"
   },
@@ -76,7 +76,7 @@
     "name": "Feride Kepenek",
     "email": "feride.kepenek@gelirler.gov.tr",
     "password_hash": "$2y$12$QnTe8Zbo4OPfzSoRZtq1Z.QQt2p1BKTwV5o.6iSwWRF7dKcGRfUV.",
-    "role": "MEMBER",
+    "role": "VIEWER",
     "is_active": 1,
     "created_at": "2026-07-24 08:20:57"
   },
@@ -113,7 +113,7 @@
     "email": "test@gelirler.gov.tr",
     "password_hash": "$2y$12$ayk7TXDGPyXWAqI921sdQuj3utyB8aM1wxgN7IEFN58d8Tfg49OMC",
     "role": "VIEWER",
-    "is_active": 1,
+    "is_active": 0,
     "created_at": "2026-07-24 11:04:00"
   }
 ]

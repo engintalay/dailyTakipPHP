@@ -10,14 +10,56 @@ $currentPath = 'pages/todos.php';
 
 $todos = getTodos(array('include_done' => 1));
 $users = getAllUsers(true);
+
+// Filter processing
+$filter = isset($_GET['filter']) ? $_GET['filter'] : 'my';
+$filterUserId = isset($_GET['user_id']) ? $_GET['user_id'] : '';
+
+$matches = function($todo) use ($currentUser, $filter, $filterUserId) {
+    if ($filter === 'all') return true;
+    if ($filter === 'user' && $filterUserId) {
+        return $todo['assigned_to'] === $filterUserId || $todo['creator_id'] === $filterUserId;
+    }
+    // default: my tasks (assigned to me OR created by me)
+    return $todo['assigned_to'] === $currentUser['id'] || $todo['creator_id'] === $currentUser['id'];
+};
+
+$filteredTodos = array();
+foreach ($todos as $todo) {
+    if ($matches($todo)) $filteredTodos[] = $todo;
+}
+
+$visibleIds = array();
+foreach ($filteredTodos as $todo) $visibleIds[$todo['id']] = true;
+
+// Map root tasks by id to include parents of visible subtasks
+$rootById = array();
+foreach ($todos as $todo) {
+    if (empty($todo['parent_id'])) $rootById[$todo['id']] = $todo;
+}
+
 $children = array();
 $roots = array();
-foreach ($todos as $todo) {
+$rootIds = array();
+foreach ($filteredTodos as $todo) {
     if (!empty($todo['parent_id'])) {
         if (!isset($children[$todo['parent_id']])) $children[$todo['parent_id']] = array();
         $children[$todo['parent_id']][] = $todo;
     } else {
         $roots[] = $todo;
+        $rootIds[$todo['id']] = true;
+    }
+}
+
+// Include parent root when a visible subtask exists but root doesn't match (keeps hierarchy)
+foreach ($todos as $todo) {
+    if (empty($todo['parent_id'])) continue;
+    if (isset($visibleIds[$todo['id']]) && isset($rootById[$todo['parent_id']])) {
+        $root = $rootById[$todo['parent_id']];
+        if (!isset($rootIds[$root['id']])) {
+            $roots[] = $root;
+            $rootIds[$root['id']] = true;
+        }
     }
 }
 
@@ -44,6 +86,24 @@ include __DIR__ . '/../includes/header.php';
             <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Küçük işleri oluşturun, atayın ve takip edin.</p>
         </div>
         <button type="button" id="toggleTodoForm" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">+ Yeni Görev</button>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2 mb-2">
+        <a href="<?php echo APP_URL; ?>pages/todos.php?filter=my"
+           class="px-4 py-2 rounded-lg text-sm <?php echo $filter === 'my' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'; ?>">
+            👤 Benim İşlerim
+        </a>
+        <a href="<?php echo APP_URL; ?>pages/todos.php?filter=all"
+           class="px-4 py-2 rounded-lg text-sm <?php echo $filter === 'all' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'; ?>">
+            🌐 Tüm İşler
+        </a>
+        <select onchange="if(this.value) { var base='<?php echo APP_URL; ?>pages/todos.php'; window.location = base + '?filter=user&user_id=' + encodeURIComponent(this.value); }"
+                class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+            <option value="">👥 Kullanıcıya göre...</option>
+            <?php foreach ($users as $user): ?>
+            <option value="<?php echo $user['id']; ?>" <?php echo ($filter === 'user' && $filterUserId === $user['id']) ? 'selected' : ''; ?>><?php echo escapeHtml($user['name']); ?></option>
+            <?php endforeach; ?>
+        </select>
     </div>
 
     <form id="todoForm" method="POST" action="<?php echo APP_URL; ?>api/todos.php" class="hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 space-y-4">
@@ -111,14 +171,14 @@ include __DIR__ . '/../includes/header.php';
                     <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Atanan: <?php echo escapeHtml($todo['assignee_name']); ?> · Oluşturan: <?php echo escapeHtml($todo['creator_name']); ?><?php if ($todo['due_date']): ?> · Son tarih: <?php echo escapeHtml(formatDateShort($todo['due_date'])); ?><?php endif; ?></p>
                 </div>
                 <div class="flex flex-wrap justify-end gap-1 shrink-0">
+                    <?php if ($canEdit): ?>
                     <?php if ($todo['status'] !== 'DONE' && $todo['assigned_to'] !== $currentUser['id']): ?>
                     <form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="claim"><input type="hidden" name="todo_id" value="<?php echo $todo['id']; ?>"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="px-2 py-1 text-xs bg-amber-100 text-amber-700 rounded hover:bg-amber-200 dark:bg-amber-900/30 dark:text-amber-300">Üzerime Al</button></form>
                     <?php endif; ?>
-                    <?php if ($todo['status'] !== 'DONE' && ($todo['assigned_to'] === $currentUser['id'] || $isAdmin)): ?>
+                    <?php if ($todo['status'] !== 'DONE'): ?>
                     <?php if ($todo['status'] === 'TODO'): ?><form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="update"><input type="hidden" name="todo_id" value="<?php echo $todo['id']; ?>"><input type="hidden" name="status" value="IN_PROGRESS"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300">Başlat</button></form><?php endif; ?>
                     <form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="update"><input type="hidden" name="todo_id" value="<?php echo $todo['id']; ?>"><input type="hidden" name="status" value="DONE"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="px-2 py-1 text-xs bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300">Tamamla</button></form>
                     <?php endif; ?>
-                    <?php if ($canEdit): ?>
                     <button onclick="editTodo('<?php echo $todo['id']; ?>')" class="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400">Düzenle</button>
                     <?php endif; ?>
                 </div>
@@ -136,9 +196,9 @@ include __DIR__ . '/../includes/header.php';
                             <span class="text-xs px-2 py-0.5 rounded-full <?php echo $statusClasses[$child['status']]; ?>"><?php echo $statusLabels[$child['status']]; ?></span>
                         </div>
                         <div class="flex gap-1 shrink-0">
-                            <?php if ($child['status'] !== 'DONE' && $child['assigned_to'] !== $currentUser['id']): ?><form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="claim"><input type="hidden" name="todo_id" value="<?php echo $child['id']; ?>"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="text-xs text-amber-700 dark:text-amber-300">Üzerime Al</button></form><?php endif; ?>
-                            <?php if ($child['status'] !== 'DONE' && ($child['assigned_to'] === $currentUser['id'] || $isAdmin)): ?><?php if ($child['status'] === 'TODO'): ?><form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="update"><input type="hidden" name="todo_id" value="<?php echo $child['id']; ?>"><input type="hidden" name="status" value="IN_PROGRESS"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="text-xs text-blue-700 dark:text-blue-300">Başlat</button></form><?php endif; ?><form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="update"><input type="hidden" name="todo_id" value="<?php echo $child['id']; ?>"><input type="hidden" name="status" value="DONE"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="text-xs text-emerald-700 dark:text-emerald-300">Tamamla</button></form><?php endif; ?>
                             <?php if ($canEditChild): ?>
+                            <?php if ($child['status'] !== 'DONE' && $child['assigned_to'] !== $currentUser['id']): ?><form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="claim"><input type="hidden" name="todo_id" value="<?php echo $child['id']; ?>"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="text-xs text-amber-700 dark:text-amber-300">Üzerime Al</button></form><?php endif; ?>
+                            <?php if ($child['status'] !== 'DONE'): ?><?php if ($child['status'] === 'TODO'): ?><form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="update"><input type="hidden" name="todo_id" value="<?php echo $child['id']; ?>"><input type="hidden" name="status" value="IN_PROGRESS"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="text-xs text-blue-700 dark:text-blue-300">Başlat</button></form><?php endif; ?><form class="todo-action-form" method="POST" action="<?php echo APP_URL; ?>api/todos.php"><input type="hidden" name="action" value="update"><input type="hidden" name="todo_id" value="<?php echo $child['id']; ?>"><input type="hidden" name="status" value="DONE"><input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>"><button class="text-xs text-emerald-700 dark:text-emerald-300">Tamamla</button></form><?php endif; ?>
                             <button onclick="editTodo('<?php echo $child['id']; ?>')" class="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Düzenle</button>
                             <?php endif; ?>
                         </div>
@@ -210,7 +270,7 @@ include __DIR__ . '/../includes/header.php';
 </div>
 
 <script>
-var todosData = <?php echo json_encode($todos); ?>;
+var todosData = <?php echo json_encode($filteredTodos); ?>;
 
 document.getElementById('toggleTodoForm').addEventListener('click', function() {
     var form = document.getElementById('todoForm');
