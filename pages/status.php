@@ -19,6 +19,11 @@ $selectedDate = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d');
 // Get current user's status for today
 $status = getDailyStatusByUserAndDate($effectiveUserId, $selectedDate);
 
+// Check for missing status warnings
+$missingStatusUsers = $isAdmin ? getUsersWithMissingStatus() : array();
+$todayStatus = getDailyStatusByUserAndDate($effectiveUserId, date('Y-m-d'));
+$missingToday = ($todayStatus === null);
+
 // Get month statuses for calendar
 $currentMonth = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
 list($year, $month) = explode('-', $currentMonth);
@@ -83,6 +88,34 @@ $currentPath = 'pages/status.php';
 
 <div class="space-y-6">
     <h1 class="text-2xl font-bold">Durum Takibi</h1>
+
+    <?php if ($isAdmin && !empty($missingStatusUsers)): ?>
+    <div class="bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950/30 dark:text-amber-300 dark:border-amber-800 rounded-lg p-3">
+        <h3 class="text-sm font-semibold mb-2">⚠️ Eksik Durum Uyarısı</h3>
+        <p class="text-xs mb-2">Aşağıdaki kullanıcılar için mevcut ve gelecek hafta (Pzt-Cum) için durum girilmemiş:</p>
+        <ul class="text-xs space-y-1">
+            <?php foreach ($missingStatusUsers as $mu): ?>
+            <li class="flex flex-wrap gap-1">
+                <span class="font-medium"><?php echo escapeHtml($mu['user']['name']); ?>:</span>
+                <span class="opacity-80">
+                    <?php
+                    $dates = array_slice($mu['missing_dates'], 0, 3);
+                    echo escapeHtml(implode(', ', $dates));
+                    if (count($mu['missing_dates']) > 3) echo ' (+'.(count($mu['missing_dates'])-3).' daha)';
+                    ?>
+                </span>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
+
+    <?php if ($missingToday): ?>
+    <div class="bg-red-50 text-red-800 border border-red-200 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800 rounded-lg p-3">
+        <p class="text-sm font-medium">⚠️ <strong><?php echo escapeHtml($currentUser['name']); ?></strong>, bugünün durumunu girmediniz!</p>
+        <p class="text-xs mt-1 opacity-90">Lütfen durumunuzu girmeyi unutmayın.</p>
+    </div>
+    <?php endif; ?>
 
     <?php if ($isAdmin): ?>
     <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2">

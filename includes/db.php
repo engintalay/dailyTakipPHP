@@ -828,5 +828,64 @@ function deleteJiraTask($id) {
     return true;
 }
 
+/**
+ * Get users with missing status for current week (Mon-Fri) and next week
+ * Returns array of arrays: ['user' => user, 'missing_dates' => [dates]]
+ */
+function getUsersWithMissingStatus() {
+    $users = getAllUsers(true);
+    $statuses = loadJson(DB_STATUSES);
+    $today = new DateTime();
+    $currentWeekStart = clone $today;
+    $currentWeekStart->modify('monday this week');
+    $nextWeekStart = clone $currentWeekStart;
+    $nextWeekStart->modify('+7 days');
+
+    $result = array();
+    $currentDates = array();
+    $nextDates = array();
+
+    // Generate current week dates (Mon-Fri)
+    for ($i = 0; $i < 5; $i++) {
+        $d = clone $currentWeekStart;
+        $d->modify("+$i days");
+        $currentDates[] = $d->format('Y-m-d');
+    }
+
+    // Generate next week dates (Mon-Fri)
+    for ($i = 0; $i < 5; $i++) {
+        $d = clone $nextWeekStart;
+        $d->modify("+$i days");
+        $nextDates[] = $d->format('Y-m-d');
+    }
+
+    $allTargetDates = array_merge($currentDates, $nextDates);
+
+    foreach ($users as $user) {
+        $userStatuses = array();
+        foreach ($statuses as $s) {
+            if ($s['user_id'] === $user['id']) {
+                $userStatuses[] = substr($s['date'], 0, 10);
+            }
+        }
+
+        $missingDates = array();
+        foreach ($allTargetDates as $date) {
+            if (!in_array($date, $userStatuses)) {
+                $missingDates[] = $date;
+            }
+        }
+
+        if (!empty($missingDates)) {
+            $result[] = array(
+                'user' => $user,
+                'missing_dates' => $missingDates
+            );
+        }
+    }
+
+    return $result;
+}
+
 // Initialize on include
 initDatabase();
