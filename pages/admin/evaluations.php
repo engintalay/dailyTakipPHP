@@ -96,6 +96,9 @@ function closePeriodModal() {
     <div class="flex items-center justify-between">
         <h1 class="text-2xl font-bold">Personel Değerlendirme</h1>
         <div class="flex gap-2">
+            <?php if (!empty($periodId) && !empty($employeeList)): ?>
+            <button onclick="window.print()" class="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700">📄 PDF Rapor</button>
+            <?php endif; ?>
             <a href="<?php echo APP_URL; ?>pages/admin/evaluation-criteria.php" class="px-4 py-2 bg-gray-600 text-white rounded-lg text-sm hover:bg-gray-700">Kriter Yönetimi</a>
             <button onclick="openPeriodModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">+ Dönem Ekle</button>
         </div>
@@ -256,5 +259,126 @@ document.getElementById('periodForm').addEventListener('submit', function(e) {
     });
 });
 </script>
+
+<?php
+// Yazdırma için seçili dönem bilgisi
+$selectedPeriod = null;
+foreach ($periods as $p) {
+    if ($p['id'] === $periodId) { $selectedPeriod = $p; break; }
+}
+?>
+
+<!-- Print-only Performans Değerlendirme Raporu -->
+<style>
+    @media print {
+        body * { visibility: hidden; }
+        .eval-print-report, .eval-print-report * { visibility: visible; }
+        .eval-print-report {
+            position: absolute; left: 0; top: 0; width: 100%;
+            margin: 0; padding: 20px; background: white;
+            display: block !important; font-size: 10pt; color: #000;
+        }
+        .eval-print-report h1 { font-size: 16pt; margin-bottom: 4px; color: #000; }
+        .eval-print-report h2 { font-size: 12pt; margin: 12px 0 6px 0; border-bottom: 1px solid #000; padding-bottom: 3px; color: #000; }
+        .eval-print-report h3 { font-size: 11pt; margin: 8px 0 4px 0; color: #000; }
+        .eval-print-report table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+        .eval-print-report th, .eval-print-report td { border: 1px solid #999; padding: 5px 8px; text-align: left; color: #000; }
+        .eval-print-report th { background: #f0f0f0 !important; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .eval-print-report .emp-card { border: 1px solid #999; padding: 10px; margin-bottom: 10px; page-break-inside: avoid; }
+        .eval-print-report .text-center { text-align: center; }
+        .eval-print-report .text-right { text-align: right; }
+        .eval-print-report .meta { font-size: 8pt; color: #555; }
+        @page { margin: 1cm; }
+    }
+    .eval-print-report { display: none; }
+</style>
+
+<div class="eval-print-report">
+    <h1>Personel Değerlendirme Raporu</h1>
+    <?php if ($selectedPeriod): ?>
+    <p class="meta">
+        Dönem: <strong><?php echo escapeHtml($selectedPeriod['name']); ?></strong>
+        (<?php echo escapeHtml($selectedPeriod['start_date']); ?> - <?php echo escapeHtml($selectedPeriod['end_date']); ?>)
+        | Rapor Tarihi: <?php echo date('d.m.Y H:i'); ?>
+    </p>
+    <?php endif; ?>
+
+    <!-- Özet Tablo -->
+    <h2>Genel Özet</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Personel</th>
+                <th>E-posta</th>
+                <th class="text-center">Ağırlıklı Puan</th>
+                <th class="text-center">Değerlendirme</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($employeeList as $e): ?>
+            <tr>
+                <td><?php echo escapeHtml($e['user']['name']); ?></td>
+                <td><?php echo escapeHtml($e['user']['email']); ?></td>
+                <td class="text-center"><?php echo $e['weighted_avg'] !== null ? $e['weighted_avg'] . '/10' : '-'; ?></td>
+                <td class="text-center"><?php echo escapeHtml($e['rating']); ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <!-- Kriter Ağırlıkları -->
+    <?php if (!empty($criteria)): ?>
+    <h2>Değerlendirme Kriterleri ve Ağırlıkları</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Kriter</th>
+                <th class="text-center">Ağırlık</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($criteria as $c): ?>
+            <tr>
+                <td><?php echo escapeHtml($c['name']); ?></td>
+                <td class="text-center"><?php echo isset($c['weight']) ? '%' . $c['weight'] : '-'; ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php endif; ?>
+
+    <!-- Kişi Bazlı Detay -->
+    <h2>Kişi Bazlı Detaylı Değerlendirme</h2>
+    <?php foreach ($employeeList as $e): ?>
+        <?php if (empty($e['evaluation'])) continue; ?>
+        <div class="emp-card">
+            <h3><?php echo escapeHtml($e['user']['name']); ?> 
+                — <?php echo $e['weighted_avg'] !== null ? $e['weighted_avg'] . '/10' : '-'; ?> 
+                (<?php echo escapeHtml($e['rating']); ?>)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kriter</th>
+                        <th class="text-center">Ağırlık</th>
+                        <th class="text-center">Puan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($criteria as $c): ?>
+                    <?php $score = isset($e['evaluation']['scores'][$c['id']]) ? $e['evaluation']['scores'][$c['id']] : null; ?>
+                    <tr>
+                        <td><?php echo escapeHtml($c['name']); ?></td>
+                        <td class="text-center"><?php echo isset($c['weight']) ? '%' . $c['weight'] : '-'; ?></td>
+                        <td class="text-center"><?php echo $score !== null ? $score . '/10' : '-'; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <?php if (!empty($e['evaluation']['notes'])): ?>
+            <p><strong>Notlar:</strong> <?php echo escapeHtml($e['evaluation']['notes']); ?></p>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+</div>
 
 <?php include __DIR__ . '/../../includes/footer.php'; ?>
