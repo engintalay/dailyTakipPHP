@@ -139,10 +139,7 @@ $currentPath = $_SERVER['REQUEST_URI'];
                 </a>
                 <a href="<?php echo APP_URL; ?>pages/reports.php?type=performance"
                    class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'reports.php') && isset($_GET['type']) && $_GET['type'] === 'performance' ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
-                    <span class="text-base">📋</span> Raporlar (Performans)
-                </a>
-                       class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'reports.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
-                     <span class="text-base">📈</span> Raporlar
+                    <span class="text-base">📋</span> Performans Raporu
                 </a>
                 <a href="<?php echo APP_URL; ?>pages/daily-summary.php"
                    class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'daily-summary.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
