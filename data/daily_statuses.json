@@ -7067,7 +7067,7 @@
     "id": "92fa350d-094e-4800-9088-3f1a566c6155",
     "user_id": "cmryo3lb0000egnlvmwvz63bt",
     "date": "2026-10-13",
-    "type": "OFFICE",
+    "type": "REMOTE",
     "note": "",
     "created_at": "2026-10-19 09:08:27"
   },
@@ -7075,7 +7075,7 @@
     "id": "bfcd2f53-be7c-4e80-848d-b6932440fdb0",
     "user_id": "cmryo3lb0000egnlvmwvz63bt",
     "date": "2026-10-14",
-    "type": "OFFICE",
+    "type": "REMOTE",
     "note": "",
     "created_at": "2026-10-19 09:08:28"
   },
@@ -7083,8 +7083,72 @@
     "id": "780c4129-2d37-47b2-8ce5-cbba18a6871c",
     "user_id": "cmryo3lb0000egnlvmwvz63bt",
     "date": "2026-10-15",
-    "type": "OFFICE",
+    "type": "REMOTE",
     "note": "",
     "created_at": "2026-10-19 09:08:28"
+  },
+  {
+    "id": "83084924-7938-4ccb-933c-bfcfce453f3d",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-17",
+    "type": "REMOTE",
+    "note": "",
+    "created_at": "2026-10-19 14:18:06"
+  },
+  {
+    "id": "24d651eb-a06d-49e9-975a-a58d6bd89d3c",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-18",
+    "type": "REMOTE",
+    "note": "",
+    "created_at": "2026-10-19 14:18:06"
+  },
+  {
+    "id": "3b162f90-4bea-4e6e-a234-4593bd126890",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-20",
+    "type": "REMOTE",
+    "note": "",
+    "created_at": "2026-10-19 14:18:34"
+  },
+  {
+    "id": "f4448504-93eb-4ef8-98da-198405ee8846",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-19",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-10-19 14:18:50"
+  },
+  {
+    "id": "c3be06a1-dc79-42be-9188-e6b0eecc614c",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-26",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-10-19 15:18:38"
+  },
+  {
+    "id": "7f82103a-10ac-4937-a764-7bd32cda14e5",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-27",
+    "type": "REMOTE",
+    "note": "",
+    "created_at": "2026-10-19 15:18:40"
+  },
+  {
+    "id": "6cc91207-3856-4784-9488-db867fb4f325",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-28",
+    "type": "OFFICE",
+    "note": "",
+    "created_at": "2026-10-19 15:18:46"
+  },
+  {
+    "id": "2c160de3-61e8-4f43-a3b8-cb1d7295cd51",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-30",
+    "type": "LEAVE",
+    "note": "",
+    "created_at": "2026-10-19 15:18:59"
   }
 ]

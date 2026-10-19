@@ -6178,5 +6178,75 @@
     "jira_link": "",
     "files": "[]",
     "created_at": "2026-10-19 09:25:04"
+  },
+  {
+    "id": "4f877156-1f81-44d2-8a0f-2b6429701ad0",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-19",
+    "content": "HACIZ_CEVAP tablosunda unique index alanı var yeni tabloya yani cevap tablosuna taşıyamıyoruz. çünkü history de tekrarlı kayıtlar var. ayrıca hem ana tabloda hemde historyde olan kayıtlar var. cevap_stg tablosunda hem iptal kaydı hem aktif kaydı olan kayıtlar oluşmuş. bu durumda 13569 kayıt var. HACIZ_CEVAP için 2 durum var. 1. hem ana tabloda hemde historyde olan kayıtlar. 2. history tablosunda paketid vdkodu hbno bankakodu alanı ile aynı ama oid farklı zamanı farklı kayıtlar var. dha bilgilerinde olup ana tablosu kayıp kayıtlara bakacağım. ",
+    "tags": "tasarım,veri tabanı, ehaciz banka",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EHACIZBANKA-56\r\nhttps:\/\/jira.gelirler.gov.tr\/browse\/EHACIZBANKA-64",
+    "files": "[]",
+    "created_at": "2026-10-19 11:28:30"
+  },
+  {
+    "id": "cd84b1e2-00f9-4308-92f9-59ba9bebeb1d",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-19",
+    "content": "EVDB-10413 da JasperReports ile  Java sürümü uyumsuz oldu sanırım jasper raporu derlenmiyor onu çözmeye çalışıyorum.",
+    "tags": "",
+    "jira_link": "EVDB-10413",
+    "files": "[]",
+    "created_at": "2026-10-19 11:50:45"
+  },
+  {
+    "id": "7d9e7b0f-e607-4353-9e93-6a2bbeab8d38",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-19",
+    "content": "Child tabloda olup parent tabloda olmayan kayıtlar için Ulaş ile görüşüldü başka tabloya aktrımlarda bcp için yardımcı olacaklar.\r\nhbno, vd_kod gibi ikili unique indexte alt tabloya bölme çözümünü önerdi Ulaş Engin abi ile konuşulacak. Uygun bulunursa tablo listesi paylaşılacak.\r\nbütün sybase veritabanın postgres'e yedek olarak aktarılması konusunda şu anda gerek yok. Orayı uzun süre silmeyiz dedi.\r\nistek tabloları ile ilgili bulunan hatalar ( alan uzunlukları ve veri tipleri) paylaşıldı düzeltecek.\r\nsybase - postgres constraintler kontrol ediliyor.\r\nİstek ve cevap tabloları ile ilgili Auditlerin belirlenmesi beklemede.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-19 12:23:57"
+  },
+  {
+    "id": "70285ad5-8d24-4d3e-87f9-12f92bce53b6",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-19",
+    "content": "EHaciz projesindeki toplantı notları ve alınan kararlar sekmenti güncellenicek.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-19 13:52:14"
+  },
+  {
+    "id": "8046b688-201a-4433-9ba1-4f92b9ed93fc",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-19",
+    "content": "Noter e-Haciz Bildirisi Kaldırma ekranına \"Haciz Bağı\" eklenmesi",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-19 14:17:44"
+  },
+  {
+    "id": "dca5868e-a333-4857-8771-4cd4da372026",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-19",
+    "content": "gelen istekler yanıtlanacak.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-19 14:19:03"
+  },
+  {
+    "id": "887daa4b-1ff6-45ca-98f8-1e463d08d5f1",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-19",
+    "content": "Kovuşturma projeleri sicil servisleri belirlenen formata göre düzenliyorum. 10:00 - 11.00 arası toplantıya katıldım.",
+    "tags": "",
+    "jira_link": "EVDB-10426\r\nEVDB-10425\r\nEVDB-10424\r\nEVDB-10418\r\nEVDB-10423",
+    "files": "[]",
+    "created_at": "2026-10-19 14:47:11"
   }
 ]
