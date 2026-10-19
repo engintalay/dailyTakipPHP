@@ -137,9 +137,9 @@ $currentPath = $_SERVER['REQUEST_URI'];
                    class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'admin/evaluation-detail.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
                     <span class="text-base">📈</span> Personel Değerlendirme Raporu
                 </a>
-                <a href="<?php echo APP_URL; ?>pages/reports.php?type=performance"
-                   class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'reports.php') && isset($_GET['type']) && $_GET['type'] === 'performance' ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
-                    <span class="text-base">📋</span> Performans Raporu
+                <a href="<?php echo APP_URL; ?>pages/reports.php"
+                   class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'reports.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
+                    <span class="text-base">📈</span> Raporlar
                 </a>
                 <a href="<?php echo APP_URL; ?>pages/daily-summary.php"
                    class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'daily-summary.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
@@ -229,7 +229,7 @@ $currentPath = $_SERVER['REQUEST_URI'];
                     <a href="<?php echo APP_URL; ?>pages/admin/evaluations.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'admin/evaluations.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📝</span> Personel Değerlendirme</a>
                     <a href="<?php echo APP_URL; ?>pages/admin/evaluation-criteria.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'admin/evaluation-criteria.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📋</span> Kriter Yönetimi</a>
                     <a href="<?php echo APP_URL; ?>pages/admin/evaluation-detail.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'admin/evaluation-detail.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📈</span> Personel Değerlendirme Raporu</a>
-                    <a href="<?php echo APP_URL; ?>pages/reports.php?type=performance" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'reports.php') && isset($_GET['type']) && $_GET['type'] === 'performance' ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📋</span> Raporlar (Performans)</a>
+                    <a href="<?php echo APP_URL; ?>pages/reports.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'reports.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📈</span> Raporlar</a>
                     <a href="<?php echo APP_URL; ?>pages/daily-summary.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'daily-summary.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📚</span> Günlük Özet</a>
                     <a href="<?php echo APP_URL; ?>pages/admin/status-report.php" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm <?php echo strpos($currentPath, 'status-report.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>"><span>📌</span> Durum Raporu</a>
                     <?php endif; ?>

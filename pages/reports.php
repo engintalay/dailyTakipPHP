@@ -6,7 +6,8 @@ require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/models.php';
 
-$currentUser = requireAdminAccess();
+$currentUser = requireManagementAccess();
+$isAdmin = isAdmin($currentUser);
 
 $pageTitle = 'Raporlar';
 $currentPath = 'pages/reports.php';
@@ -110,15 +111,6 @@ $totalStatuses = count($statuses);
 $totalAttendance = count($attendance);
 $periodLabel = $period === 'weekly' ? 'Haftalık' : 'Aylık';
 
-// Performans raporu verisi (dönem bazlı)
-$performanceReport = null;
-if (isset($_GET['type']) && $_GET['type'] === 'performance') {
-    $periodId = isset($_GET['period_id']) ? $_GET['period_id'] : '';
-    if (!empty($periodId)) {
-        $performanceReport = getPerformanceReport($periodId);
-    }
-}
-
 include __DIR__ . '/../includes/header.php';
 ?>
 
@@ -127,175 +119,28 @@ include __DIR__ . '/../includes/header.php';
         <h1 class="text-2xl font-bold">Raporlar</h1>
         <div class="flex gap-2">
             <a href="<?php echo APP_URL; ?>pages/reports.php?period=weekly"
-               class="px-4 py-2 rounded-lg text-sm <?php echo ($period === 'weekly' || $period === 'monthly') && (!isset($_GET['type']) || $_GET['type'] === 'activity') ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'; ?>">
-                Aktivite
+               class="px-4 py-2 rounded-lg text-sm <?php echo $period === 'weekly' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'; ?>">
+                Haftalık
             </a>
-            <a href="<?php echo APP_URL; ?>pages/reports.php?type=performance"
-               class="px-4 py-2 rounded-lg text-sm <?php echo isset($_GET['type']) && $_GET['type'] === 'performance' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'; ?>">
-                Performans
+            <a href="<?php echo APP_URL; ?>pages/reports.php?period=monthly"
+               class="px-4 py-2 rounded-lg text-sm <?php echo $period === 'monthly' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'; ?>">
+                Aylık
             </a>
         </div>
     </div>
-    
-    <?php if ($performanceReport !== null): ?>
-    <!-- Performans Raporu -->
-    <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
-        <h2 class="text-lg font-semibold mb-4">Performans Değerlendirme Raporu</h2>
-        
-        <div class="mb-4">
-            <label class="block text-sm font-medium mb-2">Dönem Seçin</label>
-            <select onchange="window.location.href=this.value" 
-                    class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700">
-                <option value="">-- Bir dönem seçin --</option>
-                <?php 
-                $periods = getEvaluationPeriods();
-                foreach ($periods as $p): 
-                    $selected = isset($_GET['period_id']) && $_GET['period_id'] === $p['id'] ? 'selected' : '';
-                ?>
-                <option value="reports.php?type=performance&period_id=<?php echo $p['id']; ?>" <?php echo $selected; ?>>
-                    <?php echo htmlspecialchars($p['name']); ?> (<?php echo $p['start_date']; ?> - <?php echo $p['end_date']; ?>)
-                </option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-        
-        <?php if (!empty($performanceReport)): ?>
-        <!-- Genel Özet -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-            <div class="bg-blue-50 dark:bg-blue-950/20 rounded-xl p-4 text-center">
-                <div class="text-3xl font-bold text-blue-600">
-                    <?php echo $performanceReport['summary']['total_evaluated']; ?>
-                </div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">Değerlendirilen</div>
-            </div>
-            <div class="bg-emerald-50 dark:bg-emerald-950/20 rounded-xl p-4 text-center">
-                <div class="text-3xl font-bold text-emerald-600">
-                    <?php echo $performanceReport['summary']['average_weighted']; ?>
-                </div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">Ortalama Puan</div>
-            </div>
-            <div class="bg-purple-50 dark:bg-purple-950/20 rounded-xl p-4 text-center">
-                <div class="text-3xl font-bold text-purple-600">
-                    <?php echo count($performanceReport['users']); ?>
-                </div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">Toplam Personel</div>
-            </div>
-        </div>
-        
-        <!-- Rating Dağılımı -->
-        <?php if (!empty($performanceReport['summary']['rating_distribution'])): ?>
-        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-            <h3 class="font-medium mb-3">Rating Dağılımı</h3>
-            <div class="grid grid-cols-5 gap-3">
-                <?php foreach ($performanceReport['summary']['rating_distribution'] as $rating => $count): ?>
-                <div class="text-center p-2 rounded-lg <?php 
-                    if ($rating === 'Üstün performans') echo 'bg-green-50 dark:bg-green-900/20';
-                    elseif ($rating === 'Beklentilerin üzerinde') echo 'bg-blue-50 dark:bg-blue-900/20';
-                    elseif ($rating === 'Beklentileri karşılıyor') echo 'bg-yellow-50 dark:bg-yellow-900/20';
-                    elseif ($rating === 'Gelişime açık') echo 'bg-orange-50 dark:bg-orange-900/20';
-                    else echo 'bg-red-50 dark:bg-red-900/20';
-                ?>">
-                    <div class="text-xl font-bold"><?php echo $count; ?></div>
-                    <div class="text-xs text-gray-500 dark:text-gray-400">
-                        <?php echo $rating; ?>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <?php endif; ?>
-        
-        <!-- Kriter Bazlı Ortalamalar -->
-        <?php if (!empty($performanceReport['criteria_avg'])): ?>
-        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-            <h3 class="font-medium mb-3">Kriter Bazlı Ortalamalar</h3>
-            <div class="space-y-3">
-                <?php foreach ($performanceReport['criteria_avg'] as $ca): ?>
-                <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
-                    <div>
-                        <div class="font-medium text-gray-700 dark:text-gray-300">
-                            <?php echo escapeHtml($ca['criterion']['name']); ?>
-                        </div>
-                        <?php if (!empty($ca['criterion']['weight'])): ?>
-                        <div class="text-xs text-gray-400">Ağırlık: %<?php echo $ca['criterion']['weight']; ?></div>
-                        <?php endif; ?>
-                    </div>
-                    <div class="text-right">
-                        <div class="text-lg font-bold text-blue-600">
-                            <?php echo $ca['avg']; ?>/10
-                        </div>
-                        <div class="text-xs text-gray-400">Ortalama</div>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <?php endif; ?>
-        
-        <!-- Kişisel Raporlar -->
-        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
-            <h3 class="font-medium mb-3">Kişisel Performans Raporları</h3>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                    <thead class="bg-gray-50 dark:bg-gray-700/50">
-                        <tr>
-                            <th class="text-left p-2 font-medium">Personel</th>
-                            <th class="text-center p-2 font-medium">Puan</th>
-                            <th class="text-center p-2 font-medium">Rating</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($performanceReport['users'] as $u): ?>
-                        <?php if (empty($u['user']['id'])) continue; ?>
-                        <tr class="border-t border-gray-200 dark:border-gray-700">
-                            <td class="p-2">
-                                <div class="flex items-center gap-2">
-                                    <?php echo getUserAvatar($u['user']['name'], 'w-8 h-8'); ?>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">
-                                        <?php echo escapeHtml($u['user']['name']); ?>
-                                    </span>
-                                </div>
-                            </td>
-                            <td class="text-center p-2">
-                                <span class="inline-block px-2 py-1 rounded text-sm font-bold
-                                    <?php 
-                                    if ($u['weighted_avg'] === null) echo 'bg-gray-100 dark:bg-gray-700 dark:text-gray-300';
-                                    elseif ($u['weighted_avg'] >= 9) echo 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-                                    elseif ($u['weighted_avg'] >= 7) echo 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
-                                    elseif ($u['weighted_avg'] >= 5) echo 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
-                                    elseif ($u['weighted_avg'] >= 3) echo 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200';
-                                    else echo 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-                                    ?>">
-                                    <?php echo $u['weighted_avg'] !== null ? $u['weighted_avg'] : '-'; ?>/10
-                                </span>
-                            </td>
-                            <td class="text-center p-2">
-                                <span class="text-xs px-2 py-1 rounded
-                                    <?php 
-                                    if ($u['rating'] === 'Üstün performans') echo 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-                                    elseif ($u['rating'] === 'Beklentilerin üzerinde') echo 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
-                                    elseif ($u['rating'] === 'Beklentileri karşılıyor') echo 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
-                                    elseif ($u['rating'] === 'Gelişime açık') echo 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200';
-                                    else echo 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-                                    ?>">
-                                    <?php echo escapeHtml($u['rating']); ?>
-                                </span>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <?php else: ?>
-        <div class="text-center py-8 text-gray-500 dark:text-gray-400">
-            <p>Performans değerlendirmesi yapılmamış bir dönem seçin.</p>
-        </div>
+
+    <div class="flex flex-wrap items-center gap-2">
+        <a href="<?php echo APP_URL; ?>pages/reports.php?period=<?php echo $period; ?>&month=<?php echo $prevMonth; ?>"
+           class="px-3 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">‹ Önceki Ay</a>
+        <span class="px-4 py-1.5 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg"><?php echo escapeHtml($monthLabel); ?></span>
+        <a href="<?php echo APP_URL; ?>pages/reports.php?period=<?php echo $period; ?>&month=<?php echo $nextMonth; ?>"
+           class="px-3 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Sonraki Ay ›</a>
+        <?php if ($monthStr !== date('Y-m')): ?>
+        <a href="<?php echo APP_URL; ?>pages/reports.php?period=<?php echo $period; ?>"
+           class="px-3 py-1.5 text-sm rounded-lg bg-blue-600 text-white hover:bg-blue-700">Bu Ay</a>
         <?php endif; ?>
     </div>
-    
-    <?php else: ?>
-    <!-- Aktivite Raporu -->
+
     <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5" id="report-content">
         <h2 class="text-lg font-semibold mb-1"><?php echo $periodLabel; ?> Özet Rapor</h2>
         <p class="text-sm text-gray-500 dark:text-gray-400 mb-4"><?php echo escapeHtml($startLabel); ?> — <?php echo escapeHtml($endLabel); ?></p>
@@ -421,7 +266,6 @@ include __DIR__ . '/../includes/header.php';
         </div>
         <?php endif; ?>
     </div>
-    <?php endif; ?>
 
     <div class="flex gap-2">
         <button onclick="window.print()" class="px-4 py-2 bg-gray-800 text-white rounded-lg text-sm hover:bg-gray-700">🖨️ Yazdır / PDF</button>
