@@ -2662,5 +2662,2517 @@
     "present": 1,
     "note": "",
     "created_at": "2026-09-07 08:40:11"
+  },
+  {
+    "id": "4af82b2a-787b-4f76-a83e-9a88d1bb5e32",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-07 09:19:58"
+  },
+  {
+    "id": "3faaba99-c50a-4428-9fbb-18f15add9709",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-07 09:27:48"
+  },
+  {
+    "id": "a49340fa-9b1f-4d3d-a0d4-3221704d6b12",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-07 09:31:46"
+  },
+  {
+    "id": "0f08f54c-51fa-4be4-a1d8-9858da1f5edc",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-07 10:08:34"
+  },
+  {
+    "id": "6170a97a-0157-4797-9e25-dd5ef5a3796b",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-07 10:08:53"
+  },
+  {
+    "id": "28116a76-2026-43c8-a3ae-338d8bd08413",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-09-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-07 10:15:29"
+  },
+  {
+    "id": "3ca83e4e-33b8-479c-8e13-19a2efbf02b6",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-07 11:22:00"
+  },
+  {
+    "id": "a7830323-f52e-4b79-b2c6-ebbc167962ef",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-08 08:45:07"
+  },
+  {
+    "id": "68ca749d-7d1e-4bfc-b0ca-58468da1afdc",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-08 09:07:18"
+  },
+  {
+    "id": "22936abc-7906-49a0-a7a6-9ade17594f6b",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-08 09:19:54"
+  },
+  {
+    "id": "4c4fda3d-2226-4d9a-9b8e-003cdd4f3b7b",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-08 09:32:02"
+  },
+  {
+    "id": "e4abcdef-637f-4764-9b44-a8cf177d5cab",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-08 09:53:16"
+  },
+  {
+    "id": "1d04fdb9-41fb-472c-97f8-607d9604cc35",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-08 10:11:54"
+  },
+  {
+    "id": "6aac6ec7-cdec-4a4c-9203-6c7d25a03e4d",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-09-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-08 10:45:14"
+  },
+  {
+    "id": "7532f890-e418-4725-a615-ecc1ab7abb94",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-08 11:11:21"
+  },
+  {
+    "id": "64358c05-6cfb-4030-b9b3-dde5c4caf5c9",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-08 11:20:09"
+  },
+  {
+    "id": "d50cc397-a982-49d6-a2ef-ee9441eaca34",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-09 08:58:13"
+  },
+  {
+    "id": "de81c655-fe82-4413-8e9f-0341ae60dc8c",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-09 09:04:36"
+  },
+  {
+    "id": "b892b7e3-6d13-4bc8-b0d2-e7bcfe969825",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-09 09:05:46"
+  },
+  {
+    "id": "97358102-6dcb-4c75-9847-2e4c5852d0bd",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-09 09:07:48"
+  },
+  {
+    "id": "a7574f00-efdb-403f-96b0-4c0b9c877177",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-09 10:32:17"
+  },
+  {
+    "id": "2b98973f-25b9-4c30-9f33-4ce560e12bb9",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-09 10:44:33"
+  },
+  {
+    "id": "e0a9f884-4a94-45e2-880f-26a797466956",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-09-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-09 11:08:18"
+  },
+  {
+    "id": "aa2675a2-4d3c-4ea3-9849-114e3049c4a5",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-09 13:12:16"
+  },
+  {
+    "id": "6c9ee4e9-697e-4132-b62e-301ea15bf3ea",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-09 13:49:21"
+  },
+  {
+    "id": "e62ce7cc-0137-4b93-8aee-d6e0a0242155",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-09 14:53:43"
+  },
+  {
+    "id": "875a57ef-7341-4b74-97ec-9d7c3b2e2864",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-10",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-10 09:00:24"
+  },
+  {
+    "id": "92446aa0-99fd-4e9d-a2cd-a66a7e122ab0",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-10",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-10 09:01:56"
+  },
+  {
+    "id": "bae1e5ab-ccaa-4572-89b6-e8daa10a19d1",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-10",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-10 09:06:07"
+  },
+  {
+    "id": "ae1b8dc7-c2d8-4c5c-b56a-32693eea1546",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-10",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-10 09:06:14"
+  },
+  {
+    "id": "a3670064-9396-45a7-829b-e905cb01ef0f",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-10",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-10 09:15:11"
+  },
+  {
+    "id": "cf12cea4-4aae-491e-9e6f-ca8f4409da37",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-10",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-10 11:09:14"
+  },
+  {
+    "id": "70cd0947-5a45-4464-abce-b77c49733b52",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-10",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-10 11:10:57"
+  },
+  {
+    "id": "2e3d294d-2d01-4439-9371-910a39739bc7",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-10",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-10 11:19:24"
+  },
+  {
+    "id": "79b6bb79-6a64-4aef-9179-dd2f557c341a",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-11",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-11 08:54:11"
+  },
+  {
+    "id": "665d035b-3199-440e-aaeb-3c977f744ca0",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-11",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-11 08:54:18"
+  },
+  {
+    "id": "523fbd1e-8876-4ffb-b056-d140d1c24012",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-11",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-11 08:58:16"
+  },
+  {
+    "id": "348821c8-0b58-4178-9dc1-0bf40fa36681",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-11",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-11 09:00:41"
+  },
+  {
+    "id": "e26b3e0f-cf6f-4ab9-9b52-7ef5c8682586",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-11",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-11 09:20:02"
+  },
+  {
+    "id": "9c3fb074-1929-412c-92b7-9d3e4ebbbc9d",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-11",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-11 09:53:57"
+  },
+  {
+    "id": "e3811373-86b3-4242-b0b5-9bfa29a8ac18",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-09-11",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-11 10:04:23"
+  },
+  {
+    "id": "64e105bf-289f-4047-bcc0-dc677047aa6d",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-11",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-11 10:47:37"
+  },
+  {
+    "id": "270d1c74-9791-4b8d-843d-c078e2537dd6",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-11",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-11 15:08:14"
+  },
+  {
+    "id": "2e14b7fa-9792-48a7-aa7b-450be10087d8",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-12",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-12 21:04:43"
+  },
+  {
+    "id": "4b6fd903-92cc-4529-af9e-5a52509686c2",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-14 08:42:31"
+  },
+  {
+    "id": "d157db65-fe71-4af7-8769-b0c68091854f",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-14 08:50:53"
+  },
+  {
+    "id": "107722da-6eab-43c5-8f23-0d58edb9d294",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-14 08:59:59"
+  },
+  {
+    "id": "efc42b02-062e-41a6-a34d-393e4a17a111",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-14 09:03:31"
+  },
+  {
+    "id": "9a3b3035-1790-4ce4-bf86-fa78aca2fa45",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-14 09:14:47"
+  },
+  {
+    "id": "dd29e028-101d-4e89-b57c-d2a52bc29981",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-14 09:17:00"
+  },
+  {
+    "id": "456bdc0e-a639-454e-8758-fb1146c213cb",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-09-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-14 10:07:49"
+  },
+  {
+    "id": "c1c406ae-cc49-481b-9c69-b628a85f0d09",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-14 10:25:45"
+  },
+  {
+    "id": "bc523da1-fa98-4b0d-b7e4-a53f3c6ab4e3",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-14 10:47:31"
+  },
+  {
+    "id": "87009eb7-1428-462d-a840-344bc8208518",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-09-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-14 10:48:34"
+  },
+  {
+    "id": "f0d81dcf-1cc5-4060-9d8a-f5fde2bd67aa",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-15 08:00:05"
+  },
+  {
+    "id": "1c209d9f-2e93-4bbc-b74f-98b4bdc7185e",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-15 08:29:52"
+  },
+  {
+    "id": "41c52d31-681f-46d8-8b32-f939f34cd46d",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-15 08:55:56"
+  },
+  {
+    "id": "ac35371b-b5d0-43fa-861a-7986677e452b",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-15 09:19:08"
+  },
+  {
+    "id": "69db6480-fde7-4d12-846f-01ce1ea418de",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-15 09:31:41"
+  },
+  {
+    "id": "536a8e35-5747-46d9-9a5c-04dfabfe5560",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-13",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-15 09:32:14"
+  },
+  {
+    "id": "aa994672-b638-454f-a685-79592bd2a4aa",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-15 10:07:13"
+  },
+  {
+    "id": "e433044f-4fb5-4e60-af3c-78309b4f824e",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-15 10:17:46"
+  },
+  {
+    "id": "79f70308-8641-4cd3-82a2-8d39eef397fc",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-15 10:18:15"
+  },
+  {
+    "id": "b2ac59db-448b-4335-9520-29860811c02a",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-09-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-15 10:19:13"
+  },
+  {
+    "id": "7bef54c6-dc7b-4498-b94b-49390ec15f77",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-15 10:28:30"
+  },
+  {
+    "id": "6538c95a-a015-4d48-90ba-8617adb4728d",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-15 10:34:17"
+  },
+  {
+    "id": "5bead733-0091-4135-a27d-f61e1b05c578",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-16 09:12:03"
+  },
+  {
+    "id": "b5ef2fb0-4707-4da8-9ef1-3fbf94653a4e",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-16 09:12:13"
+  },
+  {
+    "id": "9d867c42-2a6c-47b7-9300-c3159e4560db",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-16 09:22:21"
+  },
+  {
+    "id": "84393226-1332-42c7-9063-7286b389fe05",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-09-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-16 09:41:01"
+  },
+  {
+    "id": "23565234-11ff-40a9-afac-5b39052425f9",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-16 10:12:30"
+  },
+  {
+    "id": "705a75d5-deab-4e93-b20e-59c3bc44d88d",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-16 10:43:59"
+  },
+  {
+    "id": "85572f75-0e2f-4543-a31e-92ba2ae15881",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-16 11:26:21"
+  },
+  {
+    "id": "cc2d7c3a-e314-48d1-b35f-d4a170b5c1b1",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-16 13:49:34"
+  },
+  {
+    "id": "faf9c6d4-69a9-4265-af45-5a04bbc3934e",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-16 13:53:00"
+  },
+  {
+    "id": "71b931a6-bc40-41aa-baea-b3280c629802",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-16 14:22:00"
+  },
+  {
+    "id": "aad17b78-70aa-4296-984d-2220e72ba10e",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-16 14:47:58"
+  },
+  {
+    "id": "3a2bcba7-0859-4345-8456-0870bde1eaa4",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-17",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-17 08:42:14"
+  },
+  {
+    "id": "e9fe23e0-6cc2-42c2-a69c-08058ff25163",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-17",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-17 08:58:17"
+  },
+  {
+    "id": "954a6bba-8fa0-43e3-b662-5b2ef327c6f9",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-17",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-17 09:07:55"
+  },
+  {
+    "id": "f7f86a58-5109-40d0-b805-9849d9f9925e",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-17",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-17 09:11:09"
+  },
+  {
+    "id": "e5d766b4-8f3a-41da-8579-840a3ea49067",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-17",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-17 09:18:58"
+  },
+  {
+    "id": "a3c2ce3a-06c6-4033-8780-5c0983fbd5d2",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-17",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-17 09:29:32"
+  },
+  {
+    "id": "cfa9a888-72a2-46d2-89c2-b6e0ad17a477",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-17",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-17 10:14:10"
+  },
+  {
+    "id": "5660767a-07d5-4aa2-b42e-66e8b9bac02d",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-17",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-17 10:29:47"
+  },
+  {
+    "id": "878f48b2-01d2-460b-a3ec-a61dfb72f22a",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-17",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-17 11:27:57"
+  },
+  {
+    "id": "9a26167d-49ab-4b0a-a519-071ac332257c",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-09-17",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-17 15:29:32"
+  },
+  {
+    "id": "7674f2d2-b51a-4ade-9741-1fc8c5596f78",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-17",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-17 15:38:14"
+  },
+  {
+    "id": "fe7315e1-324f-44b5-84c6-0464554da4bf",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-18",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-18 09:02:37"
+  },
+  {
+    "id": "6638969e-5918-4625-ab09-eeb93fb14264",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-18",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-18 09:14:50"
+  },
+  {
+    "id": "71f6efc3-b722-4de6-8129-44d079f3ec1d",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-18",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-18 09:15:36"
+  },
+  {
+    "id": "8a6e06d8-7352-4fa9-9355-886db5419db7",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-18",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-18 09:34:57"
+  },
+  {
+    "id": "27ffbdee-5a07-4438-901a-2d233804ecd7",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-18",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-18 09:57:53"
+  },
+  {
+    "id": "68c78fc7-562f-48e8-adde-eb49b32bac60",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-18",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-18 10:47:58"
+  },
+  {
+    "id": "fdffcd81-0376-4413-b0ab-6c29aaa5c34c",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-18",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-18 11:07:08"
+  },
+  {
+    "id": "24998f53-4ddc-499a-97ed-bb38aab96d80",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-18",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-18 12:12:50"
+  },
+  {
+    "id": "dccba7fd-9899-4067-a525-72936218dde1",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-18",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-18 12:56:34"
+  },
+  {
+    "id": "bf736140-3057-4ba6-b94b-2eeb6a6e7cff",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-21",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-21 07:52:16"
+  },
+  {
+    "id": "b1df6dc1-73eb-4ccc-9b7d-91e02befe511",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-21",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-21 08:52:22"
+  },
+  {
+    "id": "7e4975cb-36cf-474c-8a96-36311080b85c",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-21",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-21 08:59:08"
+  },
+  {
+    "id": "af5a1945-84aa-4d09-9aea-d4c6448de5bf",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-21",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-21 09:00:26"
+  },
+  {
+    "id": "48e05af8-b73c-40e5-ac7c-c3f7900f24ba",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-21",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-21 09:14:27"
+  },
+  {
+    "id": "3498d889-df4f-4e0c-90f3-8e9e26047773",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-09-21",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-21 09:21:03"
+  },
+  {
+    "id": "98ae1a9b-207f-404a-ad05-5e044f452ddf",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-21",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-21 09:40:10"
+  },
+  {
+    "id": "cdc7acef-c456-48d6-b81f-da9ad889b2e7",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-21",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-21 09:45:55"
+  },
+  {
+    "id": "98155e3c-675e-433d-85a4-faec94a4689f",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-21",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-21 10:51:16"
+  },
+  {
+    "id": "dd3b1f8d-99b6-4477-9069-4012190d825f",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-21",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-21 11:09:33"
+  },
+  {
+    "id": "c4dc6abb-c023-4d3a-bae5-59ccbefbdccc",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-22",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-22 07:51:25"
+  },
+  {
+    "id": "a7282803-18af-4f74-99d9-9362d099ff92",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-09-22",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-22 09:10:13"
+  },
+  {
+    "id": "27e10915-66ce-4f7f-9199-62a52bad3a54",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-22",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-22 09:12:48"
+  },
+  {
+    "id": "0b2f1a49-9005-4bf0-81f3-528a4453edf4",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-22",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-22 09:14:46"
+  },
+  {
+    "id": "0934bab6-1b0a-4def-ad17-518b87cb3940",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-22",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-22 09:28:33"
+  },
+  {
+    "id": "542e5eb4-e36d-40c3-8285-1f2128b4a9a8",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-22",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-22 09:32:34"
+  },
+  {
+    "id": "49f082e2-2889-4032-9cf3-bde20cc6c6b5",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-22",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-22 09:35:42"
+  },
+  {
+    "id": "321ce21e-8389-4d52-a8d8-4412de1b801b",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-22",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-22 09:45:04"
+  },
+  {
+    "id": "e8b1765f-1832-4679-bf07-531246bc1890",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-22",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-22 10:39:18"
+  },
+  {
+    "id": "d650ca9c-b04d-4071-9b25-59880d2590bf",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-22",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-22 16:23:40"
+  },
+  {
+    "id": "2b313af0-179c-46ab-a836-fca136ff4a3c",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-23",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-23 08:58:27"
+  },
+  {
+    "id": "ee63fb8a-4e68-4602-a536-a7592e3cda17",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-09-23",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-23 08:59:49"
+  },
+  {
+    "id": "6bc0a4d9-96ce-4dfc-84ac-1124757f0f4e",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-23",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-23 09:06:41"
+  },
+  {
+    "id": "7e497bdd-ddd9-4499-817c-c4549f84f8a9",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-23",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-23 09:10:02"
+  },
+  {
+    "id": "76455234-bf12-49b5-9f93-1b2097f730f2",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-23",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-23 09:13:59"
+  },
+  {
+    "id": "b6e1531a-6a3f-46c1-874e-f5ee3438b802",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-23",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-23 09:39:31"
+  },
+  {
+    "id": "c3e76848-aeb1-47e9-a3da-0a3dc6299043",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-23",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-23 10:05:48"
+  },
+  {
+    "id": "976377c9-319c-44fc-8be6-4e3539f20679",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-23",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-23 10:13:26"
+  },
+  {
+    "id": "0c4655de-991e-47f5-9322-0948fbf7e949",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-23",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-23 18:10:33"
+  },
+  {
+    "id": "923e8f4f-130a-4447-85dc-386b50a03fcb",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-23",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-23 20:07:05"
+  },
+  {
+    "id": "5e3bfed2-96e6-4503-9e6f-c0e09097f978",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-24",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-24 09:00:32"
+  },
+  {
+    "id": "e4f694d0-0d11-40d6-ba2d-ce0f4aa67e6d",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-24",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-24 09:04:45"
+  },
+  {
+    "id": "e13d0629-c2c7-4f58-a3ed-49729a2db6f2",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-24",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-24 09:08:28"
+  },
+  {
+    "id": "3bec567b-58f9-4286-96aa-f195df6ec746",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-24",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-24 09:12:26"
+  },
+  {
+    "id": "5587295f-b6fc-47fb-b4c1-f88c61dad1db",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-09-24",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-24 09:30:37"
+  },
+  {
+    "id": "f2012931-41a3-4c95-9765-5694fc5c2cf8",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-24",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-24 09:48:39"
+  },
+  {
+    "id": "0672c8ee-2cc4-4ef2-b812-f725332ff068",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-24",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-24 10:30:43"
+  },
+  {
+    "id": "7e84d734-78d8-4a27-ae1a-6094caadec1b",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-24",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-24 11:09:51"
+  },
+  {
+    "id": "aa612c04-140d-4723-a387-7627a4460033",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-24",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-24 12:00:53"
+  },
+  {
+    "id": "759215e1-9c5e-405a-9a64-539ed5e1733a",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-09-22",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-24 15:00:45"
+  },
+  {
+    "id": "c8516acd-a2f2-4d88-ab6f-5aa3651e28d1",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-24",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-24 16:37:47"
+  },
+  {
+    "id": "3e048ad3-51ac-4980-9b21-7db93efd3cd3",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-25",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-25 08:58:13"
+  },
+  {
+    "id": "238d698e-b4e6-4fec-b6a4-27032671285c",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-25",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-25 09:03:40"
+  },
+  {
+    "id": "4955c3b9-14aa-4302-a782-3a2bc6e53529",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-25",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-25 09:09:32"
+  },
+  {
+    "id": "f4db7b13-4e9f-44be-bbe2-c75c4e68c501",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-25",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-25 09:13:08"
+  },
+  {
+    "id": "d7a6f4fe-3356-49f6-ae88-8bcb27f93918",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-25",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-25 09:13:17"
+  },
+  {
+    "id": "f17aba6d-8708-44ed-bdf8-59793d2a6732",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-25",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-25 09:18:16"
+  },
+  {
+    "id": "b8e2e03e-17ef-4cb3-9c4f-839f34a3f556",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-25",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-25 10:07:09"
+  },
+  {
+    "id": "cbb4c01c-22ce-4d90-8e0d-7ec4be9254a7",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-25",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-25 10:16:28"
+  },
+  {
+    "id": "699e2e72-2940-4c06-b204-a3d8ad499166",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-09-25",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-25 10:36:03"
+  },
+  {
+    "id": "ee9f9e2f-8dd1-400f-b8dd-5819bb7064fe",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-09-25",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-25 11:47:47"
+  },
+  {
+    "id": "b7e00935-2eec-48c6-9ed9-7968caede1ee",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-25",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-25 14:22:22"
+  },
+  {
+    "id": "8977591e-a9e4-4cdd-9d67-7136b5e5eb88",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-09-25",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-25 16:11:03"
+  },
+  {
+    "id": "9d893376-908d-4ba1-a3c9-969f8a229bea",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-09-28",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-28 09:13:42"
+  },
+  {
+    "id": "35fccd4f-6099-43ee-97cc-be578d509029",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-28",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-28 09:17:51"
+  },
+  {
+    "id": "95409c0f-4233-490b-8d53-710131b970e6",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-09-28",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-28 09:25:14"
+  },
+  {
+    "id": "2145089e-0b4b-4958-8432-26bea83505c2",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-28",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-28 09:30:58"
+  },
+  {
+    "id": "f7a9b7db-6139-4c1d-850e-6ea382a8d1d9",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-28",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-28 09:35:24"
+  },
+  {
+    "id": "720fa412-aeb9-4ae6-8f2e-d5f00a148112",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-09-28",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-28 09:42:48"
+  },
+  {
+    "id": "63f22388-7070-4320-83cd-4e64d67f073e",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-28",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-28 09:58:42"
+  },
+  {
+    "id": "92705acd-b51a-4188-a2fb-710bada44d66",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-28",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-28 11:41:04"
+  },
+  {
+    "id": "2b574be9-28f9-433b-8834-16a9f86746c4",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-28",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-28 12:00:19"
+  },
+  {
+    "id": "7612ef73-4f77-4cc5-9a73-a36069e1e2d0",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-28",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-28 13:51:24"
+  },
+  {
+    "id": "17ab3add-9d9a-4fc9-a1c6-deba888464b8",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-28",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-28 16:41:59"
+  },
+  {
+    "id": "980b5239-608d-41f9-861f-c24901f0cf97",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-29",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-29 08:57:24"
+  },
+  {
+    "id": "a641dab9-70ac-495d-97e5-6dac59972d5e",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-29",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-29 09:00:51"
+  },
+  {
+    "id": "85bb99e9-0e54-4cbc-96d7-fdc896df6dd7",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-29",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-29 09:03:38"
+  },
+  {
+    "id": "fb6f67da-2333-488f-86e8-d964aabd3793",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-29",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-29 09:42:42"
+  },
+  {
+    "id": "838b2e8d-8b90-4ffe-9385-577705895610",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-29",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-29 09:54:18"
+  },
+  {
+    "id": "1f7f4c3b-8346-4d4e-9b86-3703bbaef47a",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-09-29",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-29 10:02:31"
+  },
+  {
+    "id": "0f224d9d-f6fd-4504-91de-41c78d0474e0",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-29",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-29 10:55:57"
+  },
+  {
+    "id": "dd374d75-fe47-4a5d-a7d7-67ca1403f23e",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-29",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-29 11:00:48"
+  },
+  {
+    "id": "54da22fe-3af3-49ab-90c7-c40ee68ab129",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-09-30",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-30 08:57:10"
+  },
+  {
+    "id": "419ae820-9bdc-4091-b0a3-c3eed9903194",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-09-30",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-30 09:09:42"
+  },
+  {
+    "id": "a569c997-e0b3-4637-b5d6-b20efb4177c0",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-09-30",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-30 09:23:39"
+  },
+  {
+    "id": "d9572ab3-810d-4261-951f-89f5b99e9370",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-09-30",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-30 09:28:15"
+  },
+  {
+    "id": "cdfd9ea1-d9c9-4114-8294-849fab413f3a",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-09-30",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-30 09:45:19"
+  },
+  {
+    "id": "c3379566-48e6-4e64-a9a1-92ccb47426d7",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-09-30",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-30 09:46:08"
+  },
+  {
+    "id": "1cad6128-31a0-422e-b50f-7050e14286f7",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-09-30",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-09-30 11:05:50"
+  },
+  {
+    "id": "e4d20fca-2fc5-499c-9d86-59d899a8fd7d",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-01",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-01 08:46:33"
+  },
+  {
+    "id": "b615994e-46fc-412c-b530-c0c623045982",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-01",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-01 09:19:22"
+  },
+  {
+    "id": "91d0f278-ed2c-4a95-8c5b-97edd6f363c8",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-01",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-01 09:26:20"
+  },
+  {
+    "id": "1d617181-77fd-4467-b679-36e5fcfd6659",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-01",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-01 09:41:57"
+  },
+  {
+    "id": "26d17c11-7ce1-4920-81d3-4a96c00d6db1",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-01",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-01 09:45:32"
+  },
+  {
+    "id": "9f9e373b-bfe3-46e3-92d0-6c3c91007ed0",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-01",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-01 11:26:53"
+  },
+  {
+    "id": "48356b40-81e5-4e95-ab36-393661ee75e8",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-02",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-02 08:57:43"
+  },
+  {
+    "id": "0dca515a-133e-4e15-bd6d-f7b107faddf3",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-02",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-02 09:23:14"
+  },
+  {
+    "id": "0f8ddbc4-a8a4-4c0e-af15-635ef52ee8da",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-02",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-02 09:23:27"
+  },
+  {
+    "id": "eae910ac-2f4c-4a0b-976a-d10d61958b21",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-02",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-02 10:01:54"
+  },
+  {
+    "id": "5d40afe5-6f72-43e7-8324-cf018aaaeacc",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-02",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-02 10:18:38"
+  },
+  {
+    "id": "1c007912-a6be-4770-bdd0-f25edf800870",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-02",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-02 10:21:04"
+  },
+  {
+    "id": "52b2aa66-abe3-4116-bf3d-716839a66b81",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-02",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-02 16:17:42"
+  },
+  {
+    "id": "4e33971c-8ab8-401a-ba14-6f3b8fa8a757",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-04",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-04 18:05:21"
+  },
+  {
+    "id": "01b8eb52-9c37-4116-a9fc-0d8939704897",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-05",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-05 08:57:04"
+  },
+  {
+    "id": "117481de-328e-4f73-8b81-d60664f06610",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-05",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-05 09:10:22"
+  },
+  {
+    "id": "b70eb394-2939-4950-9026-ed9cfc9f2f3a",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-05",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-05 09:12:12"
+  },
+  {
+    "id": "092dbd96-9f85-48c6-bbbe-aa76074f0e29",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-05",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-05 09:27:06"
+  },
+  {
+    "id": "7e253a01-7526-4fcb-9477-856cd01f794b",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-05",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-05 09:32:17"
+  },
+  {
+    "id": "79b49007-b711-4db2-bd28-fc78b98d1b68",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-05",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-05 09:37:19"
+  },
+  {
+    "id": "9cf0f533-38cd-4163-a74a-62fd4395155b",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-05",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-05 10:14:00"
+  },
+  {
+    "id": "742ca812-e2de-4386-b3fb-42049319b7c2",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-05",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-05 10:18:00"
+  },
+  {
+    "id": "a2a10ff7-f0b4-484f-8330-ea715b8e963c",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-05",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-05 16:20:52"
+  },
+  {
+    "id": "7495f101-687b-49e6-85eb-674e8bf63ae9",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-05",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-05 19:43:17"
+  },
+  {
+    "id": "872f09d7-12fa-4149-9c91-51b6e4403e73",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-06",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-06 08:53:29"
+  },
+  {
+    "id": "d9f55e59-aafe-49c3-ac68-c05765961b3d",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-06",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-06 08:58:06"
+  },
+  {
+    "id": "b195f528-16b7-4baf-8a91-03181655a367",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-06",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-06 09:02:34"
+  },
+  {
+    "id": "16e6083b-7b91-4779-9d87-599ec6ac3627",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-06",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-06 09:10:16"
+  },
+  {
+    "id": "f2fbd4b5-3e9f-495d-b5b2-03012f2d6aec",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-06",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-06 09:22:33"
+  },
+  {
+    "id": "2a2d722d-c27b-4e2d-baa0-64aecf173b84",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-06",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-06 09:25:55"
+  },
+  {
+    "id": "590cbb64-8b56-48f7-87bd-c0f0cb14436b",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-06",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-06 09:39:53"
+  },
+  {
+    "id": "bff3e9bf-33a7-4be6-897c-23609227e4ac",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-06",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-06 09:41:16"
+  },
+  {
+    "id": "1950fdd2-22ce-491e-915f-f5bb6063b5b8",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-06",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-06 09:44:52"
+  },
+  {
+    "id": "8d6db5d7-bfa9-4f21-b728-de476d50a1de",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-06",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-06 18:23:25"
+  },
+  {
+    "id": "9ddda122-0135-411a-9a16-3bdedd5732bd",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 08:55:33"
+  },
+  {
+    "id": "2ba5454a-8e55-4b22-bb4a-5e06585a7c57",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 09:01:56"
+  },
+  {
+    "id": "5add67bf-5f57-4c6f-a14d-94721294accc",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 09:04:11"
+  },
+  {
+    "id": "bec28df9-e202-4928-bfd4-d5fc8df44d52",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 09:22:16"
+  },
+  {
+    "id": "d356882b-8170-4606-9cbe-9f01d35d89d2",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 09:28:26"
+  },
+  {
+    "id": "ffffc71b-ab38-4ca1-90bf-564fbcd617f8",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 10:38:55"
+  },
+  {
+    "id": "441ced0f-4ff6-4da6-aada-97bac8776f74",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 11:19:58"
+  },
+  {
+    "id": "3ea80eeb-8ba9-406b-966c-05247f5dd754",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 11:28:05"
+  },
+  {
+    "id": "499e6273-5598-4861-ad12-3ba8eed6463b",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 11:31:05"
+  },
+  {
+    "id": "5dfb76f4-9aa3-45bd-9f32-c0520d67a787",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-06",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 11:31:11"
+  },
+  {
+    "id": "8207213c-8ff7-47f5-93ae-fb9093881896",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-06",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 11:49:39"
+  },
+  {
+    "id": "b2ab72d0-52c6-4768-b52b-a03606f25403",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 11:49:39"
+  },
+  {
+    "id": "1714ad13-a35a-49d5-949f-57058332c9ce",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-29",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 11:49:56"
+  },
+  {
+    "id": "dfe9c80d-3759-498f-9a83-23796b771573",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-09-30",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 11:49:57"
+  },
+  {
+    "id": "f9118a77-5fcc-401d-8cde-fc4ccb690b7f",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-01",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 11:49:57"
+  },
+  {
+    "id": "9a1650b6-c364-43d7-802f-9b34739251bf",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-01",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 11:50:03"
+  },
+  {
+    "id": "3d72320d-c780-43ef-973d-8804a7c9828f",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-02",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 11:50:05"
+  },
+  {
+    "id": "d043420c-c4ce-4be9-aea7-5ff3e27418fe",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 13:42:09"
+  },
+  {
+    "id": "49555133-4da8-47a7-826b-28c0f96f93a8",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-07",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-07 16:05:47"
+  },
+  {
+    "id": "52386140-981e-4731-9d2b-3ec7955ca438",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-08 09:02:57"
+  },
+  {
+    "id": "adec60f0-75c3-44fa-bef0-a288d94cc903",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-08 09:09:19"
+  },
+  {
+    "id": "8afe9be5-d796-43b9-8153-66362fa94127",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-08 09:15:25"
+  },
+  {
+    "id": "20916444-8ab0-4cfb-bbf5-49c17a2bc190",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-08 09:26:41"
+  },
+  {
+    "id": "069704b5-54da-4332-8221-f8f431abf25f",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-08 09:30:28"
+  },
+  {
+    "id": "e84c73de-59d1-4270-881f-5c1760f599c2",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-08 09:43:34"
+  },
+  {
+    "id": "6f574050-4305-439d-97d8-d560f2d5ab09",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-08 10:02:53"
+  },
+  {
+    "id": "6861ace2-ad1d-4e6d-b661-28ab85641626",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-08 10:12:21"
+  },
+  {
+    "id": "345baee3-5ffc-4331-b6dc-f1586be93eb6",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-08 10:12:54"
+  },
+  {
+    "id": "d8559ccd-88e5-4c8d-9a59-c8bd7ebf5f0a",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-08 10:37:05"
+  },
+  {
+    "id": "b1269181-58be-4c2d-a4b2-2d3799678c63",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-08 14:16:14"
+  },
+  {
+    "id": "78d79930-739f-4200-839a-12b71d407365",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-08",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-08 15:09:51"
+  },
+  {
+    "id": "1d90d686-784e-49a7-8d9f-7392fcbc12b3",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-09 08:46:57"
+  },
+  {
+    "id": "46ca9cd8-bd52-4257-adc3-cf6da6dc8897",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-09 09:08:42"
+  },
+  {
+    "id": "38a0665e-6937-4563-8412-6d540374299e",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-09 09:17:16"
+  },
+  {
+    "id": "4eb062c6-2e2c-4161-bdb0-04bb5fe19e60",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-09 09:35:34"
+  },
+  {
+    "id": "2d9f27df-6f2e-4d11-944e-5aaf4ddd4216",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-09 09:40:36"
+  },
+  {
+    "id": "b288b6f7-f988-4c5c-8aea-ba5b1e07800f",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-09 09:45:08"
+  },
+  {
+    "id": "84e794b1-ddeb-4cd8-bb4d-b9bdb48aadc6",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-09 11:17:00"
+  },
+  {
+    "id": "7bbf3768-338f-466b-a590-057e4b809b4f",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-09 12:55:33"
+  },
+  {
+    "id": "1a7d9aa5-714b-4751-b34b-590540ee691a",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-09 13:13:21"
+  },
+  {
+    "id": "e89b5585-42b3-411f-b540-05b988af4960",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-09",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-09 14:29:14"
+  },
+  {
+    "id": "b09e404b-b70b-4917-9b59-63b8b1bceb81",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-12",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-12 08:52:24"
+  },
+  {
+    "id": "5a04b352-d4a0-4c2d-97ea-d70e4455550c",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-12",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-12 08:55:48"
+  },
+  {
+    "id": "1161f9a8-1412-407e-bf9c-beeff2f090ad",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-12",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-12 09:00:43"
+  },
+  {
+    "id": "125f043e-d792-4a5b-b1e8-31fad86bcb46",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-12",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-12 09:03:03"
+  },
+  {
+    "id": "88b40f22-8150-45e4-bcd9-cd0fdfa4e0bc",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-12",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-12 09:07:46"
+  },
+  {
+    "id": "f7a4ce6b-6c8f-42df-a44c-2e3b2e25743d",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-12",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-12 09:13:44"
+  },
+  {
+    "id": "83575599-cd81-4e53-8c75-e433e2552e58",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-12",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-12 09:14:17"
+  },
+  {
+    "id": "400228de-c512-4189-9c96-11ef4ffae03e",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-12",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-12 09:30:28"
+  },
+  {
+    "id": "0a613727-b4bb-4b47-900e-e041f2a74f50",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-12",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-12 10:26:13"
+  },
+  {
+    "id": "1c16809a-c6d9-4fc8-a622-d7e0af3030a9",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-12",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-12 15:24:40"
+  },
+  {
+    "id": "e962f6d9-62fb-4df5-a800-69a8c77afa39",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-12",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-12 15:54:30"
+  },
+  {
+    "id": "02bf5657-a79d-467d-a63c-1505ae4047c9",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-13",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-13 10:07:47"
+  },
+  {
+    "id": "b8cdb4ef-1919-45dd-a026-13c110a37d2e",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-13",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-13 10:31:34"
+  },
+  {
+    "id": "4580c16b-7805-4fd0-9dac-2205747801bb",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-13",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-13 10:41:38"
+  },
+  {
+    "id": "6823f6fb-7dff-4856-b9ac-531f08cf1be5",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-13",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-13 10:42:54"
+  },
+  {
+    "id": "348c3093-a437-4ad5-a4db-e32e9d9c4d54",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-13",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-13 10:48:11"
+  },
+  {
+    "id": "c195574e-ce45-4928-aa10-792131688303",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-13",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-13 10:52:05"
+  },
+  {
+    "id": "33cd09d3-ed70-44b5-8e74-7df9ffec9da6",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-13",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-13 10:54:21"
+  },
+  {
+    "id": "23b5512d-7290-45f9-91c2-d8b640b3eb4f",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-13",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-13 10:59:10"
+  },
+  {
+    "id": "bcc4afba-658d-4157-9ed2-51df901cad11",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-13",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-13 11:29:58"
+  },
+  {
+    "id": "3863a7bd-0cdc-4603-abeb-ac9a814d73e5",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-13",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-13 11:51:37"
+  },
+  {
+    "id": "eeb9f4cd-aab0-4b6e-8b2d-21c3b8e9bcaa",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-13",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-13 16:50:09"
+  },
+  {
+    "id": "9ba34f93-256a-47ad-b353-6e2cae8e7012",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-14 08:44:08"
+  },
+  {
+    "id": "b1a229e7-717a-4f95-a520-398b90b2971c",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-14 08:44:18"
+  },
+  {
+    "id": "f9eabd8a-53d1-4d9d-a479-608a507c51d8",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-14 09:07:35"
+  },
+  {
+    "id": "2c326e04-eef2-4149-993c-6bfd09d0054d",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-14 09:25:35"
+  },
+  {
+    "id": "894d2dc9-831a-4f8e-b076-233767ef51a0",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-14 09:30:41"
+  },
+  {
+    "id": "26797127-0385-4647-be26-567e3f8ab887",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-14 09:37:21"
+  },
+  {
+    "id": "6d2b05da-33c3-477a-b52d-1fd46913b19d",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-14 09:57:00"
+  },
+  {
+    "id": "b16ee8e1-39b1-4b6e-9593-e23fb2e12a94",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-14 11:50:43"
+  },
+  {
+    "id": "d0b3f733-5c63-49b2-867e-50b6ed038ab8",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-14 14:00:52"
+  },
+  {
+    "id": "2eeacde7-8ea3-4e63-8f7e-e60998724f77",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-14",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-14 14:42:53"
+  },
+  {
+    "id": "656a9cff-294e-4464-9bc8-bf84efd0b587",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-15 08:55:56"
+  },
+  {
+    "id": "b109fa9d-134e-463c-8332-d3651ae8a7e5",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-15 09:01:54"
+  },
+  {
+    "id": "8748ebc1-d718-413a-ad8b-762cf2219da6",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-15 09:13:13"
+  },
+  {
+    "id": "ed4a9a13-7922-4d92-8809-4e23318c3e8a",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-15 09:25:49"
+  },
+  {
+    "id": "df0db6fe-f4cd-43ca-8e07-cb7a0315ad28",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-15 09:30:10"
+  },
+  {
+    "id": "0777b170-60f5-494d-8ead-84d2ad9868ff",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-15 09:45:55"
+  },
+  {
+    "id": "719d6811-47ee-4572-a952-a9fd060bbfb9",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-15 10:47:59"
+  },
+  {
+    "id": "f8caad78-2a26-42a1-9654-f4fa39746e62",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-15 11:55:55"
+  },
+  {
+    "id": "e897624f-1d15-48f7-95d4-7399afab4c05",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-15 15:30:32"
+  },
+  {
+    "id": "9e550a99-1c0b-47c1-bd40-88b3d9fb7e97",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-15",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-15 16:58:57"
+  },
+  {
+    "id": "e549c129-5c55-41c1-b7ce-67719d04af49",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-16 08:34:59"
+  },
+  {
+    "id": "91a9e250-fa27-4340-9614-502c8d2f3d38",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-16 09:06:00"
+  },
+  {
+    "id": "9408c4b6-6355-44a7-8eb3-279e07a76d95",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-16 09:14:03"
+  },
+  {
+    "id": "2b04e7f6-d19a-4a10-a2df-c0444ad1754f",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-16 09:29:32"
+  },
+  {
+    "id": "21cba246-12d6-4a1c-9c5c-2fa824a58920",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-16 09:51:37"
+  },
+  {
+    "id": "c81cacac-7d75-4595-98fe-e79418a69583",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-16 10:18:48"
+  },
+  {
+    "id": "1ee1c356-1bdd-4a05-8796-7b449399d774",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-16 10:45:55"
+  },
+  {
+    "id": "dc29fb54-7c2a-4349-a324-597317fc3486",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-16 11:07:04"
+  },
+  {
+    "id": "7c168f74-db55-4ddb-aa16-cb47f75d39db",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-16 14:38:41"
+  },
+  {
+    "id": "658a9598-c17f-4b0e-88ae-99cbb6ae6cc7",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-16 14:54:28"
+  },
+  {
+    "id": "3f5bba2f-1408-46db-8227-a8a9a5849f04",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-16",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-16 16:59:35"
+  },
+  {
+    "id": "628c012e-df97-4c09-9839-91e375ed1b87",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-18",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-18 22:19:19"
+  },
+  {
+    "id": "184446ef-839c-4654-ac0f-e2944071eafe",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-19",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-19 08:32:19"
+  },
+  {
+    "id": "3ad5da91-cb22-495c-b040-3a47e5810d6c",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-19",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-19 08:41:42"
+  },
+  {
+    "id": "81dc70c3-2033-4eca-b67d-4504ddbbc652",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-19",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-19 09:01:52"
+  },
+  {
+    "id": "4fd27de3-399f-4e9b-aa44-44e87ca5ca7f",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-19",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-19 09:03:47"
+  },
+  {
+    "id": "2fcc837f-aa27-4cdb-85e9-b3e3123c76f0",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-19",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-19 09:06:27"
+  },
+  {
+    "id": "50ee08aa-532d-4812-8379-c8713a18c00f",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-19",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-19 09:24:34"
+  },
+  {
+    "id": "8be9458a-5045-42bf-a7cf-126019728b4b",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-19",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-19 09:24:48"
+  },
+  {
+    "id": "a4d0b834-c7cf-470a-ada6-342e813f61fa",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-19",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-19 09:32:14"
+  },
+  {
+    "id": "b51d7d20-8785-4f46-bbc8-ea0f32cbbd08",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-19",
+    "present": 1,
+    "note": "",
+    "created_at": "2026-10-19 09:48:03"
   }
 ]

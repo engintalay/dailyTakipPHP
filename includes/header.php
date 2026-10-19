@@ -59,7 +59,7 @@ $currentPath = $_SERVER['REQUEST_URI'];
     <?php if (isLoggedIn()): ?>
     <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <aside class="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col h-screen fixed left-0 top-0 z-30 hidden lg:flex">
+        <aside class="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col h-screen fixed left-0 top-0 z-30 hidden lg:flex print:hidden">
             <!-- Logo -->
             <div class="p-5 border-b border-gray-200 dark:border-gray-700">
                 <a href="<?php echo APP_URL; ?>index.php" class="text-xl font-bold text-gray-900 dark:text-white">
@@ -124,6 +124,14 @@ $currentPath = $_SERVER['REQUEST_URI'];
                 <a href="<?php echo APP_URL; ?>pages/admin/jira-tasks.php"
                    class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'admin/jira-tasks.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
                     <span class="text-base">🔗</span> Jira İşleri
+                </a>
+                <a href="<?php echo APP_URL; ?>pages/admin/evaluations.php"
+                   class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'admin/evaluations.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
+                    <span class="text-base">📝</span> Personel Değerlendirme
+                </a>
+                <a href="<?php echo APP_URL; ?>pages/admin/evaluation-criteria.php"
+                   class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors <?php echo strpos($currentPath, 'admin/evaluation-criteria.php') !== false ? 'bg-blue-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'; ?>">
+                    <span class="text-base">📋</span> Kriter Yönetimi
                 </a>
 
                     <a href="<?php echo APP_URL; ?>pages/reports.php"
@@ -196,7 +204,7 @@ $currentPath = $_SERVER['REQUEST_URI'];
 
             <!-- Mobile sidebar overlay -->
             <div x-show="sidebarOpen" x-transition:enter="transition-opacity ease-linear duration-150" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-20" @click="sidebarOpen = false"></div>
-            <aside x-show="sidebarOpen" x-transition:enter="transition ease-in-out duration-150" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="lg:hidden fixed left-0 top-0 z-30 w-64 h-screen bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
+            <aside x-show="sidebarOpen" x-transition:enter="transition ease-in-out duration-150" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="lg:hidden fixed left-0 top-0 z-30 w-64 h-screen bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 print:hidden">
                 <!-- Same sidebar content for mobile -->
                 <div class="p-5 border-b border-gray-200 dark:border-gray-700">
                     <a href="<?php echo APP_URL; ?>index.php" class="text-xl font-bold text-gray-900 dark:text-white">dailyTakip</a>

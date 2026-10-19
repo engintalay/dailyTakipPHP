@@ -342,12 +342,12 @@
     "description": "Engin abi, Aktifbank 01.09.2026 17:16daki mailinde 08.09.2026 tarihinde 02.59 itibariyle sertifika değiştireceğini ifade etmiş. Unutulmaması için burayada todo olarak işliyorum.",
     "creator_id": "cmryo42ek000fgnlvb4j80hsk",
     "assigned_to": "cmrymq3ol0000gnf71bu5x88i",
-    "status": "TODO",
+    "status": "DONE",
     "priority": "NORMAL",
     "due_date": "",
     "created_at": "2026-09-02 09:12:04",
-    "updated_at": "2026-09-02 09:12:04",
-    "completed_at": ""
+    "updated_at": "2026-09-14 16:06:06",
+    "completed_at": "2026-09-14 16:06:06"
   },
   {
     "id": "a990b6be-c90d-4133-a69e-1db810fe087e",
@@ -384,12 +384,12 @@
     "description": "paket_cevap da hesaplanan_hash alanı yok. giden_hash alanı oluşturulmuş. bu alanın oluşturulması Ulaşdan istenecek",
     "creator_id": "cmryo42ek000fgnlvb4j80hsk",
     "assigned_to": "cmryo42ek000fgnlvb4j80hsk",
-    "status": "TODO",
+    "status": "DONE",
     "priority": "NORMAL",
     "due_date": "",
     "created_at": "2026-09-04 09:10:01",
-    "updated_at": "2026-09-04 09:10:01",
-    "completed_at": ""
+    "updated_at": "2026-09-14 16:06:29",
+    "completed_at": "2026-09-14 16:06:29"
   },
   {
     "id": "727b89f6-397c-461b-b2d0-05b19d9a358b",

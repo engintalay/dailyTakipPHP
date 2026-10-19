@@ -13,6 +13,9 @@ define('DB_TODOS', DB_DIR . 'todos.json');
 define('DB_ONCALL', DB_DIR . 'on_call.json');
 define('DB_HOLIDAYS', DB_DIR . 'holidays.json');
 define('DB_JIRA_TASKS', DB_DIR . 'jira_tasks.json');
+define('DB_EVALUATION_PERIODS', DB_DIR . 'evaluation_periods.json');
+define('DB_EVALUATION_CRITERIA', DB_DIR . 'evaluation_criteria.json');
+define('DB_EVALUATIONS', DB_DIR . 'evaluations.json');
 
 if (!is_dir(DB_DIR)) {
     mkdir(DB_DIR, 0755, true);
@@ -93,6 +96,10 @@ function initDatabase() {
     if (!file_exists(DB_ONCALL)) saveJson(DB_ONCALL, array('team' => array(), 'assignments' => array()));
     if (!file_exists(DB_HOLIDAYS)) saveJson(DB_HOLIDAYS, array());
     if (!file_exists(DB_JIRA_TASKS)) saveJson(DB_JIRA_TASKS, array());
+    // Evaluation files
+    if (!file_exists(DB_EVALUATION_PERIODS)) saveJson(DB_EVALUATION_PERIODS, array());
+    if (!file_exists(DB_EVALUATION_CRITERIA)) saveJson(DB_EVALUATION_CRITERIA, array());
+    if (!file_exists(DB_EVALUATIONS)) saveJson(DB_EVALUATIONS, array());
     // Ensure all data files are writable (fix permission issues with ssh mount)
     $files = glob(DB_DIR . '*.json');
     if (is_array($files)) {
@@ -133,6 +140,233 @@ function seedDefaultUsers() {
         )
     );
     saveJson(DB_USERS, $users);
+}
+
+// Evaluation functions
+function getEvaluationPeriods() {
+    $periods = loadJson(DB_EVALUATION_PERIODS);
+    usort($periods, function($a, $b) { return strcmp($b['start_date'], $a['start_date']); });
+    return $periods;
+}
+
+function getEvaluationPeriodById($id) {
+    $periods = loadJson(DB_EVALUATION_PERIODS);
+    foreach ($periods as $p) {
+        if ($p['id'] === $id) return $p;
+    }
+    return null;
+}
+
+function createEvaluationPeriod($name, $start_date, $end_date) {
+    $periods = loadJson(DB_EVALUATION_PERIODS);
+    $period = array(
+        'id' => generateId(),
+        'name' => $name,
+        'start_date' => $start_date,
+        'end_date' => $end_date,
+        'created_at' => date('Y-m-d H:i:s')
+    );
+    $periods[] = $period;
+    saveJson(DB_EVALUATION_PERIODS, $periods);
+    return $period;
+}
+
+function updateEvaluationPeriod($id, $data) {
+    $periods = loadJson(DB_EVALUATION_PERIODS);
+    foreach ($periods as &$p) {
+        if ($p['id'] === $id) {
+            if (isset($data['name'])) $p['name'] = $data['name'];
+            if (isset($data['start_date'])) $p['start_date'] = $data['start_date'];
+            if (isset($data['end_date'])) $p['end_date'] = $data['end_date'];
+            break;
+        }
+    }
+    saveJson(DB_EVALUATION_PERIODS, $periods);
+    return getEvaluationPeriodById($id);
+}
+
+function deleteEvaluationPeriod($id) {
+    $periods = loadJson(DB_EVALUATION_PERIODS);
+    $periods = array_filter($periods, function($p) use ($id) { return $p['id'] !== $id; });
+    saveJson(DB_EVALUATION_PERIODS, array_values($periods));
+    return true;
+}
+
+function getEvaluationCriteria() {
+    $criteria = loadJson(DB_EVALUATION_CRITERIA);
+    return $criteria;
+}
+
+function getEvaluationCriteriaById($id) {
+    $criteria = loadJson(DB_EVALUATION_CRITERIA);
+    foreach ($criteria as $c) {
+        if ($c['id'] === $id) return $c;
+    }
+    return null;
+}
+
+function createEvaluationCriteria($name, $description = '') {
+    $criteria = loadJson(DB_EVALUATION_CRITERIA);
+    $criterion = array(
+        'id' => generateId(),
+        'name' => $name,
+        'description' => $description,
+        'created_at' => date('Y-m-d H:i:s')
+    );
+    $criteria[] = $criterion;
+    saveJson(DB_EVALUATION_CRITERIA, $criteria);
+    return $criterion;
+}
+
+function updateEvaluationCriteria($id, $data) {
+    $criteria = loadJson(DB_EVALUATION_CRITERIA);
+    foreach ($criteria as &$c) {
+        if ($c['id'] === $id) {
+            if (isset($data['name'])) $c['name'] = $data['name'];
+            if (isset($data['description'])) $c['description'] = $data['description'];
+            break;
+        }
+    }
+    saveJson(DB_EVALUATION_CRITERIA, $criteria);
+    return getEvaluationCriteriaById($id);
+}
+
+function deleteEvaluationCriteria($id) {
+    $criteria = loadJson(DB_EVALUATION_CRITERIA);
+    $criteria = array_filter($criteria, function($c) use ($id) { return $c['id'] !== $id; });
+    saveJson(DB_EVALUATION_CRITERIA, array_values($criteria));
+    return true;
+}
+
+function getEvaluations($filters = array()) {
+    $evaluations = loadJson(DB_EVALUATIONS);
+    $users = loadJson(DB_USERS);
+    $periods = loadJson(DB_EVALUATION_PERIODS);
+    $userMap = array();
+    foreach ($users as $u) $userMap[$u['id']] = $u['name'];
+    $periodMap = array();
+    foreach ($periods as $p) $periodMap[$p['id']] = $p;
+
+    $result = array();
+    foreach ($evaluations as $e) {
+        if (!empty($filters['user_id']) && $e['user_id'] !== $filters['user_id']) continue;
+        if (!empty($filters['period_id']) && $e['period_id'] !== $filters['period_id']) continue;
+        if (!empty($filters['start_date']) && $e['evaluated_at'] < $filters['start_date']) continue;
+        if (!empty($filters['end_date']) && $e['evaluated_at'] > $filters['end_date'] . ' 23:59:59') continue;
+
+        $e['user_name'] = isset($userMap[$e['user_id']]) ? $userMap[$e['user_id']] : 'Bilinmeyen';
+        $e['period_name'] = isset($periodMap[$e['period_id']]) ? $periodMap[$e['period_id']]['name'] : 'Bilinmeyen';
+        $result[] = $e;
+    }
+
+    usort($result, function($a, $b) { return strcmp($b['evaluated_at'], $a['evaluated_at']); });
+    return $result;
+}
+
+function getEvaluationById($id) {
+    $evaluations = loadJson(DB_EVALUATIONS);
+    foreach ($evaluations as $e) {
+        if ($e['id'] === $id) return $e;
+    }
+    return null;
+}
+
+function createEvaluation($userId, $periodId, $scores, $notes = '') {
+    $evaluations = loadJson(DB_EVALUATIONS);
+    $evaluation = array(
+        'id' => generateId(),
+        'user_id' => $userId,
+        'period_id' => $periodId,
+        'scores' => $scores,
+        'notes' => $notes,
+        'evaluated_at' => date('Y-m-d H:i:s'),
+        'created_at' => date('Y-m-d H:i:s')
+    );
+    $evaluations[] = $evaluation;
+    saveJson(DB_EVALUATIONS, $evaluations);
+    return $evaluation;
+}
+
+function updateEvaluation($id, $data) {
+    $evaluations = loadJson(DB_EVALUATIONS);
+    foreach ($evaluations as &$e) {
+        if ($e['id'] === $id) {
+            if (isset($data['scores'])) $e['scores'] = $data['scores'];
+            if (isset($data['notes'])) $e['notes'] = $data['notes'];
+            break;
+        }
+    }
+    saveJson(DB_EVALUATIONS, $evaluations);
+    return getEvaluationById($id);
+}
+
+function deleteEvaluation($id) {
+    $evaluations = loadJson(DB_EVALUATIONS);
+    $evaluations = array_filter($evaluations, function($e) use ($id) { return $e['id'] !== $id; });
+    saveJson(DB_EVALUATIONS, array_values($evaluations));
+    return true;
+}
+
+/**
+ * Ağırlıklı performans puanı hesapla
+ * @param array $scores Puanlar [criterion_id => score] (0-10 arası)
+ * @param array $criteria Kriterler (weight bilgisi içeren)
+ * @return array ['weighted_avg' => float, 'raw_avg' => float, 'rating' => string]
+ */
+function calculateWeightedEvaluation($scores, $criteria) {
+    if (empty($scores) || empty($criteria)) {
+        return array('weighted_avg' => null, 'raw_avg' => null, 'rating' => '-');
+    }
+    
+    // Kriterleri id'ye göre eşleştir
+    $criteriaMap = array();
+    foreach ($criteria as $c) {
+        $criteriaMap[$c['id']] = $c;
+    }
+    
+    $totalWeightedScore = 0;
+    $totalWeight = 0;
+    $rawSum = 0;
+    $count = 0;
+    
+    foreach ($scores as $criterionId => $score) {
+        // Puanı 0-10 arası kısın
+        $s = (int)$score;
+        if ($s < 0) $s = 0;
+        if ($s > 10) $s = 10;
+        
+        $rawSum += $s;
+        $count++;
+        
+        // Ağırlık kontrolü (eski veri için default 0)
+        $weight = isset($criteriaMap[$criterionId]['weight']) ? (int)$criteriaMap[$criterionId]['weight'] : 0;
+        
+        // Ağırlıklı puan toplamı
+        $totalWeightedScore += $s * $weight;
+        $totalWeight += $weight;
+    }
+    
+    // Ağırlıklı ortalama
+    $weightedAvg = $totalWeight > 0 ? round($totalWeightedScore / $totalWeight, 2) : null;
+    
+    // Basit ortalama (ağırlıksız)
+    $rawAvg = $count > 0 ? round($rawSum / $count, 2) : null;
+    
+    // Rating belirleme (0-10 ölçeğine göre)
+    $rating = '';
+    if ($weightedAvg !== null) {
+        if ($weightedAvg <= 2) $rating = 'Çok yetersiz';
+        elseif ($weightedAvg <= 4) $rating = 'Gelişime açık';
+        elseif ($weightedAvg <= 6) $rating = 'Beklentileri karşılıyor';
+        elseif ($weightedAvg <= 8) $rating = 'Beklentilerin üzerinde';
+        else $rating = 'Üstün performans';
+    }
+    
+    return array(
+        'weighted_avg' => $weightedAvg,
+        'raw_avg' => $rawAvg,
+        'rating' => $rating
+    );
 }
 
 function generateId() {
@@ -884,6 +1118,107 @@ function getUsersWithMissingStatus() {
         }
     }
 
+    return $result;
+}
+
+/**
+ * Performans raporu: Dönem bazlı ortalama puanlar
+ * @param string $periodId Dönem ID
+ * @return array ['users' => [], 'criteria_avg' => [], 'summary' => []]
+ */
+function getPerformanceReport($periodId) {
+    $evaluations = getEvaluations(array('period_id' => $periodId));
+    $criteria = getEvaluationCriteria();
+    $users = getAllUsers(true);
+    
+    $userMap = array();
+    foreach ($users as $u) $userMap[$u['id']] = $u;
+    
+    $result = array(
+        'users' => array(),
+        'criteria_avg' => array(),
+        'summary' => array()
+    );
+    
+    if (empty($evaluations) || empty($criteria)) {
+        return $result;
+    }
+    
+    // Her kriter için toplam puanı hesapla
+    $criteriaTotals = array();
+    $criteriaCounts = array();
+    foreach ($criteria as $c) {
+        $criteriaTotals[$c['id']] = 0;
+        $criteriaCounts[$c['id']] = 0;
+    }
+    
+    // Rating dağılımı
+    $ratingCounts = array(
+        'Çok yetersiz' => 0,
+        'Gelişime açık' => 0,
+        'Beklentileri karşılıyor' => 0,
+        'Beklentilerin üzerinde' => 0,
+        'Üstün performans' => 0
+    );
+    
+    $totalWeightedSum = 0;
+    $evaluatedCount = 0;
+    
+    foreach ($evaluations as $e) {
+        if (empty($e['scores'])) continue;
+        
+        $evalCount++;
+        $evalResult = calculateWeightedEvaluation($e['scores'], $criteria);
+        
+        if ($evalResult['weighted_avg'] !== null) {
+            $totalWeightedSum += $evalResult['weighted_avg'];
+            $ratingCounts[$evalResult['rating']]++;
+        }
+        
+        // Her kullanıcı için
+        $userEval = array(
+            'user' => isset($userMap[$e['user_id']]) ? $userMap[$e['user_id']] : array(),
+            'evaluation' => $e,
+            'weighted_avg' => $evalResult['weighted_avg'],
+            'raw_avg' => $evalResult['raw_avg'],
+            'rating' => $evalResult['rating']
+        );
+        $result['users'][] = $userEval;
+        
+        // Her kriter için toplam
+        foreach ($e['scores'] as $criterionId => $score) {
+            if (isset($criteriaTotals[$criterionId])) {
+                $criteriaTotals[$criterionId] += (int)$score;
+                $criteriaCounts[$criterionId]++;
+            }
+        }
+    }
+    
+    // Kriter ortalamarını hesapla
+    foreach ($criteria as $c) {
+        if ($criteriaCounts[$c['id']] > 0) {
+            $result['criteria_avg'][] = array(
+                'criterion' => $c,
+                'avg' => round($criteriaTotals[$c['id']] / $criteriaCounts[$c['id']], 2)
+            );
+        }
+    }
+    
+    // Özet
+    $result['summary'] = array(
+        'total_evaluated' => $evaluatedCount,
+        'average_weighted' => $evaluatedCount > 0 ? round($totalWeightedSum / $evaluatedCount, 2) : 0,
+        'rating_distribution' => $ratingCounts
+    );
+    
+    // Kullanıcıları ağırlıklı puana göre sırala
+    usort($result['users'], create_function('$a, $b', '
+        if ($a["weighted_avg"] === null && $b["weighted_avg"] === null) return 0;
+        if ($a["weighted_avg"] === null) return 1;
+        if ($b["weighted_avg"] === null) return -1;
+        return ($b["weighted_avg"] > $a["weighted_avg"]) ? 1 : -1;
+    '));
+    
     return $result;
 }
 

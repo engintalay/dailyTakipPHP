@@ -91,6 +91,8 @@ include __DIR__ . '/../includes/header.php';
             <button type="button" id="cancelEdit" class="hidden text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">İptal</button>
         </div>
 
+        <button type="submit" id="submitBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 w-full">Kaydet</button>
+
         <?php if ($isAdmin): ?>
         <div>
             <label class="block text-sm font-medium mb-1">Kullanıcı</label>
@@ -133,16 +135,7 @@ include __DIR__ . '/../includes/header.php';
                    placeholder="Her satıra bir Jira linki yazın"></textarea>
         </div>
 
-        <!-- Last Month Tasks Section -->
-        <div id="lastMonthTasks" class="hidden bg-gray-50 dark:bg-gray-900/30 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300">Son 1 Aydaki Görevler</h3>
-                <button type="button" id="toggleTasks" class="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">Göster</button>
-            </div>
-            <div id="tasksContent" class="space-y-2">
-                <p class="text-xs text-gray-500 dark:text-gray-400 italic">Yükleniyor...</p>
-            </div>
-        </div>
+        <button type="submit" id="submitBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 w-full">Kaydet</button>
 
         <div>
             <label class="block text-sm font-medium mb-1">Dosya Ekle</label>
@@ -150,7 +143,20 @@ include __DIR__ . '/../includes/header.php';
                    class="w-full text-sm file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900/20 dark:file:text-blue-400">
             <div id="attachedFiles" class="mt-2 space-y-1 hidden"></div>
         </div>
+    </form>
 
+    <!-- Last Month Tasks Section -->
+    <div id="lastMonthTasks" class="hidden bg-gray-50 dark:bg-gray-900/30 border border-gray-200 dark:border-gray-700 rounded-lg p-4 mt-4">
+        <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300">Son 1 Aydaki Görevler</h3>
+            <button type="button" id="toggleTasks" class="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">Göster/Gizle</button>
+        </div>
+        <div id="tasksContent" class="space-y-2">
+            <p class="text-xs text-gray-500 dark:text-gray-400 italic">Yükleniyor...</p>
+        </div>
+    </div>
+
+    <!-- Filters -->
         <button type="submit" id="submitBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">Kaydet</button>
     </form>
 
