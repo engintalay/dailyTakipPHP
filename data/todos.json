@@ -404,5 +404,19 @@
     "created_at": "2026-09-04 15:38:11",
     "updated_at": "2026-09-04 15:38:11",
     "completed_at": ""
+  },
+  {
+    "id": "fc7e307d-fa9e-4f8f-99b3-cf8af30247a0",
+    "parent_id": "",
+    "title": "paket cevap soruları",
+    "description": "paket_cevap tablosunda iptal edilip edilmediğine dair bir bilgi yok bu bilgi olmalımı? paket islem silinen tablosu paket islem tablosundan çok daha az kolonlu. ilerde bir paket silindiğinde bu bilgiler burayamı alınacak yoksa daha onceki kayıtları tutan bir tablo olarakmı kalacak. nullable olarak eksik kolonları buraya ekleyebiliriz",
+    "creator_id": "cmryo42ek000fgnlvb4j80hsk",
+    "assigned_to": "cmrymq3ol0000gnf71bu5x88i",
+    "status": "TODO",
+    "priority": "NORMAL",
+    "due_date": "",
+    "created_at": "2026-10-20 08:59:48",
+    "updated_at": "2026-10-20 08:59:48",
+    "completed_at": ""
   }
 ]

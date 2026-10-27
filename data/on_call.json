@@ -240,20 +240,12 @@
       "user_id": "cmryob3i00003gnk8h7vs2q8i"
     },
     {
-      "date": "2026-10-21",
-      "user_id": "cmryo3747000dgnlvd0i71bs1"
-    },
-    {
       "date": "2026-10-22",
       "user_id": "cmryob3i00003gnk8h7vs2q8i"
     },
     {
       "date": "2026-10-23",
       "user_id": "cmryni4o40000gnsb0ce8ipf2"
-    },
-    {
-      "date": "2026-10-20",
-      "user_id": "cmryo3lb0000egnlvmwvz63bt"
     },
     {
       "date": "2026-10-19",
@@ -362,6 +354,14 @@
     {
       "date": "2026-11-26",
       "user_id": "cmryob3i00003gnk8h7vs2q8i"
+    },
+    {
+      "date": "2026-10-20",
+      "user_id": "cmryo3747000dgnlvd0i71bs1"
+    },
+    {
+      "date": "2026-10-21",
+      "user_id": "cmryo3lb0000egnlvmwvz63bt"
     }
   ]
 }

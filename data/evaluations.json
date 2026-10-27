@@ -205,5 +205,192 @@
     "notes": "",
     "evaluated_at": "2026-10-19 09:49:52",
     "created_at": "2026-10-19 09:49:52"
+  },
+  {
+    "id": "5e4a7670-3fe6-4f46-86fc-6a3d9ce30cf4",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "period_id": "0c6e68ba-51ce-4179-9d01-7a4d712a501a",
+    "scores": {
+      "criterion_1": 5,
+      "criterion_2": 5,
+      "criterion_3": 5,
+      "criterion_4": 5,
+      "criterion_5": 5,
+      "criterion_6": 5,
+      "criterion_7": 5
+    },
+    "notes": "",
+    "evaluated_at": "2026-10-20 09:22:09",
+    "created_at": "2026-10-20 09:22:09"
+  },
+  {
+    "id": "c1237003-b840-4a88-9620-4f2b5df1a33d",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "period_id": "0c6e68ba-51ce-4179-9d01-7a4d712a501a",
+    "scores": {
+      "criterion_1": 5,
+      "criterion_2": 5,
+      "criterion_3": 5,
+      "criterion_4": 5,
+      "criterion_5": 5,
+      "criterion_6": 5,
+      "criterion_7": 5
+    },
+    "notes": "",
+    "evaluated_at": "2026-10-20 09:22:19",
+    "created_at": "2026-10-20 09:22:19"
+  },
+  {
+    "id": "e49ee8d7-b821-4db4-80d4-a5631c83eb96",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "period_id": "0c6e68ba-51ce-4179-9d01-7a4d712a501a",
+    "scores": {
+      "criterion_1": 5,
+      "criterion_2": 5,
+      "criterion_3": 5,
+      "criterion_4": 5,
+      "criterion_5": 5,
+      "criterion_6": 5,
+      "criterion_7": 5
+    },
+    "notes": "",
+    "evaluated_at": "2026-10-20 09:22:25",
+    "created_at": "2026-10-20 09:22:25"
+  },
+  {
+    "id": "ab19e288-4e10-48b8-9acb-206f7310e80e",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "period_id": "0c6e68ba-51ce-4179-9d01-7a4d712a501a",
+    "scores": {
+      "criterion_1": 7,
+      "criterion_2": 8,
+      "criterion_3": 7,
+      "criterion_4": 8,
+      "criterion_5": 7,
+      "criterion_6": 8,
+      "criterion_7": 7
+    },
+    "notes": "",
+    "evaluated_at": "2026-10-20 09:22:46",
+    "created_at": "2026-10-20 09:22:46"
+  },
+  {
+    "id": "4a707ec2-590c-481e-a2ad-8b294d77502d",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "period_id": "0c6e68ba-51ce-4179-9d01-7a4d712a501a",
+    "scores": {
+      "criterion_1": 10,
+      "criterion_2": 10,
+      "criterion_3": 10,
+      "criterion_4": 10,
+      "criterion_5": 10,
+      "criterion_6": 10,
+      "criterion_7": 10
+    },
+    "notes": "",
+    "evaluated_at": "2026-10-20 09:23:07",
+    "created_at": "2026-10-20 09:23:07"
+  },
+  {
+    "id": "2e95c074-191d-486b-9049-1e5b90463b36",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "period_id": "0c6e68ba-51ce-4179-9d01-7a4d712a501a",
+    "scores": {
+      "criterion_1": 8,
+      "criterion_2": 7,
+      "criterion_3": 8,
+      "criterion_4": 7,
+      "criterion_5": 8,
+      "criterion_6": 7,
+      "criterion_7": 8
+    },
+    "notes": "",
+    "evaluated_at": "2026-10-20 09:23:28",
+    "created_at": "2026-10-20 09:23:28"
+  },
+  {
+    "id": "7a902d4b-d726-45da-985f-b5176cc7715a",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "period_id": "0c6e68ba-51ce-4179-9d01-7a4d712a501a",
+    "scores": {
+      "criterion_1": 6,
+      "criterion_2": 5,
+      "criterion_3": 5,
+      "criterion_4": 6,
+      "criterion_5": 5,
+      "criterion_6": 5,
+      "criterion_7": 6
+    },
+    "notes": "",
+    "evaluated_at": "2026-10-20 09:24:03",
+    "created_at": "2026-10-20 09:24:03"
+  },
+  {
+    "id": "1963f0a1-8f94-4d4d-bb28-772ed7cea441",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "period_id": "0c6e68ba-51ce-4179-9d01-7a4d712a501a",
+    "scores": {
+      "criterion_1": 10,
+      "criterion_2": 10,
+      "criterion_3": 10,
+      "criterion_4": 10,
+      "criterion_5": 10,
+      "criterion_6": 10,
+      "criterion_7": 10
+    },
+    "notes": "",
+    "evaluated_at": "2026-10-20 09:24:14",
+    "created_at": "2026-10-20 09:24:14"
+  },
+  {
+    "id": "6445da01-432e-46fe-ad48-709f3387b9cc",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "period_id": "0c6e68ba-51ce-4179-9d01-7a4d712a501a",
+    "scores": {
+      "criterion_1": 10,
+      "criterion_2": 10,
+      "criterion_3": 10,
+      "criterion_4": 10,
+      "criterion_5": 10,
+      "criterion_6": 10,
+      "criterion_7": 10
+    },
+    "notes": "",
+    "evaluated_at": "2026-10-20 09:24:31",
+    "created_at": "2026-10-20 09:24:31"
+  },
+  {
+    "id": "d37fab43-713e-4613-828d-25d51e36e044",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "period_id": "0c6e68ba-51ce-4179-9d01-7a4d712a501a",
+    "scores": {
+      "criterion_1": 8,
+      "criterion_2": 8,
+      "criterion_3": 8,
+      "criterion_4": 8,
+      "criterion_5": 8,
+      "criterion_6": 8,
+      "criterion_7": 8
+    },
+    "notes": "",
+    "evaluated_at": "2026-10-20 09:24:57",
+    "created_at": "2026-10-20 09:24:57"
+  },
+  {
+    "id": "ffd5665f-3252-4b2c-a81a-d22c9b24c5c7",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "period_id": "0c6e68ba-51ce-4179-9d01-7a4d712a501a",
+    "scores": {
+      "criterion_1": 7,
+      "criterion_2": 7,
+      "criterion_3": 7,
+      "criterion_4": 7,
+      "criterion_5": 7,
+      "criterion_6": 7,
+      "criterion_7": 7
+    },
+    "notes": "",
+    "evaluated_at": "2026-10-20 09:25:14",
+    "created_at": "2026-10-20 09:25:14"
   }
 ]

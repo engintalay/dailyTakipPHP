@@ -6245,8 +6245,528 @@
     "date": "2026-10-19",
     "content": "Kovuşturma projeleri sicil servisleri belirlenen formata göre düzenliyorum. 10:00 - 11.00 arası toplantıya katıldım.",
     "tags": "",
-    "jira_link": "EVDB-10426\r\nEVDB-10425\r\nEVDB-10424\r\nEVDB-10418\r\nEVDB-10423",
+    "jira_link": "EVDB-10426\r\nEVDB-10425\r\nEVDB-10424\r\nEVDB-10418\r\nEVDB-10423\r\nEVDB-10419",
     "files": "[]",
     "created_at": "2026-10-19 14:47:11"
+  },
+  {
+    "id": "b51e8342-63b6-4927-aea3-572f09e89fe6",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-20",
+    "content": "E haciz banka veri tabanı göçü çalışması devam ediyor. en son 69.127 ile yeni ortamı karşılaştırmaya devam ediyoruz. dha bilgileri ile cevap_dha_Stg arasında 330bin kayıt farkı var ama nedenini bulamadık. hatalı kayıt olduğuna kanaat getirirsek sorun yok yoksa o kayıtlarıda almalıyız. paket_cevap tablosunda iptal edilip edilmediğine dair bir bilgi yok bu bilgi olmalımı? paket islem silinen tablosu paket islem tablosundan çok daha az kolonlu. ilerde bir paket silindiğinde bu bilgiler burayamı alınacak yoksa daha onceki kayıtları tutan bir tablo olarakmı kalacak. nullable olarak eksik kolonları buraya ekleyebiliriz. audlara daha bakamadık. paket id si paket islem silinende çıkan haciz_cevap_history kayıtlar var. bu kayıtlar aslında ordanda silinmesi gerekiyormuş. o nedenle onlarla ilgili çalışma yapmayacağız.",
+    "tags": "tasarım,veri tabanı, ehaciz banka",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EHACIZBANKA-56\r\nhttps:\/\/jira.gelirler.gov.tr\/browse\/EHACIZBANKA-64",
+    "files": "[]",
+    "created_at": "2026-10-20 08:56:24"
+  },
+  {
+    "id": "2aaa0dbb-7cb6-4c48-91e1-c51983a0546f",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-20",
+    "content": "adres günleme servisleri",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-20 09:04:03"
+  },
+  {
+    "id": "d0332611-c1cd-4599-ba15-33fd9eae56a7",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-20",
+    "content": "Adres Günleme sayfası için ekran tasarımları ve servis bağlantıları ile son analiz değişiklikleri inceleniyor. \r\n",
+    "tags": "eBelge",
+    "jira_link": "jira.gelirler.gov.tr\/browse\/EBELGE-80",
+    "files": "[]",
+    "created_at": "2026-10-20 09:06:23"
+  },
+  {
+    "id": "ea4bb413-2d3a-4764-ab26-7ed755061a81",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-20",
+    "content": "CSVTD-352607 - EHaciz gitmeyen paketlerin gönderilmesi.\r\nEVDBS-21034 - E-HACİZ BANKA MEVDUAT BİLGİLERİNE MKK VE PTT'NİNDE DAHİL EDİLMESİ\r\nEVDBS-23476 - E-HACİZ UYGULAMASINDA BANKALARDA HACİZ TATBİK EDİLEN VARLIKLARIN VERGİ DAİRELERİ TARAFINDAN TALEP EDİLMESİNE AİT YAPILMASI GEREKENLER - Para isteme yazısı için uygulama, sorgu hazırlanacak.\r\n",
+    "tags": "",
+    "jira_link": "CSVTD-352607\r\nEVDBS-21034, EVDBS-23476 ",
+    "files": "[]",
+    "created_at": "2026-10-20 09:21:36"
+  },
+  {
+    "id": "ec1e67b8-9336-4d5a-b8d3-c6a94100634a",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-20",
+    "content": "önceki gün ile aynı",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-20 09:29:56"
+  },
+  {
+    "id": "58866e1d-c93c-4d34-a6d8-97b0a88b874b",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-20",
+    "content": "istek tabloları kontrol edildi. major bir sorun bulunmuyor. Bulunan minör sorunlar vt ekibine mail atıldı. aşamalı olarak stg-> nihai tablo geçişine Ulaş tarafından başlanabilir.\r\nişlem akış stg tabloları aktarımı için vt ekibine jira işi açıldı.\r\nÖncesinde ref tabloları ve evdb_haciz_bildirisi tablosu beslenmesi yapılması gerekiyor bunlar için de iş açıldı.\r\nChild tabloda olup parent tabloda olmayan kayıtlar zaten bozuk ve aktarılıyor oldukları için ayrıca bir tabloda tutmaya gerek olmadığı kararı alındı.\r\nbütün sybase veritabanın postgres'e yedek olarak aktarılması konusunda Vt ekibi şu anda gerek yok gerek olması durumunda yapılabilir olarak yaklaştı.\r\nvd_kod, hbno unique indexini bozan HACIZ_ISTEK_HISTORY kaynaklı kayıtlar için Engin şube ile görüşecek. Sonrasında aksiyon alacağız. obj_version alanına göre alt tablo yapmak soğuk vt anlayışımızı bozduğu için uygun bulunmadı.\r\nupdate alan tablolar çıkarılarak, istek-cevap tabloları için audit tabloları netleşecek.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-20 09:47:15"
+  },
+  {
+    "id": "74ed9147-eb15-47bb-ab29-9f3c3a2cc1f0",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-20",
+    "content": "Kovuşturma projeleri sicil servisleri belirlenen formata göre düzenlemeye devam ediyorum. Yeni Sicil Servislerinin Kullanılan Servislerle Uygunluğunun Kontrolünü yapacağım.",
+    "tags": "",
+    "jira_link": "EVDB-10420\r\nEVDB-10421\r\nEVDB-10422\r\nEBELGE-89\r\nEVDB-10451",
+    "files": "[]",
+    "created_at": "2026-10-20 09:51:32"
+  },
+  {
+    "id": "2f25b1e6-3760-4d56-8e3a-47a88e37f3ad",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-20",
+    "content": "TESTEVDB-3646 : Noter e-Haciz Bildirisi Kaldırma ekranına \"Haciz Bağı\" eklenmesi testi\r\nTESTEVDB-3686 : Banka ve Araçlara Uygulanan e-Haciz Bilgileri Servis Talebi testi",
+    "tags": "test , eBelge , eHaciz , noter , banka",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/TESTEVDB-3646?filter=15394,\r\nhttps:\/\/jira.gelirler.gov.tr\/browse\/TESTEVDB-3686",
+    "files": "[]",
+    "created_at": "2026-10-20 10:10:57"
+  },
+  {
+    "id": "8e418c93-af60-4b69-9d1b-0777a0bf9733",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-20",
+    "content": "Dün EVDB-10413 işini tamamladım Engin abi teste deployunu yaptı. Bu gün Feride Hanıma haber verceğim. Dün Haktan abi EBELGE-90 işini tamamlamış. Ben de EBELGE-91 e başlayacağım. Sp hakkında Engin abi ile konuşacaklarım var konuşamadım.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-20 11:12:56"
+  },
+  {
+    "id": "76afeb24-8152-42fc-bf3a-b7f1dfbb10e4",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-20",
+    "content": "Noter e-Haciz Bildirisi Kaldırma ekranına \"Haciz Bağı\" eklenmesi",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-20 14:38:49"
+  },
+  {
+    "id": "9873260a-9ce9-4636-bee2-0c25c87fccbd",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-20",
+    "content": "EHaciz projesindeki toplantı notları ve alınan kararlar sekmenti güncellenicek.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-20 15:16:04"
+  },
+  {
+    "id": "1a1f4375-c043-42ce-ac9e-97b6dd466d0a",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-21",
+    "content": "EVDB-10449 işine başladım",
+    "tags": "",
+    "jira_link": "EVDB-10449",
+    "files": "[]",
+    "created_at": "2026-10-21 09:00:06"
+  },
+  {
+    "id": "4c5c5f5a-c217-4cbf-96e4-ec08752842d7",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-21",
+    "content": "Yeni Sicil Servislerinin Kullanılan Servislerle Uygunluğunun Kontrolünü yapıyorum.",
+    "tags": "",
+    "jira_link": "EVDB-10451",
+    "files": "[]",
+    "created_at": "2026-10-21 09:16:00"
+  },
+  {
+    "id": "1c758178-7989-4180-b946-545ee6a58622",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-21",
+    "content": "Adres Günleme sayfası için ekran tasarımları ve servis bağlantıları ile son analiz değişiklikleri inceleniyor. \r\n",
+    "tags": "",
+    "jira_link": "jira.gelirler.gov.tr\/browse\/EBELGE-80",
+    "files": "[]",
+    "created_at": "2026-10-21 09:28:49"
+  },
+  {
+    "id": "366f5bf1-0eac-4dbe-8f11-1ed250e7021e",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-21",
+    "content": "EBELGE-91 işini bu gün bitirip teste atmayı planlıyorum.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-21 09:29:43"
+  },
+  {
+    "id": "65cce82c-6b24-457b-abcf-24074fbb9354",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-21",
+    "content": "adres günleme servisleri",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-21 09:30:47"
+  },
+  {
+    "id": "6e1433ac-1b95-46f7-81d7-3aa0d163c5bb",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-21",
+    "content": "gelen istekler yanıtlanacak.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-21 09:45:03"
+  },
+  {
+    "id": "cf0e5af9-2420-40a0-9099-874b1bb5311b",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-21",
+    "content": "update alan tablolar çıkarıldı. audit tabloları netleşti. scripti yazılacak.\r\npaket_cevap_silinen netleşecek.\r\ncevap tabloları eksik kaytılar netleşecek.\r\n2 haftalık toplantı yapılacak.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-21 13:31:27"
+  },
+  {
+    "id": "9c72e192-17f3-49e8-bac2-9106898c62be",
+    "user_id": "cmrynrhe0000wgnwhix3mv84d",
+    "date": "2026-10-21",
+    "content": "Ehaciz toplantısına katılım sağlanacak. Günlük çağrılar çözülüyor.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-21 16:08:51"
+  },
+  {
+    "id": "f4a2cea5-6410-49f9-8db6-6cd3de3d00a2",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-21",
+    "content": "nöbet",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-21 17:36:14"
+  },
+  {
+    "id": "252622ee-8853-48de-8c1c-37e0c704ee3e",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-22",
+    "content": "adres günleme servisleri",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-22 09:14:45"
+  },
+  {
+    "id": "0fcadcb2-2a6c-41e1-be64-6520b13ce207",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-22",
+    "content": "ireport açılmama conf ayarı yapıldı.EVDB-10449 işine devam ediliyor",
+    "tags": "",
+    "jira_link": "EVDB-10449",
+    "files": "[]",
+    "created_at": "2026-10-22 09:39:07"
+  },
+  {
+    "id": "e7300a34-fbf1-4fb9-987a-b2ec30548467",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-22",
+    "content": "Adres Günleme sayfası için ekran tasarımları ve servis bağlantıları ile son analiz değişiklikleri inceleniyor. \r\n",
+    "tags": "",
+    "jira_link": "jira.gelirler.gov.tr\/browse\/EBELGE-80",
+    "files": "[]",
+    "created_at": "2026-10-22 09:39:57"
+  },
+  {
+    "id": "397263bb-0f3a-4caf-926a-6ad7372ba3ab",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-22",
+    "content": "EVDBS-23476 - E-HACİZ UYGULAMASINDA BANKALARDA HACİZ TATBİK EDİLEN VARLIKLARIN VERGİ DAİRELERİ TARAFINDAN TALEP EDİLMESİNE AİT YAPILMASI GEREKENLER - Para isteme yazısı için uygulama, sorgu hazırlanacak.\r\nEVDBS-21034 - E-HACİZ BANKA MEVDUAT BİLGİLERİNE MKK VE PTT'NİNDE DAHİL EDİLMESİ\r\n",
+    "tags": "",
+    "jira_link": "EVDBS-21034, EVDBS-23476 ",
+    "files": "[]",
+    "created_at": "2026-10-22 09:52:46"
+  },
+  {
+    "id": "a9b015d1-458a-4d45-96f3-0f5e48f8460f",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-22",
+    "content": "TESTEVDB-3646 : Noter e-Haciz Bildirisi Kaldırma ekranına \"Haciz Bağı\" eklenmesi testi\r\nTESTEVDB-3686 : Banka ve Araçlara Uygulanan e-Haciz Bilgileri Servis Talebi testi\r\nEBLGANALIZ-3 : e-Belge\/Adres Değişikliği ve Tebliğ Şekli Günleme Ekranları analizi\r\nANALIZEVDB-1149: E-Haciz Uygulamasının Yenilenmesi analizi (Figma çiziminin güncellenmesi) \r\n",
+    "tags": "analiz, eBelge,takip,test,ehaciz",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/TESTEVDB-3646?filter=15394,\r\nhttps:\/\/jira.gelirler.gov.tr\/browse\/TESTEVDB-3686\r\nhttps:\/\/jira.gelirler.gov.tr\/browse\/EBLGANALIZ-3 ,\r\nhttps:\/\/jira.gelirler.gov.tr\/browse\/ANALIZEVDB-1149",
+    "files": "[]",
+    "created_at": "2026-10-22 10:04:24"
+  },
+  {
+    "id": "672c3020-2628-4d5a-bf3d-f598827a926a",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-22",
+    "content": "gelen istekler yanıtlanacak.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-22 10:19:00"
+  },
+  {
+    "id": "e3ee23eb-6762-49c4-9f76-06c2ca927b6a",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-22",
+    "content": "paket_cevap_silinen tablosuna neler eklenebilir onlara bakıcam. vt ekibinden dönüş bekliyorum. bazı scriptler geçmemişti onları kontrol ederim. ref lerde yok daha. aud lar bekliyor. sıra gelirse onuda hazırlayıp create edecez. ",
+    "tags": "tasarım,veri tabanı, ehaciz banka",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EHACIZBANKA-56\r\nhttps:\/\/jira.gelirler.gov.tr\/browse\/EHACIZBANKA-64",
+    "files": "[]",
+    "created_at": "2026-10-22 10:23:11"
+  },
+  {
+    "id": "3acb56a7-1afb-4f40-8250-25186a3f3fd8",
+    "user_id": "cmryni4o40000gnsb0ce8ipf2",
+    "date": "2026-10-22",
+    "content": "Yeni Sicil Servislerinin Kullanılan Servislerle Uygunluğunun Kontrolünü yapıyorum.",
+    "tags": "",
+    "jira_link": "EVDB-10451",
+    "files": "[]",
+    "created_at": "2026-10-22 10:36:53"
+  },
+  {
+    "id": "ab227b77-2c5a-4803-ab0a-4577734cf06f",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-22",
+    "content": "Dün EBELGE-91 işinde protocol exception hatası vardı onu çözmeye çalıştık Haktan abi ile.  EVDB-10413 işi testten geçti prod deploy yapacağım bu gün. Uğraştırıcı çağrılar geliyor onlara bakacağım. ",
+    "tags": "",
+    "jira_link": "EBELGE-91",
+    "files": "[]",
+    "created_at": "2026-10-22 14:14:49"
+  },
+  {
+    "id": "71e30c00-ca47-4046-93d3-8f659d31a4bf",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-22",
+    "content": "Noter e-Haciz Bildirisi Kaldırma ekranına \"Haciz Bağı\" eklenmesi",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-22 15:11:13"
+  },
+  {
+    "id": "df84225f-d88f-40d9-91bf-97c94d1c089b",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-23",
+    "content": "EVDB-10457 banka detay servisindeki count bilgisi güncellenecek\r\nEVDB-10449 e devam edilecek",
+    "tags": "",
+    "jira_link": "EVDB-10457\r\nEVDB-10449",
+    "files": "[]",
+    "created_at": "2026-10-23 09:18:37"
+  },
+  {
+    "id": "123a7fc9-42e7-45ad-888a-4996a1f969b1",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-23",
+    "content": "Adres Günleme sayfası için ekran tasarımları ve servis bağlantıları ile son analiz değişiklikleri inceleniyor. \r\n",
+    "tags": "",
+    "jira_link": "jira.gelirler.gov.tr\/browse\/EBELGE-80",
+    "files": "[]",
+    "created_at": "2026-10-23 09:25:53"
+  },
+  {
+    "id": "9aa32f3d-ab7e-48a5-8092-20bc03f684dc",
+    "user_id": "cmryo0m5e0002gnlvuqurwjjz",
+    "date": "2026-10-23",
+    "content": "adres günleme tablo servisinin son testi ve test ortamına deploy işlemleri",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-23 09:29:10"
+  },
+  {
+    "id": "559d5ec1-04de-438a-a32c-b6285d1a6571",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-23",
+    "content": "-EBLGANALIZ-3 : e-Belge\/Adres Değişikliği ve Tebliğ Şekli Günleme Ekranları analizi\r\n",
+    "tags": "analiz, eBelge,takip",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EBLGANALIZ-3 \r\n",
+    "files": "[]",
+    "created_at": "2026-10-23 09:31:29"
+  },
+  {
+    "id": "637b28bb-c975-49bc-9f12-7f55d364b638",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-23",
+    "content": "paket_cevap_silinen için 4 kolon testde ekledim. prodvtgoc de eklenmesini isteyeceğim. eski kayıtlarda bunlar null kalacak o yüzden sciprtlere dokunmadım. alınan kararlara eklenmesi için gruba yazdım. vt ekibinden dönüş bekliyorum. maas yarısı aktarılmamış cho larda 2,2 milyon kayıt var. dha da 300bin tutarsız kayıt kaldı. unique index atamadık tekrarlı kayıtlardan. ",
+    "tags": "tasarım,veri tabanı, ehaciz banka",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EHACIZBANKA-56\r\nhttps:\/\/jira.gelirler.gov.tr\/browse\/EHACIZBANKA-64",
+    "files": "[]",
+    "created_at": "2026-10-23 10:09:19"
+  },
+  {
+    "id": "204ae9d6-ea7d-479a-b5cd-32727fb639f3",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-23",
+    "content": "EBELGE-91 işiyle ilgili Feride Hanımla konuştuk. Hata mesajıyla ilgili değişiklikler olacak onları güncelleyip testlerini yapacağım",
+    "tags": "",
+    "jira_link": "EBELGE-91",
+    "files": "[]",
+    "created_at": "2026-10-23 11:55:25"
+  },
+  {
+    "id": "24192eb0-f673-42e4-9311-6efef56022ff",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-26",
+    "content": "EBLGTST-12 :  \/adresGunlemeIcinBelgeSorgula servisinin test edilmesi\r\nTESTEVDB-3685 : E-HACİZ LİSTELERİNDE BANKA-HACİZ BİLDİRİLERİNİN BANKAYA TEBLİĞ ZAMANI EKLENMESİ",
+    "tags": "test, eBelge,takip,evdbRapor,eHaciz",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EBLGTST-12, https:\/\/jira.gelirler.gov.tr\/browse\/TESTEVDB-3685?filter=15394",
+    "files": "[]",
+    "created_at": "2026-10-26 10:01:32"
+  },
+  {
+    "id": "bc07933e-b02b-4b5b-b1e1-f0f8a28970ec",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-26",
+    "content": "paket_cevap_silinen e kolon eklenmisti. bunların yapılması icin gorusecegiz. bazı alanlarin date olmasını istemişlerdi ama paket bilgisinde hatalı tarihde atsa alabilmemiz lazım diye düşündük. o nedenle char devam edecek. diğer scriptlere bakacağız. vt ekibinden beklenenler var. birde alt tab cevap tablosunda date yapmışız onuda char yapalımmı Engin abiye sorcam. dha bilgileri nde eşleşmeyen kayıt biraz fazla digerlerinde baya az kaldı. ",
+    "tags": "tasarım,veri tabanı, ehaciz banka",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EHACIZBANKA-56\r\nhttps:\/\/jira.gelirler.gov.tr\/browse\/EHACIZBANKA-64",
+    "files": "[]",
+    "created_at": "2026-10-26 10:23:12"
+  },
+  {
+    "id": "adbb27c5-8d9c-46dd-9453-6923639f55b0",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-26",
+    "content": "EVDB-10449 için VKN\/TCKN Bazında Durum Listesi bankanın HB aldığı zaman ve Bankanın tebellüğ zamanı alanları eklendi. Tarih formatı ayarlandı",
+    "tags": "",
+    "jira_link": "EVDB-10449",
+    "files": "[]",
+    "created_at": "2026-10-26 11:22:19"
+  },
+  {
+    "id": "31b42dec-7068-462d-8aea-b9511e82969f",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-26",
+    "content": "gelen istekler yanıtlanacak.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-26 11:31:19"
+  },
+  {
+    "id": "b32b3b91-bc95-4084-853b-d7b87c6bb268",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-26",
+    "content": "audit tabloları create scripti yazılacak istek, cevap, islem, iptal, paket ve paket_cevap tabloları için audit olacak.\r\nref tabloları ve işlem akış viewları vt ekibi tarafından bekleniyor. sonrasında hbno bazında işlem-cevap sağlaması yapılacak. işlem ile cevab'ın kesişim kümesi üzerinde durulacak.\r\nakabinde vt ekibinden cevap tabloları ile ilgili işler de bekleniyor. bunlarında jira işleri açılmış durumda.\r\nistek_history duplicate birleşik index için şube ile netleştirildikten sonra istek_stg -> istek nihai aktarım yapılabilir.  sadece oidisi farklı olan duplike kayıtların teke düşürülmesi öngörülüyor.\r\n",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-26 14:36:08"
+  },
+  {
+    "id": "aa9dbe1d-3384-4e7a-a075-963ad95a2071",
+    "user_id": "cmryo3lb0000egnlvmwvz63bt",
+    "date": "2026-10-26",
+    "content": "Nöbet",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-26 14:46:15"
+  },
+  {
+    "id": "c7f9b527-5772-44df-b95e-acb118131066",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-26",
+    "content": "Adres Günleme ekranına devam ediliyor. ",
+    "tags": "eBelge",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EBELGE-80",
+    "files": "[]",
+    "created_at": "2026-10-26 17:08:30"
+  },
+  {
+    "id": "35924b87-69c1-4ccf-a53c-035f628ab92d",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-26",
+    "content": "Bu gün gelen çağrıları çözmeye çalışmakla geçti. EVDBS-53563 işinde geliştirme gerekiyor gibi. Kesinlikle bir şeyler yanlış ama yanlış ne onu anlamaya çalıştık. Feride Hanım da çok yardımcı oldu sağolsun.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-26 17:19:24"
+  },
+  {
+    "id": "2a5b8452-abe7-4f98-bc65-f051b676bef7",
+    "user_id": "cmryob3i00003gnk8h7vs2q8i",
+    "date": "2026-10-27",
+    "content": "EBELGE-91 e devam edeceğim. Engin abiye sormam gereken çağrılar var inşallah onları soracağım.",
+    "tags": "",
+    "jira_link": "EBELGE-91",
+    "files": "[]",
+    "created_at": "2026-10-27 09:09:55"
+  },
+  {
+    "id": "4acb3e36-b07d-4319-a98f-4c15002b3d3e",
+    "user_id": "cmryo3747000dgnlvd0i71bs1",
+    "date": "2026-10-27",
+    "content": "EVDB-10449 için VKN\/TCKN Bazında Durum Listesi teste atıldı. Test edilecek.\r\nE-Haciz Bildirisi Banka Cevap Detay Listesi ne başlanacak",
+    "tags": "",
+    "jira_link": "EVDB-10449",
+    "files": "[]",
+    "created_at": "2026-10-27 09:14:08"
+  },
+  {
+    "id": "344062f8-0e7c-4646-8e55-4af87e0ff353",
+    "user_id": "cmryo885d0001gnk8fyv9zhnk",
+    "date": "2026-10-27",
+    "content": "Adres Günleme ekranına devam ediliyor. ",
+    "tags": "eBelge",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EBELGE-80",
+    "files": "[]",
+    "created_at": "2026-10-27 09:14:28"
+  },
+  {
+    "id": "6fe2623f-3605-47cc-93b8-858df6d284b7",
+    "user_id": "cmryo7spk0000gnk8tkbauba1",
+    "date": "2026-10-27",
+    "content": "EBLGTST-12 :  \/adresGunlemeIcinBelgeSorgula servisinin test edilmesi\r\nTESTEVDB-3685 : E-HACİZ LİSTELERİNDE BANKA-HACİZ BİLDİRİLERİNİN BANKAYA TEBLİĞ ZAMANI EKLENMESİ",
+    "tags": "eBelge,takip,test,ehaciz",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EBLGTST-12, https:\/\/jira.gelirler.gov.tr\/browse\/TESTEVDB-3685?filter=15394",
+    "files": "[]",
+    "created_at": "2026-10-27 09:23:35"
+  },
+  {
+    "id": "fa1e5809-a0f5-483f-bfda-5ccc9a659a25",
+    "user_id": "cmryo42ek000fgnlvb4j80hsk",
+    "date": "2026-10-27",
+    "content": "cevap tablosunda dogum_tarihi alanı date olmuş ama yanlışda gelse kaydedilebilmesi için char(8) olmalı. o nedenle postgre vtgocde talep açtım test de kendim alterledim. işlem tabloları atılırsa çarpraz kontrol yapcaz. diğer talepler bekliyor vtde işler. yaparlarsa kontrol etcez. aud lara bakamadık onlara bi bakalım. diğer projeler nasıl kullanmış ona gore bizde create edelim.",
+    "tags": "tasarım,veri tabanı, ehaciz banka",
+    "jira_link": "https:\/\/jira.gelirler.gov.tr\/browse\/EHACIZBANKA-56\r\nhttps:\/\/jira.gelirler.gov.tr\/browse\/EHACIZBANKA-64",
+    "files": "[]",
+    "created_at": "2026-10-27 09:32:28"
+  },
+  {
+    "id": "e07de004-1bcf-4874-801c-9440cd9443d1",
+    "user_id": "cmryo5wpz000ggnlvfn48oath",
+    "date": "2026-10-27",
+    "content": "bugün audit tabloları create scriptleri bitecek.\r\nref tabloları ve işlem akış viewları vt ekibi tarafından bekleniyor. sonrasında hbno bazında işlem-cevap sağlaması yapılacak. işlem ile cevab'ın kesişim kümesi üzerinde durulacak.\r\nakabinde vt ekibinden cevap tabloları ile ilgili işler de bekleniyor. bunlarında jira işleri açılmış durumda.\r\nistek_history duplicate birleşik index için şube ile netleştirildikten sonra istek_stg -> istek nihai aktarım yapılabilir.  sadece oidisi farklı olan duplike kayıtların teke düşürülmesi öngörülüyor.\r\n",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-27 09:49:45"
+  },
+  {
+    "id": "a7c9a1d0-7cc1-4f90-a069-cfefe441186b",
+    "user_id": "cmryo9e3s0002gnk8g4kecz0u",
+    "date": "2026-10-27",
+    "content": "gelen istekler yanıtlanacak.",
+    "tags": "",
+    "jira_link": "",
+    "files": "[]",
+    "created_at": "2026-10-27 10:05:43"
+  },
+  {
+    "id": "528ce728-0ea3-4cef-94f4-c6d5ad71288b",
+    "user_id": "cmrymq3ol0000gnf71bu5x88i",
+    "date": "2026-10-27",
+    "content": "CSVTD-353718 - EHaciz gitmeyen paketlerin gönderilmesi.\r\nEVDBS-23476 - E-HACİZ UYGULAMASINDA BANKALARDA HACİZ TATBİK EDİLEN VARLIKLARIN VERGİ DAİRELERİ TARAFINDAN TALEP EDİLMESİNE AİT YAPILMASI GEREKENLER - Para isteme yazısı için uygulama, sorgu hazırlanacak.\r\nEVDBS-21034 - E-HACİZ BANKA MEVDUAT BİLGİLERİNE MKK VE PTT'NİNDE DAHİL EDİLMESİ\r\n",
+    "tags": "",
+    "jira_link": "CSVTD-353718\r\nEVDBS-21034, EVDBS-23476 ",
+    "files": "[]",
+    "created_at": "2026-10-27 10:41:59"
   }
 ]
