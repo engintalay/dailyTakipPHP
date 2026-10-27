@@ -1,0 +1,81 @@
+=== SİSTEM KONTROL RAPORU ===
+Tarih: Tue Oct 27 18:12:13 +03 2026
+
+=== PHP Versiyonu ===
+PHP 7.3.33 (cli) (built: Nov 16 2021 11:18:28) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.3.33, Copyright (c) 1998-2018 Zend Technologies
+    with Zend OPcache v7.3.33, Copyright (c) 1999-2018, by Zend Technologies
+
+=== PHP Modülleri ===
+curl
+json
+libxml
+mbstring
+mysqli
+mysqlnd
+pdo_dblib
+pdo_mysql
+pdo_pgsql
+pdo_sqlite
+pdo_sqlsrv
+session
+
+=== MySQL/MariaDB Versiyonu ===
+mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
+
+=== PostgreSQL Versiyonu ===
+psql (PostgreSQL) 9.2.24
+
+=== PostgreSQL Paketleri ===
+postgresql-libs-9.2.24-9.el7_9.x86_64
+postgresql-server-9.2.24-9.el7_9.x86_64
+postgresql-9.2.24-9.el7_9.x86_64
+
+=== PDO PostgreSQL Uzantısı ===
+pdo_pgsql yüklü\n
+=== PDO MySQL Uzantısı ===
+pdo_mysql yüklü\n
+=== PostgreSQL Servis Durumu ===
+● postgresql.service - PostgreSQL database server
+   Loaded: loaded (/usr/lib/systemd/system/postgresql.service; disabled; vendor preset: disabled)
+   Active: active (running) since Tue 2026-10-27 18:05:12 +03; 7min ago
+  Process: 17450 ExecStop=/usr/bin/pg_ctl stop -D ${PGDATA} -s -m fast (code=exited, status=0/SUCCESS)
+  Process: 17462 ExecStart=/usr/bin/pg_ctl start -D ${PGDATA} -s -o -p ${PGPORT} -w -t 300 (code=exited, status=0/SUCCESS)
+
+=== PostgreSQL Kullanıcı Bilgileri (pg_hba.conf) ===
+Dosya yolu: /var/lib/pgsql/data/pg_hba.conf
+local   all             all                                     peer
+host    all             all             127.0.0.1/32            md5
+host    all             all             ::1/128                 ident
+
+=== PostgreSQL Veritabanları ===
+                                      List of databases
+    Name    |      Owner      | Encoding |   Collate   |    Ctype    |   Access privileges   
+------------+-----------------+----------+-------------+-------------+-----------------------
+ dailytakip | dailytakip_user | UTF8     | tr_TR.UTF-8 | tr_TR.UTF-8 | 
+ postgres   | postgres        | UTF8     | tr_TR.UTF-8 | tr_TR.UTF-8 | 
+ template0  | postgres        | UTF8     | tr_TR.UTF-8 | tr_TR.UTF-8 | =c/postgres          +
+            |                 |          |             |             | postgres=CTc/postgres
+ template1  | postgres        | UTF8     | tr_TR.UTF-8 | tr_TR.UTF-8 | =c/postgres          +
+            |                 |          |             |             | postgres=CTc/postgres
+(4 rows)
+
+
+=== PostgreSQL Bağlantı Testi ===
+  current_user   
+-----------------
+ dailytakip_user
+(1 row)
+
+
+=== Apache/Nginx Versiyonu ===
+Server version: Apache/2.4.6 (CentOS)
+Server built:   Jan 25 2022 14:08:43
+
+=== PostgreSQL Portu ===
+#port = 5432				# (change requires restart)
+# Note: In RHEL/Fedora installations, you can't set the port number here;
+					# supported by the operating system:
+
+=== KONTROL TAMAMLANDI ===
