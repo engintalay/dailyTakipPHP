@@ -1,5 +1,5 @@
 === SİSTEM KONTROL RAPORU ===
-Tarih: Tue Oct 27 18:12:13 +03 2026
+Tarih: Sal Eki 27 18:19:17 +03 2026
 
 === PHP Versiyonu ===
 PHP 7.3.33 (cli) (built: Nov 16 2021 11:18:28) ( NTS )
@@ -39,15 +39,12 @@ pdo_mysql yüklü\n
 === PostgreSQL Servis Durumu ===
 ● postgresql.service - PostgreSQL database server
    Loaded: loaded (/usr/lib/systemd/system/postgresql.service; disabled; vendor preset: disabled)
-   Active: active (running) since Tue 2026-10-27 18:05:12 +03; 7min ago
+   Active: active (running) since Sal 2026-10-27 18:05:12 +03; 14min ago
   Process: 17450 ExecStop=/usr/bin/pg_ctl stop -D ${PGDATA} -s -m fast (code=exited, status=0/SUCCESS)
   Process: 17462 ExecStart=/usr/bin/pg_ctl start -D ${PGDATA} -s -o -p ${PGPORT} -w -t 300 (code=exited, status=0/SUCCESS)
 
 === PostgreSQL Kullanıcı Bilgileri (pg_hba.conf) ===
-Dosya yolu: /var/lib/pgsql/data/pg_hba.conf
-local   all             all                                     peer
-host    all             all             127.0.0.1/32            md5
-host    all             all             ::1/128                 ident
+pg_hba.conf bulunamadı: /var/lib/pgsql/data/pg_hba.conf
 
 === PostgreSQL Veritabanları ===
                                       List of databases
@@ -74,8 +71,5 @@ Server version: Apache/2.4.6 (CentOS)
 Server built:   Jan 25 2022 14:08:43
 
 === PostgreSQL Portu ===
-#port = 5432				# (change requires restart)
-# Note: In RHEL/Fedora installations, you can't set the port number here;
-					# supported by the operating system:
 
 === KONTROL TAMAMLANDI ===
